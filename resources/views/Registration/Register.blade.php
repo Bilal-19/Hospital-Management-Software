@@ -8,7 +8,8 @@
         <h2 class="text-[#111827] text-2xl font-bold my-3">Create your account</h2>
         <p class="text-[#6B7280] text-sm">Welcome to Hospital Management System Portal. </p>
 
-        <form action="" class="my-10" autocomplete="off">
+        <form action="{{route("Create.Account")}}" class="my-10" autocomplete="off" method="post">
+            @csrf
             <div class="flex flex-col">
                 <label for="username" class="text-[#111827] font-medium mb-1">Username:</label>
                 <input type="text" name="username" id="username"
