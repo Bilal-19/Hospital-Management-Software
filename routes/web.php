@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -25,3 +26,6 @@ Route::post("/send-password", [AuthenticationController::class, 'sendPassword'])
 Route::get("/generate-password", [AuthenticationController::class, 'generatePassword'])->name('Generate.Password');
 
 Route::get("/send-email",[EmailController::class,"sendEmail"])->name("Send.Email");
+
+
+Route::get("/doctor-dashboard",[DoctorController::class,'index'])->name('Doctor.Dashboard');

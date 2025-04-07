@@ -75,7 +75,18 @@ class AuthenticationController extends EmailController
         )
         ;
         $haveAccount = Auth::attempt($userCredentials);
-        dd($haveAccount);
+        // Redirect user based on their role.
+
+        if ($haveAccount){
+            $userRole = Auth::user()->role;
+
+            if ($userRole == 'Doctor'){
+                return view("Doctor.Dashboard");
+            }
+        } else {
+            toastr()->error("Please input correct credentials");
+            return redirect()->back();
+        }
     }
     public function sendPassword(Request $request)
     {
