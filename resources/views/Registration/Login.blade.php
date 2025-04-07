@@ -6,10 +6,11 @@
         <h2 class="text-[#111827] text-2xl font-bold mb-3">Sign in to your account</h2>
         <p class="text-[#6B7280] text-sm">Welcome back! Please enter your details. </p>
 
-        <form action="" class="my-10" autocomplete="off">
+        <form action="{{route("VerifyUserCredentials")}}" class="my-10" autocomplete="off" method="post">
+            @csrf
             <div class="flex flex-col">
-                <label for="username" class="text-[#111827] font-medium mb-1">Username:</label>
-                <input type="text" name="username" id="username"
+                <label for="email" class="text-[#111827] font-medium mb-1">Email:</label>
+                <input type="email" name="email" id="email"
                     class="border border-[#9CA3AF] rounded-md p-2 focus:outline-none">
             </div>
 

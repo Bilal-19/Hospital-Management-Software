@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 Route::get("/login", [AuthenticationController::class, 'LoginView'])->name('Login');
 Route::get("/register", [AuthenticationController::class, 'RegisterView'])->name('Register');
 Route::post("/create-account", [AuthenticationController::class, 'createUserAccount'])->name('Create.Account');
+Route::post("/verify-credentials", [AuthenticationController::class, 'VerifyUserCredentials'])->name('VerifyUserCredentials');

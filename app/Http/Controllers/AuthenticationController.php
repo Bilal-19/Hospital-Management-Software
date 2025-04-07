@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -45,8 +46,18 @@ class AuthenticationController extends Controller
 
             }
         }
+    }
 
-
-
+    public function VerifyUserCredentials(Request $request)
+    {
+        $userCredentials = $request->validate(
+            [
+                'email' => 'required',
+                'password' => 'required'
+            ]
+        )
+        ;
+        $haveAccount = Auth::attempt($userCredentials);
+        dd($haveAccount);
     }
 }

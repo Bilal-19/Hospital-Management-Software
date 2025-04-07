@@ -11,7 +11,7 @@
         <form action="{{route("Create.Account")}}" class="my-10" autocomplete="off" method="post">
             @csrf
             <div class="flex flex-col">
-                <label for="username" class="text-[#111827] font-medium mb-1">Username:</label>
+                <label for="username" class="text-[#111827] font-medium mb-1">Full Name:</label>
                 <input type="text" name="username" id="username"
                     class="border border-[#9CA3AF] rounded-md p-2 focus:outline-none">
             </div>
