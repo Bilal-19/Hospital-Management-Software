@@ -23,9 +23,6 @@
     <!-- Topbar -->
     <header class="bg-slate-700 text-white py-4 px-6 flex justify-between items-center">
         <h1 class="text-lg md:text-2xl font-semibold">Hospital Management Software</h1>
-        <a href="" class="text-white">
-            <i class="fa-solid fa-right-from-bracket"></i>
-        </a>
         <button id="menu-btn" class="md:hidden text-white text-md">
             <i class="fas fa-bars"></i>
         </button>
@@ -61,6 +58,16 @@
                     class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">
                     <i class="fa-solid fa-file-invoice-dollar"></i>
                     <span class="inline">Salary Receipt</span>
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">
+                    <i class="fa-solid fa-user-doctor"></i>
+                    <span class="inline">My Profile</span>
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span class="inline">Log Out</span>
                 </a>
             </nav>
         </aside>
