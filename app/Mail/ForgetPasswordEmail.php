@@ -16,12 +16,16 @@ class ForgetPasswordEmail extends Mailable
     /**
      * Create a new message instance.
      */
-    public $message;
+    public $emailMessage;
     public $subject;
-    public function __construct($message, $subject)
+    public $password;
+    public $userEmail;
+    public function __construct($password, $emailMessage, $subject, $userEmail)
     {
-        $this->message = $message;
+        $this->password = $password;
+        $this->emailMessage = $emailMessage;
         $this->subject = $subject;
+        $this->userEmail = $userEmail;
     }
 
     /**
@@ -42,8 +46,9 @@ class ForgetPasswordEmail extends Mailable
         return new Content(
             view: 'mail.SendPasswordEmail',
             with: [
-                'subject' => $this->subject,
-                'email_message' => $this->message
+                'password' => $this->password,
+                'message' => $this->emailMessage,
+                'subject' => $this->subject
             ]
         );
     }

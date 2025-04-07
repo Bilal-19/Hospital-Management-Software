@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class AuthenticationController extends Controller
+class AuthenticationController extends EmailController
 {
     public function LoginView()
     {
@@ -64,7 +64,6 @@ class AuthenticationController extends Controller
         $haveAccount = Auth::attempt($userCredentials);
         dd($haveAccount);
     }
-
     public function sendPassword(Request $request)
     {
         // 1. Check if email exist or not
@@ -74,7 +73,20 @@ class AuthenticationController extends Controller
 
         if ($accountExist == 1) {
             $fetchPassword = DB::table("users")->where('email', '=', $userEmail)->first();
-            return $fetchPassword->password;
+            $userPassword = $fetchPassword->password;
+            $isEmailDispatch = $this->sendEmail(
+                $userPassword,
+                "Here's your password",
+                "Check your password in this email",
+                $userEmail
+            );
+            if ($isEmailDispatch) {
+                toastr()->success("Password sent to your email");
+                return redirect()->back();
+            } else {
+                toastr()->info("Something went wrong.");
+                return redirect()->back();
+            }
         } else {
             toastr()->error("User with this email doesn't exist");
             return redirect()->back();

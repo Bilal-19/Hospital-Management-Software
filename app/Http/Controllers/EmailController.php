@@ -8,12 +8,14 @@ use Mail;
 
 class EmailController extends Controller
 {
-    public function sendEmail()
+    public function sendEmail($password,$subject,$message, $userEmail)
     {
-        $email_message = "Here's your password";
-        $subject = "Hello User";
-        $request = Mail::to("bilalmuhammadyousuf543@gmail.com")->
-            send(new ForgetPasswordEmail($email_message, $subject));
-        dd($request);
+        $request = Mail::to($userEmail)->
+            send(new ForgetPasswordEmail($password, $message, $subject, $userEmail));
+        if ($request){
+            return true;
+        } else {
+            return false;
+        }
     }
 }
