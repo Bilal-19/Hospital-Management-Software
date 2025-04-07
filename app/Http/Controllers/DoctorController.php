@@ -14,6 +14,9 @@ class DoctorController extends Controller
         } else {
             return view("welcome");
         }
+    }
 
+    public function markAttendance(){
+        return view("Doctor.MarkAttendance");
     }
 }

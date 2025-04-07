@@ -29,3 +29,4 @@ Route::get("/send-email",[EmailController::class,"sendEmail"])->name("Send.Email
 
 
 Route::get("/doctor-dashboard",[DoctorController::class,'index'])->name('Doctor.Dashboard');
+Route::get("/mark-attendance",[DoctorController::class,'markAttendance'])->name('Doctor.MarkAttendance');
