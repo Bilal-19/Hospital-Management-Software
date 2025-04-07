@@ -4,7 +4,7 @@
 <div class="w-full flex flex-col md:flex-row justify-between items-center">
     <div class="w-80 md:w-2/6 m-8 md:m-10">
         <h2 class="text-[#111827] text-2xl font-bold mb-3">Trouble with logging in?</h2>
-        <p class="text-[#6B7280] text-sm">Enter your email address, and we'll send you password to get back into your account. </p>
+        <p class="text-[#6B7280] text-sm">Enter your email address, and we'll send you new password so you can get back into your account. </p>
 
         <form action="{{route("sendPassword")}}" class="my-10" autocomplete="off" method="post">
             @csrf

@@ -5,6 +5,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Str;
 
 class AuthenticationController extends EmailController
 {
@@ -23,12 +24,24 @@ class AuthenticationController extends EmailController
         return view("Registration.ForgetPassword");
     }
 
+    public function getEmailCount($userEmail)
+    {
+        $countEmail = DB::table('users')->
+            where('email', '=', $userEmail)->
+            count();
+        return $countEmail;
+    }
+
+    public function generatePassword()
+    {
+        $newPassword = Str::random(8);
+        return $newPassword;
+    }
+
     public function createUserAccount(Request $request)
     {
         // Check if email already exist or not
-        $isEmailAlreadyExist = DB::table('users')->
-            where('email', '=', $request->email)->
-            count();
+        $isEmailAlreadyExist = $this->getEmailCount($request->email);
 
         if ($isEmailAlreadyExist >= 1) {
             toastr()->error('User with this email already exist');
@@ -66,22 +79,23 @@ class AuthenticationController extends EmailController
     }
     public function sendPassword(Request $request)
     {
-        // 1. Check if email exist or not
         $userEmail = $request->email;
 
-        $accountExist = DB::table("users")->where("email", "=", $userEmail)->count();
+        $accountExist = $this->getEmailCount($userEmail);
 
         if ($accountExist == 1) {
-            $fetchPassword = DB::table("users")->where('email', '=', $userEmail)->first();
-            $userPassword = $fetchPassword->password;
+            $newPassword = $this->generatePassword();
+            DB::table("users")->
+                where('email', '=', $userEmail)->
+                update(['password' => Hash::make($newPassword)]);
             $isEmailDispatch = $this->sendEmail(
-                $userPassword,
-                "Here's your password",
-                "Check your password in this email",
+                $newPassword,
+                "Here's your new password",
+                "Password reset",
                 $userEmail
             );
             if ($isEmailDispatch) {
-                toastr()->success("Password sent to your email");
+                toastr()->success("New password sent to your email.");
                 return redirect()->back();
             } else {
                 toastr()->info("Something went wrong.");

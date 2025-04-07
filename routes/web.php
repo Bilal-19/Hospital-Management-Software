@@ -22,5 +22,6 @@ Route::get("/forget-password", [AuthenticationController::class, 'forgetPassword
 Route::post("/create-account", [AuthenticationController::class, 'createUserAccount'])->name('Create.Account');
 Route::post("/verify-credentials", [AuthenticationController::class, 'VerifyUserCredentials'])->name('VerifyUserCredentials');
 Route::post("/send-password", [AuthenticationController::class, 'sendPassword'])->name('sendPassword');
+Route::get("/generate-password", [AuthenticationController::class, 'generatePassword'])->name('Generate.Password');
 
 Route::get("/send-email",[EmailController::class,"sendEmail"])->name("Send.Email");
