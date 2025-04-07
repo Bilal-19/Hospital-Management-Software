@@ -34,7 +34,7 @@
 
             <div class="flex flex-row justify-between my-5">
                 <p class="text-sm text-[#374151]"><input type="checkbox" name="remember"> Remember me</p>
-                <a href="" class="font-semibold text-sm">Forgot Password?</a>
+                <a href="{{route("Forget.Password")}}" class="font-semibold text-sm">Forgot Password?</a>
             </div>
 
             <button class="w-full bg-black text-white p-2 rounded-md cursor-pointer">Sign in</button>

@@ -5,7 +5,6 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use function Laravel\Prompts\error;
 
 class AuthenticationController extends Controller
 {
@@ -17,6 +16,11 @@ class AuthenticationController extends Controller
     public function RegisterView()
     {
         return view("Registration.Register");
+    }
+
+    public function forgetPassword()
+    {
+        return view("Registration.ForgetPassword");
     }
 
     public function createUserAccount(Request $request)
@@ -59,5 +63,22 @@ class AuthenticationController extends Controller
         ;
         $haveAccount = Auth::attempt($userCredentials);
         dd($haveAccount);
+    }
+
+    public function sendPassword(Request $request)
+    {
+        // 1. Check if email exist or not
+        $userEmail = $request->email;
+
+        $accountExist = DB::table("users")->where("email", "=", $userEmail)->count();
+
+        if ($accountExist == 1) {
+            $fetchPassword = DB::table("users")->where('email', '=', $userEmail)->first();
+            return $fetchPassword->password;
+        } else {
+            toastr()->error("User with this email doesn't exist");
+            return redirect()->back();
+        }
+
     }
 }
