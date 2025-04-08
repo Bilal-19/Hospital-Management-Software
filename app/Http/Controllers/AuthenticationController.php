@@ -47,7 +47,7 @@ class AuthenticationController extends EmailController
             toastr()->error('User with this email already exist');
             return redirect()->back();
         } else {
-            $isUserCreated = DB::table('users')->insert(
+            $userID = DB::table('users')->insertGetId(
                 [
                     'name' => $request->username,
                     'email' => $request->email,
@@ -57,10 +57,15 @@ class AuthenticationController extends EmailController
                 ]
             );
 
-            if ($isUserCreated) {
+            if ($request->role === "Doctor") {
+                DB::table("doctors")->insert([
+                    "fullName" => $request->username,
+                    "emailAddress" => $request->email,
+                    'created_at' => now(),
+                    "user_id" => $userID
+                ]);
                 toastr()->success('Account created successfully');
                 return redirect()->back();
-
             }
         }
     }
@@ -77,10 +82,10 @@ class AuthenticationController extends EmailController
         $haveAccount = Auth::attempt($userCredentials);
         // Redirect user based on their role.
 
-        if ($haveAccount){
+        if ($haveAccount) {
             $userRole = Auth::user()->role;
 
-            if ($userRole == 'Doctor'){
+            if ($userRole == 'Doctor') {
                 return view("Doctor.Dashboard");
             }
         } else {
