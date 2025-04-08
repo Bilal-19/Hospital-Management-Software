@@ -20,18 +20,6 @@
                     class="border border-[#9CA3AF] rounded-md p-2 focus:outline-none">
             </div>
 
-            <div class="mt-5 flex flex-col">
-                <label for="role" class="text-[#111827] font-medium mb-1">Role:</label>
-                <select name="role" id="role"
-                    class="border border-[#9CA3AF] rounded-md py-2 px-3 focus:outline-none">
-                    <option value="Doctor">Doctor</option>
-                    <option value="Receptionists">Receptionists</option>
-                    <option value="Pharmacists">Pharmacists</option>
-                    <option value="Lab Technicians">Lab Technicians</option>
-                    <option value="Patients">Patients</option>
-                </select>
-            </div>
-
             <div class="flex flex-row justify-between my-5">
                 <p class="text-sm text-[#374151]"><input type="checkbox" name="remember"> Remember me</p>
                 <a href="{{route("Forget.Password")}}" class="font-semibold text-sm">Forgot Password?</a>
