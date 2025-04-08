@@ -31,19 +31,19 @@
                 <div class="flex flex-col">
                     <label for="currentDate">Date:</label>
                     <input type="date" name="currentDate" id="currentDate"
-                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none w-80">
+                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none w-80" required>
                 </div>
 
                 <div class="flex flex-col">
                     <label for="loggedIn">Time:</label>
                     <input type="time" name="loggedIn" id="loggedIn"
-                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none w-80">
+                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none w-80" required>
                 </div>
 
                 <div class="flex flex-col">
                     <label for="remarks">Notes / Remarks:</label>
                     <input type="text" name="remarks" id="remarks"
-                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none w-80">
+                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none w-80" required>
                 </div>
 
             </div>

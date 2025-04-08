@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,29 +34,43 @@ class DoctorController extends Controller
 
     public function markTodayAttendance(Request $request)
     {
-        $isMarkPresent = DB::table("staff")->insert([
-            "staff_name" => $request->doctorName,
-            "date" => $request->currentDate,
-            "time" => $request->loggedIn,
-            "notes" => $request->remarks,
-            "staff_id" => $request->doctorID,
-            "created_at" => now()
-        ]);
+        $carbonDate = Carbon::now();
+        $todaysDate = $carbonDate->toDateString();
 
-        if ($isMarkPresent) {
-            toastr()->success("Your attendance mark successfully");
+        $countAttendance = DB::table("staff")->
+            where("staff_id", "=", $request->doctorID)->
+            where("date", "=", $todaysDate)->
+            count();
+
+        if ($countAttendance >= 1) {
+            toastr()->info("You've already checked in.");
             return redirect()->back();
         } else {
-            toastr()->error("something went wrong");
-            return redirect()->back();
+            $isMarkPresent = DB::table("staff")->insert([
+                "staff_name" => $request->doctorName,
+                "date" => $request->currentDate,
+                "time" => $request->loggedIn,
+                "notes" => $request->remarks,
+                "staff_id" => $request->doctorID,
+                "created_at" => now()
+            ]);
+
+            if ($isMarkPresent) {
+                toastr()->success("Attendance mark successfully");
+                return redirect()->back();
+            } else {
+                toastr()->error("something went wrong");
+                return redirect()->back();
+            }
         }
+
     }
 
     public function updateMyProfile(Request $request)
     {
         $isUpdated = DB::table("doctors")
-        ->where('user_id', '=', Auth::user()->id)
-        ->update([
+            ->where('user_id', '=', Auth::user()->id)
+            ->update([
                 "fullName" => $request->fullName,
                 "gender" => $request->gender,
                 "dateOfBirth" => $request->dateOfBirth,
@@ -73,7 +88,7 @@ class DoctorController extends Controller
                 "availableOnSat" => $request->Saturday,
                 "created_at" => now()
             ]);
-        if ($isUpdated){
+        if ($isUpdated) {
             toastr()->success("Profile updated");
             return redirect()->back();
         } else {
