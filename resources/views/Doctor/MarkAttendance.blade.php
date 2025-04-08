@@ -9,7 +9,7 @@
 
         <form action="{{route("Doctor.MarkPresent")}}" method="POST">
             @csrf
-            <div class="w-full mt-5 grid grid-cols-3 gap-5 space-y-3 md:space-y-0">
+            <div class="w-full mt-5 grid grid-cols-1 md:grid-cols-3 md:gap-5 space-y-3 md:space-y-0">
                 <div class="flex flex-col">
                     <label for="doctorID">ID:</label>
                     <input type="number" name="doctorID" id="doctorID" readonly value="{{ Auth::user()->id }}"
