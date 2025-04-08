@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('staff', function (Blueprint $table) {
+        Schema::create('patients', function (Blueprint $table) {
             $table->id();
-            $table->string('staff_name');
-            $table->date('date');
-            $table->time('time');
-            $table->string('notes')->nullable();
+            $table->string('fullName');
+            $table->string('age');
+            $table->string('gender');
+            $table->string('emailAddress');
+            $table->string('phoneNumber');
+            $table->string('reasonForVisit');
+            $table->string('medicalHistory');
             $table->timestamps();
 
             // Foreign Key
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('staff');
+        Schema::dropIfExists('patients');
     }
 };

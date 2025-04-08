@@ -29,7 +29,10 @@ Route::get("/send-email",[EmailController::class,"sendEmail"])->name("Send.Email
 
 
 Route::get("/doctor-dashboard",[DoctorController::class,'index'])->name('Doctor.Dashboard');
+Route::get("/patients",[DoctorController::class,'createPatientProfile'])->name('Doctor.PatientDirectory');
+Route::get("/add-patient",[DoctorController::class,'addPatient'])->name('Doctor.AddPatient');
 Route::get("/mark-attendance",[DoctorController::class,'markAttendance'])->name('Doctor.MarkAttendance');
 Route::get("/doctor-profile",[DoctorController::class,'myProfile'])->name('Doctor.Profile');
 Route::post("/mark-todays-attendance",[DoctorController::class,'markTodayAttendance'])->name('Doctor.MarkPresent');
 Route::post("/update-profile",[DoctorController::class,'updateMyProfile'])->name('Doctor.UpdateProfile');
+Route::post("/create-patient",[DoctorController::class,'createPatient'])->name('Doctor.CreatePatientProfile');

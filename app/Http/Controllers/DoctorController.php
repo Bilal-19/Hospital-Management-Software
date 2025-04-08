@@ -32,6 +32,39 @@ class DoctorController extends Controller
         }
     }
 
+    public function createPatientProfile()
+    {
+        return view("Doctor.Patients");
+    }
+
+    public function addPatient()
+    {
+        return view("Doctor.AddPatient");
+    }
+
+    public function createPatient(Request $request)
+    {
+        $newPatientCreated = DB::table("patients")->insert([
+            "fullName" => $request->fullName,
+            "age" => $request->age,
+            "gender" => $request->gender,
+            "emailAddress" => $request->emailAddress,
+            "phoneNumber" => $request->phoneNumber,
+            "reasonForVisit" => $request->reasonForVisit,
+            "medicalHistory" => $request->medicalHistory,
+            "user_id" => Auth::user()->id,
+            "created_at" => now()
+        ]);
+
+        if ($newPatientCreated){
+            toastr()->success("New patient registered successfully");
+            return redirect()->back();
+        } else {
+            toastr()->info("Please check error message. Something went wrong.");
+            return redirect()->back();
+        }
+    }
+
     public function markTodayAttendance(Request $request)
     {
         $carbonDate = Carbon::now();

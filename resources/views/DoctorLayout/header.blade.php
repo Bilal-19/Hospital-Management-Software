@@ -49,7 +49,7 @@
                     <i class="fa-solid fa-calendar-check"></i>
                     <span class="inline">View Appointments</span>
                 </a>
-                <a href="#"
+                <a href="{{route("Doctor.PatientDirectory")}}"
                     class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">
                     <i class="fa-solid fa-notes-medical"></i>
                     <span class="inline">Patients</span>
