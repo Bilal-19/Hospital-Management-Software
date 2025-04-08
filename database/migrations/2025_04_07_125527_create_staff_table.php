@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
-            $table->id('staff_id');
             $table->string('staff_name');
             $table->date('date');
-            $table->timestamp('time');
+            $table->time('time');
             $table->string('notes')->nullable();
             $table->timestamps();
+
+            // Foreign Key
+            $table->unsignedBigInteger('staff_id');
+            $table->foreign('staff_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
