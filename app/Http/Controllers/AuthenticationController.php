@@ -66,6 +66,8 @@ class AuthenticationController extends EmailController
                 ]);
                 toastr()->success('Account created successfully');
                 return redirect()->back();
+            } else {
+                return redirect()->back();
             }
         }
     }
@@ -87,6 +89,10 @@ class AuthenticationController extends EmailController
 
             if ($userRole == 'Doctor') {
                 return view("Doctor.Dashboard");
+            } elseif($userRole == 'Receptionists'){
+                return view("Receptionist.Dashboard");
+            } else {
+                return redirect()->back();
             }
         } else {
             toastr()->error("Please input correct credentials");

@@ -72,7 +72,7 @@ class DoctorController extends Controller
         $todaysDate = $carbonDate->toDateString();
 
         $countAttendance = DB::table("staff")->
-            where("staff_id", "=", $request->doctorID)->
+            where("user_id", "=", $request->doctorID)->
             where("date", "=", $todaysDate)->
             count();
 
@@ -85,7 +85,7 @@ class DoctorController extends Controller
                 "date" => $request->currentDate,
                 "time" => $request->loggedIn,
                 "notes" => $request->remarks,
-                "staff_id" => $request->doctorID,
+                "user_id" => $request->doctorID,
                 "created_at" => now()
             ]);
 
