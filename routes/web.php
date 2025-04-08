@@ -3,7 +3,7 @@
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EmailController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReceptionistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,3 +36,5 @@ Route::get("/doctor-profile",[DoctorController::class,'myProfile'])->name('Docto
 Route::post("/mark-todays-attendance",[DoctorController::class,'markTodayAttendance'])->name('Doctor.MarkPresent');
 Route::post("/update-profile",[DoctorController::class,'updateMyProfile'])->name('Doctor.UpdateProfile');
 Route::post("/create-patient",[DoctorController::class,'createPatient'])->name('Doctor.CreatePatientProfile');
+
+Route::get("/receptionist-dashboard",[ReceptionistController::class,'index'])->name('Receptionist.Dashboard');
