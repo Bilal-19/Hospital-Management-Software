@@ -32,9 +32,10 @@ class DoctorController extends Controller
         }
     }
 
-    public function createPatientProfile()
+    public function readPatient()
     {
-        return view("Doctor.Patients");
+        $fetchRecords = DB::table("patients")->get();
+        return view("Doctor.Patients", with(compact("fetchRecords")));
     }
 
     public function addPatient()
