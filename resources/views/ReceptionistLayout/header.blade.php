@@ -55,7 +55,7 @@
                     <i class="fa-solid fa-file-invoice-dollar"></i>
                     <span class="inline">Salary Receipt</span>
                 </a>
-                <a href="#"
+                <a href="{{route("Receptionist.Profile")}}"
                     class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">
                     <i class="fa-solid fa-user-doctor"></i>
                     <span class="inline">My Profile</span>

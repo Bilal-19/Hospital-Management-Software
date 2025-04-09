@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string("fullName");
             $table->string("emailAddress");
-            $table->string("phoneNumber");
-            $table->string("gender");
-            $table->string("shiftTiming");
-            $table->string("assignedDepartment");
-            $table->string("joiningDate");
+            $table->string("phoneNumber")->nullable();
+            $table->string("gender")->nullable();
+            $table->string("shiftTiming")->nullable();
+            $table->string("assignedDepartment")->nullable();
+            $table->date("joiningDate")->nullable();
             $table->timestamps();
 
              // Foreign Key

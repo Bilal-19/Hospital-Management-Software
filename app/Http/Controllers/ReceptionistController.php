@@ -23,7 +23,7 @@ class ReceptionistController extends Controller
         $fetchDoctorName = DB::table("doctors")->
             pluck('fullName');
         $fetchAppoinments = DB::table("appoinments")->limit(3)->get();
-        return view("Receptionist.ManageAppoinments", with(compact("fetchDoctorName","fetchAppoinments")));
+        return view("Receptionist.ManageAppoinments", with(compact("fetchDoctorName", "fetchAppoinments")));
     }
 
     public function createAppoinment(Request $request)
@@ -37,11 +37,45 @@ class ReceptionistController extends Controller
             "created_at" => now()
         ]);
 
-        if ($isAppoinmentCreated){
+        if ($isAppoinmentCreated) {
             toastr()->success("Appoinment booked successfully");
             return redirect()->back();
         } else {
             toastr()->info("Something went wrong. Please check error message");
+            return redirect()->back();
+        }
+    }
+
+    public function receptionistProfile()
+    {
+        // 'first() - used to fetch single record'
+        $UserID = Auth::user()->id;
+        $fetchRecord = DB::table("receptionist")->where('user_id', '=', $UserID)->first();
+        return view("Receptionist.MyProfile", with(compact("fetchRecord")));
+    }
+
+    public function updateReceptionistProfile(Request $request)
+    {
+        $UserID = Auth::user()->id;
+        $isUpdated = DB::table("receptionist")->
+            where("id", "=", $UserID)->
+            update([
+                "fullName" => $request->fullName,
+                "gender" => $request->gender,
+                "emailAddress" => $request->emailAddress,
+                "phoneNumber" => $request->phoneNumber,
+                "assignedDepartment" => $request->assignedDepartment,
+                "shiftTiming" => $request->shiftTiming,
+                "joiningDate" => $request->joiningDate,
+                "updated_at" => now()
+            ]);
+        if ($isUpdated) {
+            toastr()->success("Profile updated.");
+            return redirect()->back();
+        }
+        else {
+            dd($isUpdated);
+            toastr()->error("Something went wrong. Try again later.");
             return redirect()->back();
         }
     }

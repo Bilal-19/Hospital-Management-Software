@@ -38,6 +38,17 @@ class AuthenticationController extends EmailController
         return $newPassword;
     }
 
+    public function createRoleBaseAccount($tableName, $userID, $username, $email)
+    {
+        $result = DB::table($tableName)->insert([
+            "fullName" => $username,
+            "emailAddress" => $email,
+            'created_at' => now(),
+            "user_id" => $userID
+        ]);
+        return $result;
+    }
+
     public function createUserAccount(Request $request)
     {
         // Check if email already exist or not
@@ -58,15 +69,12 @@ class AuthenticationController extends EmailController
             );
 
             if ($request->role === "Doctor") {
-                DB::table("doctors")->insert([
-                    "fullName" => $request->username,
-                    "emailAddress" => $request->email,
-                    'created_at' => now(),
-                    "user_id" => $userID
-                ]);
-                toastr()->success('Account created successfully');
+                $this->createRoleBaseAccount("doctors", $userID, $request->username, $request->email);
+                toastr()->success("Account created successfully.");
                 return redirect()->back();
-            } else {
+            } else if ($request->role === "Receptionist"){
+                $this->createRoleBaseAccount("receptionist", $userID, $request->username, $request->email);
+                toastr()->success("Account created successfully.");
                 return redirect()->back();
             }
         }
@@ -89,7 +97,7 @@ class AuthenticationController extends EmailController
 
             if ($userRole == 'Doctor') {
                 return view("Doctor.Dashboard");
-            } elseif($userRole == 'Receptionists'){
+            } elseif ($userRole == 'Receptionist') {
                 return view("Receptionist.Dashboard");
             } else {
                 return redirect()->back();

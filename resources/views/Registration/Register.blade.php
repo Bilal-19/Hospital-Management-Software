@@ -32,11 +32,12 @@
                 <label for="role" class="text-[#111827] font-medium mb-1">Role:</label>
                 <select name="role" id="role"
                     class="border border-[#9CA3AF] rounded-md py-2 px-3 focus:outline-none">
+                    <option value="Admin">Admin</option>
                     <option value="Doctor">Doctor</option>
-                    <option value="Receptionists">Receptionists</option>
-                    <option value="Pharmacists">Pharmacists</option>
+                    <option value="Receptionist">Receptionist</option>
+                    <option value="Pharmacists">Pharmacist</option>
                     <option value="Lab Technicians">Lab Technicians</option>
-                    <option value="Patients">Patients</option>
+                    <option value="Patients">Patient</option>
                 </select>
             </div>
 

@@ -120,7 +120,7 @@ class DoctorController extends Controller
                 "availableOnThurs" => $request->Thursday,
                 "availableOnFri" => $request->Friday,
                 "availableOnSat" => $request->Saturday,
-                "created_at" => now()
+                "updated_at" => now()
             ]);
         if ($isUpdated) {
             toastr()->success("Profile updated");

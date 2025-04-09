@@ -41,3 +41,5 @@ Route::get("/receptionist-dashboard",[ReceptionistController::class,'index'])->n
 Route::get("/mark-attendance",[ReceptionistController::class,'markAttendance'])->name('Receptionist.MarkAttendance');
 Route::get("/appointments",[ReceptionistController::class,'manageAppointments'])->name('Receptionist.ManageAppointments');
 Route::post("/create-appointment",[ReceptionistController::class,'createAppoinment'])->name('Receptionist.CreateAppoinment');
+Route::get("/receptionist-profile",[ReceptionistController::class,'receptionistProfile'])->name('Receptionist.Profile');
+Route::post("/update-receptionist-profile",[ReceptionistController::class,'updateReceptionistProfile'])->name('Receptionist.UpdateProfile');
