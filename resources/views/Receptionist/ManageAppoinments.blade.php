@@ -71,7 +71,7 @@
                         </select>
                     </div>
                 </div>
-                <button class="w-full bg-emerald-700 text-white py-2 rounded-md mt-5 hover:transform duration-500 hover:bg-emerald-600">Book Now</button>
+                <button class="w-full bg-black text-white py-2 rounded-md mt-5 hover:transform duration-500 hover:bg-black/90">Book Now</button>
             </form>
         </div>
 
