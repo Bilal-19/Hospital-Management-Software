@@ -42,13 +42,13 @@
                 </a>
                 <a href="{{route("Receptionist.ManageAppointments")}}"
                     class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">
-                    <i class="fa-solid fa-calendar-check"></i>
+                    <i class="fas fa-notes-medical"></i>
                     <span class="inline">Manage Appoinments</span>
                 </a>
                 <a href="#"
                     class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">
-                    <i class="fa-solid fa-notes-medical"></i>
-                    <span class="inline">Billing</span>
+                    <i class="fas fa-receipt"></i>
+                    <span class="inline">Generate Bill</span>
                 </a>
                 <a href="#"
                     class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">
@@ -57,7 +57,7 @@
                 </a>
                 <a href="{{route("Receptionist.Profile")}}"
                     class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">
-                    <i class="fa-solid fa-user-doctor"></i>
+                    <i class="fa-solid fa-user"></i>
                     <span class="inline">My Profile</span>
                 </a>
                 <a href="#"
