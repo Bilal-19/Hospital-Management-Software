@@ -39,3 +39,5 @@ Route::post("/create-patient",[DoctorController::class,'createPatient'])->name('
 
 Route::get("/receptionist-dashboard",[ReceptionistController::class,'index'])->name('Receptionist.Dashboard');
 Route::get("/mark-attendance",[ReceptionistController::class,'markAttendance'])->name('Receptionist.MarkAttendance');
+Route::get("/appointments",[ReceptionistController::class,'manageAppointments'])->name('Receptionist.ManageAppointments');
+Route::post("/create-appointment",[ReceptionistController::class,'createAppoinment'])->name('Receptionist.CreateAppoinment');

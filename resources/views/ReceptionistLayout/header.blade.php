@@ -44,7 +44,7 @@
                     <i class="fa-solid fa-clipboard-check"></i>
                     <span class="inline">Mark Attendance</span>
                 </a>
-                <a href="#"
+                <a href="{{route("Receptionist.ManageAppointments")}}"
                     class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">
                     <i class="fa-solid fa-calendar-check"></i>
                     <span class="inline">Manage Appoinments</span>
