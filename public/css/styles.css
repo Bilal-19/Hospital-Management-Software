@@ -1,0 +1,9 @@
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+label {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+}
