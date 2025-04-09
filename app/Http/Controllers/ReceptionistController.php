@@ -22,7 +22,8 @@ class ReceptionistController extends Controller
     {
         $fetchDoctorName = DB::table("doctors")->
             pluck('fullName');
-        return view("Receptionist.ManageAppoinments", with(compact("fetchDoctorName")));
+        $fetchAppoinments = DB::table("appoinments")->limit(3)->get();
+        return view("Receptionist.ManageAppoinments", with(compact("fetchDoctorName","fetchAppoinments")));
     }
 
     public function createAppoinment(Request $request)
