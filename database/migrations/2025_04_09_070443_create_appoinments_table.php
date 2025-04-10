@@ -16,6 +16,8 @@ return new class extends Migration {
             $table->string("doctorName");
             $table->date("appoinmentDate");
             $table->string("appoinmentTime");
+            $table->string("patientName");
+            $table->string("reasonForVisit");
             $table->timestamps();
 
             // Foreign Key reference - Who created appoinment i.e receptionist

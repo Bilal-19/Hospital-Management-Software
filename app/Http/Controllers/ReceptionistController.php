@@ -15,7 +15,8 @@ class ReceptionistController extends Controller
 
     public function markAttendance()
     {
-        return view("Receptionist.MarkAttendance");
+        $fetchMyAttendance = DB::table("staff")->where("user_id","=",Auth::user()->id)->get();
+        return view("Receptionist.MarkAttendance", with(compact("fetchMyAttendance")));
     }
 
     public function manageAppointments()
