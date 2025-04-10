@@ -61,7 +61,7 @@ class ReceptionistController extends Controller
     {
         $UserID = Auth::user()->id;
         $isUpdated = DB::table("receptionist")->
-            where("id", "=", $UserID)->
+            where("user_id", "=", $UserID)->
             update([
                 "fullName" => $request->fullName,
                 "gender" => $request->gender,
@@ -76,7 +76,6 @@ class ReceptionistController extends Controller
             toastr()->success("Profile updated.");
             return redirect()->back();
         } else {
-            dd($isUpdated);
             toastr()->error("Something went wrong. Try again later.");
             return redirect()->back();
         }
