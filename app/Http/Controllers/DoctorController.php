@@ -12,7 +12,11 @@ class DoctorController extends Controller
     public function index()
     {
         if (Auth::user()) {
-            return view("Doctor.Dashboard");
+            $fetchAppoinments = DB::table("appoinments")->
+            where("doctorName","=",Auth::user()->name)->
+            limit(3)->
+            get();
+            return view("Doctor.Dashboard", with(compact("fetchAppoinments")));
         } else {
             return view("welcome");
         }

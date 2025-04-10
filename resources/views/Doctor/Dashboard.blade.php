@@ -8,42 +8,24 @@
             <p class="text-gray-600 capitalize">Welcome {{ Auth::user()->name }}</p>
         </div>
 
-        <div class="w-full mt-10">
-            <div class="w-1/2 bg-white p-6 rounded shadow">
-                <h4 class="text-lg mb-4 font-bold text-center">Upcomming Appointments</h4>
-            <table>
-                <tr>
-                    <th class="border border-slate-400 p-3">Patient Name</th>
-                    <th class="border border-slate-400 p-3">Appointment Time</th>
-                    <th class="border border-slate-400 p-3">Reason for Visit</th>
-                    <th class="border border-slate-400 p-3">Actions</th>
+        <div class="w-full bg-white rounded shadow p-6 mt-10">
+            <h3 class="text-lg font-semibold mb-4">Upcoming Appoinments</h3>
+            <table class="w-full">
+                <tr class="border-b border-gray-500 text-[#6B7280] text-xs">
+                    <th class="font-medium text-start py-3">Date</th>
+                    <th class="font-medium text-start py-3">Time</th>
+                    <th class="font-medium text-start py-3">Patient Name</th>
+                    <th class="font-medium text-start py-3">Reason for Visit</th>
                 </tr>
-                <tr>
-                    <td class="border border-slate-400 p-3">Raza</td>
-                    <td class="border border-slate-400 p-3">10:00 AM</td>
-                    <td class="border border-slate-400 p-3">Follow-up for Diabetes</td>
-                    <td class="border border-slate-400 p-3">✏️ Edit</td>
-                </tr>
-                <tr>
-                    <td class="border border-slate-400 p-3">Sana Khan</td>
-                    <td class="border border-slate-400 p-3">10:30 AM</td>
-                    <td class="border border-slate-400 p-3">Chest Pain</td>
-                    <td class="border border-slate-400 p-3">✏️ Edit</td>
-                </tr>
-                <tr>
-                    <td class="border border-slate-400 p-3">Ahmed Malik	</td>
-                    <td class="border border-slate-400 p-3">11:00 AM</td>
-                    <td class="border border-slate-400 p-3">Blood Pressure Check</td>
-                    <td class="border border-slate-400 p-3">✏️ Edit</td>
-                </tr>
-                <tr>
-                    <td class="border border-slate-400 p-3">Fatima Noor</td>
-                    <td class="border border-slate-400 p-3">11:30 AM</td>
-                    <td class="border border-slate-400 p-3">Routine Checkup</td>
-                    <td class="border border-slate-400 p-3">✏️ Edit</td>
-                </tr>
+                @foreach ($fetchAppoinments as $record)
+                    <tr class="border-b border-gray-300 text-sm text-[#111827]">
+                        <td class="py-3">{{date("M d, Y", strtotime($record->appoinmentDate))}}</td>
+                        <td class="py-3">{{$record->appoinmentTime}}</td>
+                        <td class="py-3">{{$record->patientName}}</td>
+                        <td class="py-3">{{$record->reasonForVisit}}</td>
+                    </tr>
+                @endforeach
             </table>
-            </div>
         </div>
     </main>
     </div>
