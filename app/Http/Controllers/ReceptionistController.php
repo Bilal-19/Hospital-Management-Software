@@ -84,13 +84,17 @@ class ReceptionistController extends Controller
 
     public function generateBills()
     {
-        return view("Receptionist.GenerateBills");
+        $fetchDoctors = DB::table("doctors")->pluck('fullName');
+        $fetchBillHistory = DB::table("receipt")->where("user_id","=",Auth::user()->id)->get();
+        return view("Receptionist.GenerateBills", with(compact("fetchBillHistory","fetchDoctors")));
     }
 
     public function createBill(Request $request)
     {
         $isInvoiceGenerated = DB::table("receipt")->insert(
             [
+                "patientName" => $request->patientName,
+                "doctorName" => $request->doctorName,
                 "serviceName" => $request->serviceName,
                 "serviceAmount" => $request->serviceAmount,
                 "testName" => $request->testName,

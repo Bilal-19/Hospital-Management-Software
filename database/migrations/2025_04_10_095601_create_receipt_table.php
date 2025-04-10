@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('receipt', function (Blueprint $table) {
             $table->id();
+            $table->string("patientName");
+            $table->string("doctorName");
             $table->string("serviceName");
             $table->integer("serviceAmount");
             $table->string("testName");
