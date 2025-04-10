@@ -15,7 +15,7 @@ class ReceptionistController extends Controller
 
     public function markAttendance()
     {
-        $fetchMyAttendance = DB::table("staff")->where("user_id","=",Auth::user()->id)->get();
+        $fetchMyAttendance = DB::table("staff")->where("user_id", "=", Auth::user()->id)->get();
         return view("Receptionist.MarkAttendance", with(compact("fetchMyAttendance")));
     }
 
@@ -75,9 +75,40 @@ class ReceptionistController extends Controller
         if ($isUpdated) {
             toastr()->success("Profile updated.");
             return redirect()->back();
-        }
-        else {
+        } else {
             dd($isUpdated);
+            toastr()->error("Something went wrong. Try again later.");
+            return redirect()->back();
+        }
+    }
+
+    public function generateBills()
+    {
+        return view("Receptionist.GenerateBills");
+    }
+
+    public function createBill(Request $request)
+    {
+        $isInvoiceGenerated = DB::table("receipt")->insert(
+            [
+                "serviceName" => $request->serviceName,
+                "serviceAmount" => $request->serviceAmount,
+                "testName" => $request->testName,
+                "testCost" => $request->testCost,
+                "medicineName" => $request->medicineName,
+                "medicinePrice" => $request->medicinePrice,
+                "totalAmount" => $request->serviceAmount + $request->testCost + $request->medicinePrice,
+                "paymentMode" => $request->paymentMode,
+                "status" => "Paid",
+                "user_id" => Auth::user()->id,
+                "created_at" => now()
+            ]
+        );
+
+        if ($isInvoiceGenerated){
+            toastr()->success("Invoice generated successfully.");
+            return redirect()->back();
+        } else {
             toastr()->error("Something went wrong. Try again later.");
             return redirect()->back();
         }

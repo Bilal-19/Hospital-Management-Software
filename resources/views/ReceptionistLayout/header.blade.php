@@ -45,7 +45,7 @@
                     <i class="fas fa-notes-medical"></i>
                     <span class="inline">Manage Appoinments</span>
                 </a>
-                <a href="#"
+                <a href="{{route("Receptionist.GenerateBills")}}"
                     class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">
                     <i class="fas fa-receipt"></i>
                     <span class="inline">Generate Bill</span>

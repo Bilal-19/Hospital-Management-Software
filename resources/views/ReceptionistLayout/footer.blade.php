@@ -8,6 +8,8 @@
          sidebar.classList.toggle('-translate-x-full');
      });
  </script>
+
+ @stack("custom-js-script")
  </body>
 
  </html>
