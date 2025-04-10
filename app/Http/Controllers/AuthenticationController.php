@@ -137,4 +137,14 @@ class AuthenticationController extends EmailController
         }
 
     }
+
+    public function LogOutUser(){
+        if (Auth::check()){
+            Auth::logout();
+            return view("Registration.Login");
+        } else {
+            toastr()->info("You're already log out.");
+            return redirect()->back();
+        }
+    }
 }

@@ -60,7 +60,7 @@
                     <i class="fa-solid fa-user-doctor"></i>
                     <span class="inline">My Profile</span>
                 </a>
-                <a href="#"
+                <a href="{{route("LogOutUser")}}"
                     class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <span class="inline">Log Out</span>
