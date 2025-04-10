@@ -54,7 +54,7 @@
                 <div class="flex flex-col">
                     <label for="shiftTiming">Shift Timing:</label>
                     <select name="shiftTiming" id="shiftTiming"
-                        class="bg-gray-100 px-3 py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
+                        class="bg-gray-100 px-2 py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
                         @php
                             $staffShiftArr = ['9 AM - 5 PM', '10 AM - 6 PM'];
                         @endphp

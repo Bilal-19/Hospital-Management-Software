@@ -18,9 +18,11 @@ class DoctorController extends Controller
         }
     }
 
-    public function markAttendance()
+    public function markDoctorAttendance()
     {
-        return view("Doctor.MarkAttendance");
+        $userID = Auth::user()->id;
+        $fetchMyAttendance = DB::table("staff")->where("user_id","=",$userID)->get();
+        return view("Doctor.MarkAttendance", with(compact("fetchMyAttendance")));
     }
 
     public function myProfile()
