@@ -18,11 +18,11 @@
         <div class="w-full mt-10 bg-white p-6 rounded shadow overflow-auto">
 
                 <table class="w-full">
-                    <tr>
-                        <th class="border border-slate-400 p-3">Patient Name</th>
-                        <th class="border border-slate-400 p-3">Age</th>
-                        <th class="border border-slate-400 p-3">Reason for Visit</th>
-                        <th class="border border-slate-400 p-3">Gender</th>
+                    <tr class="border-b border-gray-500 text-[#6B7280] text-xs">
+                        <th class="font-medium text-start py-3">Patient Name</th>
+                        <th class="font-medium text-start py-3">Age</th>
+                        <th class="font-medium text-start py-3">Reason for Visit</th>
+                        <th class="font-medium text-start py-3">Reason for Visit</th>
                     </tr>
                     @foreach ($fetchRecords as $record)
                         <tr>
