@@ -29,7 +29,7 @@ class DoctorController extends Controller
     {
         if (Auth::user()) {
             $userID = Auth::user()->id;
-            $fetchRecord = DB::table("doctors")->find($userID);
+            $fetchRecord = DB::table("doctors")->where("user_id","=",$userID)->first();
             return view("Doctor.MyProfile", with(compact("fetchRecord")));
         }
     }

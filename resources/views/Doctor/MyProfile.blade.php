@@ -35,13 +35,13 @@
                 <div class="flex flex-col">
                     <label for="emailAddress">Email Address:</label>
                     <input type="email" name="emailAddress" id="emailAddress" value="{{ $fetchRecord->emailAddress }}"
-                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none w-80">
+                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
                 </div>
 
                 <div class="flex flex-col">
                     <label for="phoneNumber">Phone Number:</label>
                     <input type="text" name="phoneNumber" id="phoneNumber" value="{{ $fetchRecord->phoneNumber }}"
-                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none w-80">
+                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
                 </div>
 
                 <div class="flex flex-col">
@@ -77,13 +77,13 @@
                 <div class="flex flex-col">
                     <label for="licenseNumber">License Number:</label>
                     <input type="text" name="licenseNumber" id="licenseNumber" value="{{$fetchRecord->licenseNumber}}"
-                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none w-80">
+                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
                 </div>
 
                 <div class="flex flex-col">
                     <label for="consultationFee">Consultation Fee:</label>
                     <input type="number" name="consultationFee" id="consultationFee" value="{{$fetchRecord->consultationFee}}"
-                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none w-80">
+                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
                 </div>
 
                 <div class="flex flex-col justify-center">
