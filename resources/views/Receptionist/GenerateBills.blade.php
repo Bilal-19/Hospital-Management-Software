@@ -8,7 +8,7 @@
 
             <form action="{{ route('Receptionist.CreateBill') }}" method="post" autocomplete="off">
                 @csrf
-                <div class="mt-5 grid grid-cols-2 gap-8">
+                <div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="flex flex-col">
                         <label>Patient</label>
                         <input type="text" name="patientName" placeholder="Enter Patient Name"
