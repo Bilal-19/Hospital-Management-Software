@@ -34,6 +34,8 @@ class ReceptionistController extends Controller
             "doctorName" => $request->doctor,
             "appoinmentDate" => $request->appoinmentDate,
             "appoinmentTime" => $request->appoinmentTime,
+            "patientName" => $request->patientName,
+            "reasonForVisit" => $request->reasonForVisit,
             "user_id" => Auth::user()->id,
             "created_at" => now()
         ]);

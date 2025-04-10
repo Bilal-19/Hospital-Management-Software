@@ -3,12 +3,12 @@
 @section('section')
     <!-- Main Content -->
     <main class="flex-1 p-6">
-        <div class="w-full bg-white rounded shadow p-6 mb-10">
+        <div class="w-80 md:w-full bg-white rounded shadow p-6 mb-10">
             <h3 class="text-lg font-semibold mb-4">Book Appoinment</h3>
 
             <form action="{{ route('Receptionist.CreateAppoinment') }}" method="post" autocomplete="off">
                 @csrf
-                <div class="grid md:grid-cols-2 gap-5">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                     <div class="flex flex-col">
                         <label for="department" class="mb-2">Department:</label>
                         <select name="department" id="department" required
@@ -70,6 +70,18 @@
                             @endforeach
                         </select>
                     </div>
+
+                    <div class="flex flex-col">
+                        <label for="patientName" class="mb-2">Patient Name:</label>
+                        <input type="text" required name="patientName" placeholder="Enter patient name"
+                            class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                    </div>
+
+                    <div class="flex flex-col">
+                        <label for="reasonForVisit" class="mb-2">Reason for Visit:</label>
+                        <input type="text" required name="reasonForVisit" placeholder="Enter patient name"
+                            class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                    </div>
                 </div>
                 <button class="w-full bg-black text-white py-2 rounded-md mt-5 hover:transform duration-500 hover:bg-black/90">Book Now</button>
             </form>
@@ -77,11 +89,13 @@
 
         <div class="w-full bg-white rounded shadow p-6">
             <h3 class="text-lg font-semibold mb-4">Upcoming Appoinments</h3>
-            <table class="w-full">
+            <table class="w-80 md:w-full">
                 <tr class="border-b border-gray-500 text-[#6B7280] text-xs">
                     <th class="font-medium text-start py-3">Date & Time</th>
                     <th class="font-medium text-start py-3">Doctor</th>
                     <th class="font-medium text-start py-3">Department</th>
+                    <th class="font-medium text-start py-3">Patient Name</th>
+                    <th class="font-medium text-start py-3">Reason for Visit</th>
                     <th class="font-medium text-start py-3">Actions</th>
                 </tr>
                 @foreach ($fetchAppoinments as $record)
@@ -89,6 +103,8 @@
                         <td class="py-3">{{date("M d, Y", strtotime($record->appoinmentDate))}} {{$record->appoinmentTime}}</td>
                         <td class="py-3">{{$record->doctorName}}</td>
                         <td class="py-3">{{$record->department}}</td>
+                        <td class="py-3">{{$record->patientName}}</td>
+                        <td class="py-3">{{$record->reasonForVisit}}</td>
                         <td class="py-3">
                             <a href="" class="font-medium text-black mr-3">Reschedule</a>
                             <a href="" class="font-medium text-[#DC2626]">Cancel</a>
