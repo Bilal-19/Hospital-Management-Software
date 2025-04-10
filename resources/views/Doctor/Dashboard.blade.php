@@ -8,6 +8,13 @@
             <p class="text-gray-600 capitalize">Welcome {{ Auth::user()->name }}</p>
         </div>
 
+        @php
+            $fetchAppoinments = DB::table("appoinments")->
+            where("doctorName","=",Auth::user()->name)->
+            limit(3)->
+            get();
+        @endphp
+
         <div class="w-full bg-white rounded shadow p-6 mt-10">
             <h3 class="text-lg font-semibold mb-4">Upcoming Appoinments</h3>
             <table class="w-full">
