@@ -10,10 +10,10 @@ class ReceptionistController extends Controller
 {
     public function index()
     {
-        if (Auth::check() && Auth::user()->role === "Receptionist"){
+        if (Auth::check() && Auth::user()->role === "Receptionist") {
             return view("Receptionist.Dashboard");
         } else {
-            return view("welcome");
+            return view("Registration.Login");
         }
     }
 
@@ -129,9 +129,16 @@ class ReceptionistController extends Controller
         return view("Receptionist.Invoices", with(compact("fetchBillHistory")));
     }
 
-    public function allDoctors()
+    public function allDoctors(Request $request)
     {
-        $fetchRecords = DB::table("doctors")->get();
+        if ($request->search) {
+            $fetchRecords = DB::table("doctors")->
+                where("fullName", "=", $request->search)
+                ->orWhere("department", "=", $request->search)
+                ->get();
+        } else {
+            $fetchRecords = DB::table("doctors")->get();
+        }
         return view("Receptionist.AllDoctors", with(compact("fetchRecords")));
     }
 }
