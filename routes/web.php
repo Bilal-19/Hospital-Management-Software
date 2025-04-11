@@ -45,5 +45,6 @@ Route::post("/create-appointment",[ReceptionistController::class,'createAppoinme
 Route::get("/receptionist-profile",[ReceptionistController::class,'receptionistProfile'])->name('Receptionist.Profile');
 Route::post("/update-receptionist-profile",[ReceptionistController::class,'updateReceptionistProfile'])->name('Receptionist.UpdateProfile');
 Route::get("/generate-bill",[ReceptionistController::class,'generateBills'])->name('Receptionist.GenerateBills');
-Route::get("/all-invoices",[ReceptionistController::class,'getInvoices'])->name('Receptionist.GetInvoices');
 Route::post("/create-invoice",[ReceptionistController::class,'createBill'])->name('Receptionist.CreateBill');
+Route::get("/all-invoices",[ReceptionistController::class,'getInvoices'])->name('Receptionist.GetInvoices');
+Route::get("/all-doctors",[ReceptionistController::class,'allDoctors'])->name('Receptionist.AllDoctors');

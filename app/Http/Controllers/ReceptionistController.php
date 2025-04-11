@@ -124,4 +124,10 @@ class ReceptionistController extends Controller
             get();
         return view("Receptionist.Invoices", with(compact("fetchBillHistory")));
     }
+
+    public function allDoctors()
+    {
+        $fetchRecords = DB::table("doctors")->get();
+        return view("Receptionist.AllDoctors", with(compact("fetchRecords")));
+    }
 }

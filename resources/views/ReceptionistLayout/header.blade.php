@@ -55,9 +55,9 @@
                     <i class="fa-solid fa-file-invoice"></i>
                     <span class="inline">Invoices</span>
                 </a>
-                <a href="#"
+                <a href="{{route("Receptionist.AllDoctors")}}"
                     class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">
-                    <i class="fa-solid fa-file-invoice"></i>
+                    <i class="fa-solid fa-user-doctor"></i>
                     <span class="inline">All Doctors</span>
                 </a>
                 <a href="#"

@@ -21,7 +21,7 @@ class DoctorController extends Controller
     public function markDoctorAttendance()
     {
         $userID = Auth::user()->id;
-        $fetchMyAttendance = DB::table("staff")->where("user_id","=",$userID)->get();
+        $fetchMyAttendance = DB::table("staff")->where("user_id", "=", $userID)->get();
         return view("Doctor.MarkAttendance", with(compact("fetchMyAttendance")));
     }
 
@@ -29,7 +29,7 @@ class DoctorController extends Controller
     {
         if (Auth::user()) {
             $userID = Auth::user()->id;
-            $fetchRecord = DB::table("doctors")->where("user_id","=",$userID)->first();
+            $fetchRecord = DB::table("doctors")->where("user_id", "=", $userID)->first();
             return view("Doctor.MyProfile", with(compact("fetchRecord")));
         }
     }
@@ -59,7 +59,7 @@ class DoctorController extends Controller
             "created_at" => now()
         ]);
 
-        if ($newPatientCreated){
+        if ($newPatientCreated) {
             toastr()->success("New patient registered successfully");
             return redirect()->back();
         } else {
@@ -104,12 +104,23 @@ class DoctorController extends Controller
 
     public function updateMyProfile(Request $request)
     {
+        if ($request->file("profilePicture")) {
+            $imagePath = time() . '.' . $request->profilePicture->getClientOriginalExtension();
+            $request->profilePicture->move("Doctors/Profile",$imagePath);
+        } else {
+            $extractImagePath = DB::table("doctors")->
+                select("profilePicture")->
+                where("user_id", "=", Auth::user()->id)->
+                first();
+            $imagePath = $extractImagePath->profilePicture;
+        }
         $isUpdated = DB::table("doctors")
             ->where('user_id', '=', Auth::user()->id)
             ->update([
                 "fullName" => $request->fullName,
                 "gender" => $request->gender,
                 "dateOfBirth" => $request->dateOfBirth,
+                "profilePicture" => $imagePath,
                 "emailAddress" => $request->emailAddress,
                 "phoneNumber" => $request->phoneNumber,
                 "department" => $request->department,
@@ -122,6 +133,7 @@ class DoctorController extends Controller
                 "availableOnThurs" => $request->Thursday,
                 "availableOnFri" => $request->Friday,
                 "availableOnSat" => $request->Saturday,
+                "status" => $request->status,
                 "updated_at" => now()
             ]);
         if ($isUpdated) {

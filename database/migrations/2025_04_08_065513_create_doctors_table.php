@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string("fullName")->nullable();
             $table->string("gender")->nullable();
             $table->date("dateOfBirth")->nullable();
+            $table->string("profilePicture")->nullable();
             $table->string("emailAddress")->nullable();
             $table->string("phoneNumber")->nullable();
             $table->string("department")->nullable();
@@ -28,6 +29,7 @@ return new class extends Migration
             $table->string("availableOnThurs")->nullable();
             $table->string("availableOnFri")->nullable();
             $table->string("availableOnSat")->nullable();
+            $table->string("status")->default("Available");
             $table->timestamps();
 
             // Foreign Key

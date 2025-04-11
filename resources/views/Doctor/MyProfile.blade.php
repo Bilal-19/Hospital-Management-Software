@@ -7,7 +7,7 @@
             <h2 class="text-xl font-semibold mb-4">My Profile</h2>
         </div>
 
-        <form action="{{ route('Doctor.UpdateProfile') }}" method="POST">
+        <form action="{{ route('Doctor.UpdateProfile') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <h4 class="text-lg font-semibold my-4">Personal Information</h4>
             <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-5 space-y-1 md:space-y-0">
@@ -27,6 +27,12 @@
                 </div>
 
                 <div class="flex flex-col">
+                    <label for="profilePicture">Profile Picture (Optional):</label>
+                    <input type="file" name="profilePicture" id="profilePicture"
+                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
+                </div>
+
+                <div class="flex flex-col">
                     <label for="dateOfBirth">Date of Birth:</label>
                     <input type="date" name="dateOfBirth" id="dateOfBirth" value="{{ $fetchRecord->dateOfBirth }}"
                         class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
@@ -34,7 +40,7 @@
 
                 <div class="flex flex-col">
                     <label for="emailAddress">Email Address:</label>
-                    <input type="email" name="emailAddress" id="emailAddress" value="{{ $fetchRecord->emailAddress }}"
+                    <input type="email" name="emailAddress" id="emailAddress" value="{{ $fetchRecord->emailAddress }}" readonly
                         class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
                 </div>
 
@@ -84,6 +90,15 @@
                     <label for="consultationFee">Consultation Fee:</label>
                     <input type="number" name="consultationFee" id="consultationFee" value="{{$fetchRecord->consultationFee}}"
                         class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="status">Status:</label>
+                    <select name="status" id="status"
+                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
+                        <option value="Available" {{ $fetchRecord->status == "Available" ? "selected" : "" }}>Available</option>
+                        <option value="Unavailable" {{ $fetchRecord->status == "Unavailable" ? "selected" : "" }}>Unavailable</option>
+                    </select>
                 </div>
 
                 <div class="flex flex-col justify-center">
