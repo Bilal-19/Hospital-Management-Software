@@ -10,7 +10,11 @@ class ReceptionistController extends Controller
 {
     public function index()
     {
-        return view("Receptionist.Dashboard");
+        if (Auth::check() && Auth::user()->role === "Receptionist"){
+            return view("Receptionist.Dashboard");
+        } else {
+            return view("welcome");
+        }
     }
 
     public function markAttendance()

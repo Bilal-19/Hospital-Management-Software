@@ -6,39 +6,24 @@
         <div class="p-6">
             <div class="w-full grid grid-cols-3 gap-5">
                 @foreach ($fetchRecords as $record)
-                    <div class="flex space-x-2 bg-white p-6 rounded-md shadow">
+                    <div class="flex items-center space-x-3 bg-white p-6 rounded-md shadow">
                         <div>
-                            <img src="" alt="profile">
+                            <img src="{{ asset('Doctors/Profile/' . $record->profilePicture) }}" alt="profile"
+                                class="rounded-full size-16 object-cover">
                         </div>
                         <div>
-                            <h4 class="font-semibold text-lg">{{$record->fullName}}</h4>
-                            <p class="text-sm text-[#6B7280]">{{$record->department}}</p>
-                            <p>Available</p>
+                            <h4 class="font-semibold text-lg">{{ $record->fullName }}</h4>
+                            <p class="text-sm text-[#6B7280]">{{ $record->department }}</p>
+                            @if ($record->status === 'Available')
+                                <button
+                                    class="text-[#166534] text-xs font-medium bg-[#DCFCE7] px-2.5 py-0.5 rounded-3xl">{{$record->status}}</button>
+                            @else
+                                <button
+                                    class="text-[#991B1B] text-xs font-medium bg-[#FEE2E2] px-2.5 py-0.5 rounded-3xl">{{$record->status}}</button>
+                            @endif
                         </div>
                     </div>
                 @endforeach
-
-                <div class="flex space-x-2 bg-white p-6 rounded-md shadow">
-                    <div>
-                        <img src="" alt="profile">
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-lg">Dr. John Smith</h4>
-                        <p class="text-sm text-[#6B7280]">Cardiology</p>
-                        <p>Available</p>
-                    </div>
-                </div>
-
-                <div class="flex space-x-2 bg-white p-6 rounded-md shadow">
-                    <div>
-                        <img src="" alt="profile">
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-lg">Dr. John Smith</h4>
-                        <p class="text-sm text-[#6B7280]">Cardiology</p>
-                        <p>Available</p>
-                    </div>
-                </div>
             </div>
         </div>
     </main>

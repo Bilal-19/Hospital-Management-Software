@@ -11,10 +11,10 @@ class DoctorController extends Controller
 {
     public function index()
     {
-        if (Auth::user()) {
+        if (Auth::check() && Auth::user()->role === "Doctor"){
             return view("Doctor.Dashboard");
         } else {
-            return view("welcome");
+            return view("Registration.Login");
         }
     }
 
