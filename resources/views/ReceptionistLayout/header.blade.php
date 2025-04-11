@@ -45,8 +45,8 @@
                     <i class="w-2 fas fa-notes-medical"></i>
                     <span class="inline">Book Appoinments</span>
                 </a>
-                <a href="{{route("Receptionist.ManageAppointments")}}"
-                    class="flex items-center gap-3 px-4 py-2 space-x-1 border-b {{request()->routeIs("Receptionist.ManageAppointments") ? "bg-white text-emerald-700 rounded-md": "text-white"}}">
+                <a href="{{route("Receptionist.AllAppoinments")}}"
+                    class="flex items-center gap-3 px-4 py-2 space-x-1 border-b {{request()->routeIs("Receptionist.AllAppoinments") ? "bg-white text-emerald-700 rounded-md": "text-white"}}">
                     <i class="w-2 fas fa-notes-medical"></i>
                     <span class="inline">All Appoinments</span>
                 </a>
@@ -66,12 +66,12 @@
                     <span class="inline">All Doctors</span>
                 </a>
                 <a href="#"
-                    class="flex items-center gap-3 px-4 py-2 space-x-1 border-b">
+                    class="flex items-center gap-3 px-4 py-2 space-x-1 border-b text-white">
                     <i class="w-2 fa-solid fa-file-invoice-dollar"></i>
                     <span class="inline">Salary Receipt</span>
                 </a>
                 <a href="{{route("Receptionist.Profile")}}"
-                    class="flex items-center gap-3 px-4 py-2 space-x-1 border-b">
+                    class="flex items-center gap-3 px-4 py-2 space-x-1 border-b {{request()->routeIs("Receptionist.Profile") ? "bg-white text-emerald-700 rounded-md": "text-white"}}">
                     <i class="w-2 fa-solid fa-user"></i>
                     <span class="inline">My Profile</span>
                 </a>

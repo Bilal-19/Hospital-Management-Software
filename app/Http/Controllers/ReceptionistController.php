@@ -31,6 +31,11 @@ class ReceptionistController extends Controller
         return view("Receptionist.ManageAppoinments", with(compact("fetchDoctorName", "fetchAppoinments")));
     }
 
+    public function allAppoinments(){
+        $fetchAppoinments = DB::table("appoinments")->paginate(15);
+        return view("Receptionist.AllAppoinments", with(compact( "fetchAppoinments")));
+    }
+
     public function createAppoinment(Request $request)
     {
         $isAppoinmentCreated = DB::table("appoinments")->insert([

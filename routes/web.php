@@ -48,3 +48,4 @@ Route::get("/generate-bill",[ReceptionistController::class,'generateBills'])->na
 Route::post("/create-invoice",[ReceptionistController::class,'createBill'])->name('Receptionist.CreateBill');
 Route::get("/all-invoices",[ReceptionistController::class,'getInvoices'])->name('Receptionist.GetInvoices');
 Route::get("/all-doctors",[ReceptionistController::class,'allDoctors'])->name('Receptionist.AllDoctors');
+Route::get("/all-appoinments",[ReceptionistController::class,'allAppoinments'])->name('Receptionist.AllAppoinments');
