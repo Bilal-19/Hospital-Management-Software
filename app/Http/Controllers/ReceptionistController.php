@@ -84,8 +84,8 @@ class ReceptionistController extends Controller
     public function generateBills()
     {
         $fetchDoctors = DB::table("doctors")->pluck('fullName');
-        $fetchBillHistory = DB::table("receipt")->where("user_id","=",Auth::user()->id)->get();
-        return view("Receptionist.GenerateBills", with(compact("fetchBillHistory","fetchDoctors")));
+        $fetchBillHistory = DB::table("receipt")->where("user_id", "=", Auth::user()->id)->limit(3)->get();
+        return view("Receptionist.GenerateBills", with(compact("fetchBillHistory", "fetchDoctors")));
     }
 
     public function createBill(Request $request)
@@ -108,12 +108,20 @@ class ReceptionistController extends Controller
             ]
         );
 
-        if ($isInvoiceGenerated){
+        if ($isInvoiceGenerated) {
             toastr()->success("Invoice generated successfully.");
             return redirect()->back();
         } else {
             toastr()->error("Something went wrong. Try again later.");
             return redirect()->back();
         }
+    }
+
+    public function getInvoices()
+    {
+        $fetchBillHistory = DB::table("receipt")->
+            where("user_id", "=", Auth::user()->id)->
+            get();
+        return view("Receptionist.Invoices", with(compact("fetchBillHistory")));
     }
 }

@@ -29,7 +29,7 @@
         <!-- Sidebar -->
         <aside id="sidebar"
             class="bg-emerald-700 text-black w-64 space-y-4 py-6 px-4 absolute md:relative z-10 top-16 left-0 md:top-0 md:flex md:flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out h-max-screen">
-            <nav class="space-y-10">
+            <nav class="space-y-7">
                 <a href="#"
                     class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">
                     <i class="fa-solid fa-house"></i>
@@ -49,6 +49,16 @@
                     class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">
                     <i class="fas fa-receipt"></i>
                     <span class="inline">Generate Bill</span>
+                </a>
+                <a href="{{route("Receptionist.GetInvoices")}}"
+                    class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">
+                    <i class="fa-solid fa-file-invoice"></i>
+                    <span class="inline">Invoices</span>
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">
+                    <i class="fa-solid fa-file-invoice"></i>
+                    <span class="inline">All Doctors</span>
                 </a>
                 <a href="#"
                     class="flex items-center gap-3 px-4 py-2 bg-white text-black rounded hover:bg-gray-200">

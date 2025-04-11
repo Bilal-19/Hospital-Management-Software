@@ -91,7 +91,15 @@
         </div>
 
         <div class="bg-white rounded shadow p-6 mt-5">
-            <h2 class="text-xl font-semibold mb-4">Billing History</h2>
+            <div class="flex items-center justify-between mb-5">
+                <div>
+                    <h2 class="text-xl font-semibold">Billing History</h2>
+                    <p class="text-sm text-black/80">{{ count($fetchBillHistory) }} records found</p>
+                </div>
+                <div>
+                    <a href="{{route("Receptionist.GetInvoices")}}" class="bg-black text-white px-3 py-2 rounded-md">View All Bills</a>
+                </div>
+            </div>
             <table class="w-80 md:w-full">
                 <tr class="border-b border-gray-500 text-[#6B7280] text-xs">
                     <th class="font-medium text-start py-3">Date</th>
