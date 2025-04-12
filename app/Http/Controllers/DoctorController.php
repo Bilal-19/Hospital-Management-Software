@@ -11,7 +11,7 @@ class DoctorController extends Controller
 {
     public function index()
     {
-        if (Auth::check() && Auth::user()->role === "Doctor"){
+        if (Auth::check() && Auth::user()->role === "Doctor") {
             return view("Doctor.Dashboard");
         } else {
             return view("Registration.Login");
@@ -36,8 +36,11 @@ class DoctorController extends Controller
 
     public function readPatient()
     {
-        $fetchRecords = DB::table("patients")->get();
-        return view("Doctor.Patients", with(compact("fetchRecords")));
+        $fetchRecords = DB::table("patients")->
+            where("user_id", "=", Auth::user()->id)->
+            paginate(10);
+        $countRecords = DB::table("patients")->count();
+        return view("Doctor.Patients", with(compact("fetchRecords", "countRecords")));
     }
 
     public function addPatient()
@@ -106,7 +109,7 @@ class DoctorController extends Controller
     {
         if ($request->file("profilePicture")) {
             $imagePath = time() . '.' . $request->profilePicture->getClientOriginalExtension();
-            $request->profilePicture->move("Doctors/Profile",$imagePath);
+            $request->profilePicture->move("Doctors/Profile", $imagePath);
         } else {
             $extractImagePath = DB::table("doctors")->
                 select("profilePicture")->
@@ -145,10 +148,11 @@ class DoctorController extends Controller
         }
     }
 
-    public function viewAllAppoinments(){
+    public function viewAllAppoinments()
+    {
         $fetchAppoinments = DB::table("appoinments")->
-        where("doctorName","=",Auth::user()->name)->
-        paginate(10);
+            where("doctorName", "=", Auth::user()->name)->
+            paginate(10);
         return view("Doctor.ViewAllAppoinments", with(compact("fetchAppoinments")));
     }
 }
