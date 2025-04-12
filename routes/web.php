@@ -37,6 +37,7 @@ Route::get("/doctor-profile",[DoctorController::class,'myProfile'])->name('Docto
 Route::post("/mark-todays-attendance",[DoctorController::class,'markTodayAttendance'])->name('Doctor.MarkPresent');
 Route::post("/update-profile",[DoctorController::class,'updateMyProfile'])->name('Doctor.UpdateProfile');
 Route::post("/create-patient",[DoctorController::class,'createPatient'])->name('Doctor.CreatePatientProfile');
+Route::get("/doctor-all-appoinments",[DoctorController::class,'viewAllAppoinments'])->name('Doctor.AllAppoinments');
 
 Route::get("/receptionist-dashboard",[ReceptionistController::class,'index'])->name('Receptionist.Dashboard');
 Route::get("/mark-attendance",[ReceptionistController::class,'markAttendance'])->name('Receptionist.MarkAttendance');

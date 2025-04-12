@@ -25,7 +25,7 @@ class AppoinmentSeeder extends Seeder
                     'Dermatology',
                     'General Medicine',
                 ]),
-                "doctorName" => $fakeRecord->firstName(),
+                "doctorName" => "Dr. Salik",
                 "appoinmentDate" => $fakeRecord->date("Y-m-d", "2024-12-31"),
                 "appoinmentTime" => $fakeRecord->time(),
                 "patientName" => $fakeRecord->firstName(),

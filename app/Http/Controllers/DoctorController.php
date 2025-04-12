@@ -144,4 +144,11 @@ class DoctorController extends Controller
             return redirect()->back();
         }
     }
+
+    public function viewAllAppoinments(){
+        $fetchAppoinments = DB::table("appoinments")->
+        where("doctorName","=",Auth::user()->name)->
+        paginate(10);
+        return view("Doctor.ViewAllAppoinments", with(compact("fetchAppoinments")));
+    }
 }
