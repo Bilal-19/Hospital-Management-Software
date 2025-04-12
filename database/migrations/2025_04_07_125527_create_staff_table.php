@@ -13,10 +13,6 @@ return new class extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
-            $table->string('staff_name');
-            $table->date('date');
-            $table->time('time');
-            $table->string('notes')->nullable();
             $table->timestamps();
 
             // Foreign Key

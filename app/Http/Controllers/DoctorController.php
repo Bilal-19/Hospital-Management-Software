@@ -77,31 +77,25 @@ class DoctorController extends Controller
         $todaysDate = $carbonDate->toDateString();
 
         $countAttendance = DB::table("staff")->
-            where("user_id", "=", $request->doctorID)->
-            where("date", "=", $todaysDate)->
+            where("user_id", "=", Auth::user()->id)->
+            orWhere("created_at", "=", "$todaysDate%")->
             count();
 
         if ($countAttendance >= 1) {
             toastr()->info("You've already checked in.");
-            return redirect()->back();
         } else {
             $isMarkPresent = DB::table("staff")->insert([
-                "staff_name" => $request->doctorName,
-                "date" => $request->currentDate,
-                "time" => $request->loggedIn,
-                "notes" => $request->remarks,
-                "user_id" => $request->doctorID,
+                "user_id" => Auth::user()->id,
                 "created_at" => now()
             ]);
 
             if ($isMarkPresent) {
                 toastr()->success("Attendance mark successfully");
-                return redirect()->back();
             } else {
                 toastr()->error("something went wrong");
-                return redirect()->back();
             }
         }
+        return redirect()->back();
 
     }
 

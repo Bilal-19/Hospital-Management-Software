@@ -35,10 +35,10 @@
                     <i class="fa-solid fa-house"></i>
                     <span class="inline">Dashboard</span>
                 </a>
-                <a href="{{ route('Doctor.MarkAttendance') }}"
-                    class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Doctor.MarkAttendance') ? 'bg-white text-black rounded hover:bg-gray-200' : 'text-white' }}">
+                <a href="{{ route('Doctor.AllAttendance') }}"
+                    class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Doctor.AllAttendance') ? 'bg-white text-black rounded hover:bg-gray-200' : 'text-white' }}">
                     <i class="fa-solid fa-clipboard-check"></i>
-                    <span class="inline">Mark Attendance</span>
+                    <span class="inline">All Attendance</span>
                 </a>
                 <a href="{{route("Doctor.AllAppoinments")}}"
                     class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Doctor.AllAppoinments') ? 'bg-white text-black rounded hover:bg-gray-200' : 'text-white' }}">
