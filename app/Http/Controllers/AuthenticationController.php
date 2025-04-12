@@ -71,12 +71,11 @@ class AuthenticationController extends EmailController
             if ($request->role === "Doctor") {
                 $this->createRoleBaseAccount("doctors", $userID, $request->username, $request->email);
                 toastr()->success("Account created successfully.");
-                return redirect()->back();
             } else if ($request->role === "Receptionist"){
                 $this->createRoleBaseAccount("receptionist", $userID, $request->username, $request->email);
                 toastr()->success("Account created successfully.");
-                return redirect()->back();
             }
+            return redirect()->back();
         }
     }
 
@@ -100,11 +99,11 @@ class AuthenticationController extends EmailController
             } elseif ($userRole == 'Receptionist') {
                 return view("Receptionist.Dashboard");
             } else {
-                return redirect()->back();
+                return view("Registration.Login");
             }
         } else {
-            toastr()->error("Please input correct credentials");
-            return redirect()->back();
+            toastr()->error("User with this email doesnot exist.");
+            return view("Registration.Login");
         }
     }
     public function sendPassword(Request $request)
@@ -143,7 +142,6 @@ class AuthenticationController extends EmailController
             Auth::logout();
             return view("Registration.Login");
         } else {
-            toastr()->info("You're already log out.");
             return redirect()->back();
         }
     }

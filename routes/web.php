@@ -31,7 +31,6 @@ Route::get("/send-email",[EmailController::class,"sendEmail"])->name("Send.Email
 
 Route::get("/doctor-dashboard",[DoctorController::class,'index'])->name('Doctor.Dashboard');
 Route::get("/patients",[DoctorController::class,'readPatient'])->name('Doctor.PatientDirectory');
-Route::get("/add-patient",[DoctorController::class,'addPatient'])->name('Doctor.AddPatient');
 Route::get("/mark-doctor-attendance",[DoctorController::class,'markDoctorAttendance'])->name('Doctor.AllAttendance');
 Route::get("/doctor-profile",[DoctorController::class,'myProfile'])->name('Doctor.Profile');
 Route::post("/mark-todays-attendance",[DoctorController::class,'markTodayAttendance'])->name('Doctor.MarkPresent');
@@ -50,3 +49,4 @@ Route::post("/create-invoice",[ReceptionistController::class,'createBill'])->nam
 Route::get("/all-invoices",[ReceptionistController::class,'getInvoices'])->name('Receptionist.GetInvoices');
 Route::get("/all-doctors",[ReceptionistController::class,'allDoctors'])->name('Receptionist.AllDoctors');
 Route::get("/all-appoinments",[ReceptionistController::class,'allAppoinments'])->name('Receptionist.AllAppoinments');
+Route::get("/add-patient",[ReceptionistController::class,'addPatient'])->name('Receptionist.AddPatient');

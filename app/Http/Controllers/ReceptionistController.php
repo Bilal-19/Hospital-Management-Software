@@ -146,4 +146,9 @@ class ReceptionistController extends Controller
         }
         return view("Receptionist.AllDoctors", with(compact("fetchRecords")));
     }
+
+    public function addPatient()
+    {
+        return view("Receptionist.AddPatient");
+    }
 }

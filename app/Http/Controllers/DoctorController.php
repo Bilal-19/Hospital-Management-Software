@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DoctorController extends Controller
 {
@@ -20,9 +21,14 @@ class DoctorController extends Controller
 
     public function markDoctorAttendance()
     {
-        $userID = Auth::user()->id;
-        $fetchMyAttendance = DB::table("staff")->where("user_id", "=", $userID)->get();
-        return view("Doctor.MarkAttendance", with(compact("fetchMyAttendance")));
+        if (Auth::check() && Auth::user()->role === "Doctor") {
+            $userID = Auth::user()->id;
+            $fetchMyAttendance = DB::table("staff")->where("user_id", "=", $userID)->get();
+            return view("Doctor.MarkAttendance", with(compact("fetchMyAttendance")));
+        } else {
+            return view("Registration.Login");
+        }
+
     }
 
     public function myProfile()
@@ -43,10 +49,7 @@ class DoctorController extends Controller
         return view("Doctor.Patients", with(compact("fetchRecords", "countRecords")));
     }
 
-    public function addPatient()
-    {
-        return view("Doctor.AddPatient");
-    }
+
 
     public function createPatient(Request $request)
     {
@@ -62,8 +65,16 @@ class DoctorController extends Controller
             "created_at" => now()
         ]);
 
-        if ($newPatientCreated) {
-            toastr()->success("New patient registered successfully");
+        $newUserRec = DB::table("users")->insert([
+            "name" => $request->fullName,
+            "email" => $request->emailAddress,
+            "password" => Hash::make("12345678"),
+            "role" => "Patient",
+            "created_at" => now()
+        ]);
+
+        if ($newPatientCreated && $newUserRec) {
+            toastr()->success("Patient registered successfully.");
             return redirect()->back();
         } else {
             toastr()->info("Please check error message. Something went wrong.");
