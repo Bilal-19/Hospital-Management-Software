@@ -34,22 +34,19 @@
 
 
         <div class="w-full my-5 flex flex-col md:flex-row justify-between space-y-5 md:space-y-0">
-            <div class="w-80 mx-auto md:mx-0 md:w-1/4 bg-white rounded-md shadow p-6 border-1 border-t border-t-slate-700 flex flex-row items-center justify-center space-x-2">
-                <i class="fa-solid fa-hospital-user"></i>
-                <h3 class="text-lg font-semibold">100+</h3>
-                <p class="text-gray-600 text-md">Patients Treated</p>
+            <div class="w-80 mx-auto md:mx-0 md:w-1/4 bg-white rounded-md shadow p-6 border-1 border-t border-t-slate-700 flex flex-col items-center justify-center space-x-2">
+                <p class="text-lg font-medium text-gray-800">Today's Patient</p>
+                <p><i class="fa-solid fa-hospital-user"></i> 100</p>
             </div>
 
-            <div class="w-80 mx-auto md:mx-0 md:w-1/4 bg-white rounded-md shadow p-6 border-1 border-t border-t-slate-700 flex flex-row items-center justify-center space-x-2">
-                <i class="fa-solid fa-calendar-check"></i>
-                <h3 class="text-lg font-semibold">100+</h3>
-                <p class="text-gray-600 text-md">Appointments Done</p>
+            <div class="w-80 mx-auto md:mx-0 md:w-1/4 bg-white rounded-md shadow p-6 border-1 border-t border-t-slate-700 flex flex-col items-center justify-center space-x-2">
+                <p class="text-lg font-medium text-gray-800">Appointments</p>
+                <p> <i class="fa-solid fa-calendar-check"></i> 100</p>
             </div>
 
-            <div class="w-80 mx-auto md:mx-0 md:w-1/4 bg-white rounded-md shadow p-6 border-1 border-t border-t-slate-700 flex flex-row items-center justify-center space-x-2">
-                <i class="fa-solid fa-person-dots-from-line"></i>
-                <h3 class="text-lg font-semibold">100+</h3>
-                <p class="text-gray-600 text-md">Diagnosis Done</p>
+            <div class="w-80 mx-auto md:mx-0 md:w-1/4 bg-white rounded-md shadow p-6 border-1 border-t border-t-slate-700 flex flex-col items-center justify-center space-x-2">
+                <p class="text-lg font-medium text-gray-800">Diagnosis</p>
+                <p> <i class="fa-solid fa-person-dots-from-line"></i> 100</p>
             </div>
         </div>
 
