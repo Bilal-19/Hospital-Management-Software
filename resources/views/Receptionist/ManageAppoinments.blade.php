@@ -10,7 +10,7 @@
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                     <div class="flex flex-col">
-                        <label for="department" class="mb-2">Department:</label>
+                        <label for="department">Department:</label>
                         <select name="department" id="department" required
                             class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
                             @php
@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="flex flex-col">
-                        <label for="doctor" class="mb-2">Doctor:</label>
+                        <label for="doctor">Doctor:</label>
                         <select name="doctor" id="doctor" required
                             class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
                             @foreach ($fetchDoctorName as $value)
@@ -40,14 +40,14 @@
                     </div>
 
                     <div class="flex flex-col">
-                        <label for="date" class="mb-2">Date:</label>
+                        <label for="date">Date:</label>
                         <input type="text" required name="appoinmentDate" placeholder="Select appoinment date"
                             onfocus="(this.type='date')"
                             class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
                     </div>
 
                     <div class="flex flex-col">
-                        <label for="appoinmentTime" class="mb-2">Available Time Slot:</label>
+                        <label for="appoinmentTime">Available Time Slot:</label>
                         <select name="appoinmentTime" required id="appoinmentTime"
                             class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
                             @php
