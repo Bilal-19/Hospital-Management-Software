@@ -10,6 +10,13 @@
         ->orWhere('user_id', '=', Auth::user()->id)
         ->count();
 
+    // Check no of today's appoinment -- count
+$todayDate = date('Y-m-d', strtotime(now()));
+$countTodayAppointment = DB::table('appoinments')
+    ->where('appoinmentDate', '=', $todayDate)
+    ->orWhere('user_id', '=', Auth::user()->id)
+        ->count();
+
 @endphp
 
 @section('section')
@@ -34,17 +41,20 @@
 
 
         <div class="w-full my-5 flex flex-col md:flex-row justify-between space-y-5 md:space-y-0">
-            <div class="w-80 mx-auto md:mx-0 md:w-1/4 bg-white rounded-md shadow p-6 border-1 border-t border-t-slate-700 flex flex-col items-center justify-center space-x-2">
-                <p class="text-lg font-medium text-gray-800">Today's Patient</p>
-                <p><i class="fa-solid fa-hospital-user"></i> 100</p>
+            <div
+                class="w-80 mx-auto md:mx-0 md:w-1/4 bg-white rounded-md shadow p-6 border-1 border-t border-t-slate-700 flex flex-col items-center justify-center space-x-2">
+                <p class="text-lg font-medium text-gray-800">Today's Appointments</p>
+                <p><i class="fa-solid fa-hospital-user"></i> {{ $countTodayAppointment }}</p>
             </div>
 
-            <div class="w-80 mx-auto md:mx-0 md:w-1/4 bg-white rounded-md shadow p-6 border-1 border-t border-t-slate-700 flex flex-col items-center justify-center space-x-2">
-                <p class="text-lg font-medium text-gray-800">Appointments</p>
+            <div
+                class="w-80 mx-auto md:mx-0 md:w-1/4 bg-white rounded-md shadow p-6 border-1 border-t border-t-slate-700 flex flex-col items-center justify-center space-x-2">
+                <p class="text-lg font-medium text-gray-800">Upcoming Appointments</p>
                 <p> <i class="fa-solid fa-calendar-check"></i> 100</p>
             </div>
 
-            <div class="w-80 mx-auto md:mx-0 md:w-1/4 bg-white rounded-md shadow p-6 border-1 border-t border-t-slate-700 flex flex-col items-center justify-center space-x-2">
+            <div
+                class="w-80 mx-auto md:mx-0 md:w-1/4 bg-white rounded-md shadow p-6 border-1 border-t border-t-slate-700 flex flex-col items-center justify-center space-x-2">
                 <p class="text-lg font-medium text-gray-800">Diagnosis</p>
                 <p> <i class="fa-solid fa-person-dots-from-line"></i> 100</p>
             </div>
