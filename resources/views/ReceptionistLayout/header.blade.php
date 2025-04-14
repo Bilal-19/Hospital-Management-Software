@@ -31,57 +31,42 @@
             class="bg-emerald-700 text-black w-64 space-y-4 py-6 px-5 absolute md:relative z-10 top-16 left-0 md:top-0 md:flex md:flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out h-max-screen">
             <nav class="space-y-7">
                 <a href="{{ route('Receptionist.Dashboard') }}"
-                    class="flex gap-3 px-4 py-2 space-x-1 items-center border-b {{ request()->routeIs('Receptionist.Dashboard') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
-                    <i class="w-2 fa-solid fa-house"></i>
+                    class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Receptionist.Dashboard') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
+                    <i class="fa-solid fa-house"></i>
                     <span class="inline">Dashboard</span>
                 </a>
-                <a href="{{ route('Receptionist.MarkAttendance') }}"
-                    class="flex items-center gap-3 px-4 py-2 space-x-1 border-b {{ request()->routeIs('Receptionist.MarkAttendance') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
-                    <i class="w-2 fa-solid fa-clipboard-check"></i>
-                    <span class="inline">Mark Attendance</span>
-                </a>
                 <a href="{{ route('Receptionist.ManageAppointments') }}"
-                    class="flex items-center gap-3 px-4 py-2 space-x-1 border-b {{ request()->routeIs('Receptionist.ManageAppointments') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
-                    <i class="w-2 fas fa-notes-medical"></i>
-                    <span class="inline">Book Appoinments</span>
+                    class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Receptionist.ManageAppointments') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
+                    <i class="fas fa-notes-medical"></i>
+                    <span class="inline">Book Appointment</span>
                 </a>
                 <a href="{{ route('Receptionist.AllPatients') }}"
                     class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Receptionist.AllPatients') ? 'bg-white text-black rounded hover:bg-gray-200' : 'text-white' }}">
                     <i class="fa-solid fa-notes-medical"></i>
-                    <span class="inline">All Patients</span>
-                </a>
-                <a href="{{ route('Receptionist.AllAppoinments') }}"
-                    class="flex items-center gap-3 px-4 py-2 space-x-1 border-b {{ request()->routeIs('Receptionist.AllAppoinments') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
-                    <i class="w-2 fas fa-notes-medical"></i>
-                    <span class="inline">All Appoinments</span>
+                    <span class="inline">Patients</span>
                 </a>
                 <a href="{{ route('Receptionist.GenerateBills') }}"
-                    class="flex items-center gap-3 px-4 py-2 space-x-1 border-b {{ request()->routeIs('Receptionist.GenerateBills') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
-                    <i class="w-2 fas fa-receipt"></i>
-                    <span class="inline">Generate Bill</span>
-                </a>
-                <a href="{{ route('Receptionist.GetInvoices') }}"
-                    class="flex items-center gap-3 px-4 py-2 space-x-1 border-b {{ request()->routeIs('Receptionist.GetInvoices') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
-                    <i class="w-2 fa-solid fa-file-invoice"></i>
-                    <span class="inline">Invoices</span>
+                    class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Receptionist.GenerateBills') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
+                    <i class="fas fa-receipt"></i>
+                    <span class="inline">Billing & Invoices</span>
                 </a>
                 <a href="{{ route('Receptionist.AllDoctors') }}"
-                    class="flex items-center gap-3 px-4 py-2 space-x-1 border-b {{ request()->routeIs('Receptionist.AllDoctors') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
-                    <i class="w-2 fa-solid fa-user-doctor"></i>
+                    class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Receptionist.AllDoctors') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
+                    <i class="fa-solid fa-user-doctor"></i>
                     <span class="inline">All Doctors</span>
                 </a>
-                <a href="#" class="flex items-center gap-3 px-4 py-2 space-x-1 border-b text-white">
-                    <i class="w-2 fa-solid fa-file-invoice-dollar"></i>
+                <a href="#" class="flex items-center gap-3 px-4 py-2 border-b text-white">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
                     <span class="inline">Salary Receipt</span>
                 </a>
                 <a href="{{ route('Receptionist.Profile') }}"
-                    class="flex items-center gap-3 px-4 py-2 space-x-1 border-b {{ request()->routeIs('Receptionist.Profile') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
-                    <i class="w-2 fa-solid fa-user"></i>
+                    class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Receptionist.Profile') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
+                    <i class="fa-solid fa-user"></i>
                     <span class="inline">My Profile</span>
                 </a>
                 <a href="{{ route('LogOutUser') }}"
-                    class="flex items-center gap-3 px-4 py-2 space-x-1 border-b {{ request()->routeIs('LogOutUser') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
-                    <i class="w-2 fa-solid fa-right-from-bracket"></i>
+                    class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('LogOutUser') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
+                    <i class="fa-solid fa-right-from-bracket"></i>
                     <span class="inline">Log Out</span>
                 </a>
             </nav>

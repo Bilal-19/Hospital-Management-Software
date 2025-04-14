@@ -5,8 +5,8 @@
     <main class="flex-1 p-6">
         <div class="bg-white p-6 rounded shadow flex flex-col md:flex-row justify-between md:items-center">
             <div>
-                <h2 class="text-xl font-semibold md:mb-4">Patients</h2>
-                <p class="text-gray-600 capitalize mb-5 md:mb-0">{{$countRecords}} records found</p>
+                <h2 class="text-xl font-semibold">Patients</h2>
+                <p class="text-gray-600 mb-5 md:mb-0 text-sm">{{$countRecords}} records found</p>
             </div>
             <div>
                 <a href="{{ route('Receptionist.AddPatient') }}" class="bg-black text-white px-3 py-2 rounded-md"><i
@@ -23,6 +23,7 @@
                     <th class="font-medium text-start py-3">Contact Number</th>
                     <th class="font-medium text-start py-3">Reason for Visit</th>
                     <th class="font-medium text-start py-3">Gender</th>
+                    <th class="font-medium text-start py-3">Actions</th>
                 </tr>
                 @foreach ($fetchRecords as $record)
                     <tr class="border-b border-gray-300 text-sm text-[#111827]">
@@ -31,6 +32,10 @@
                         <td class="py-3">{{ $record->phoneNumber }}</td>
                         <td class="py-3">{{ $record->reasonForVisit }}</td>
                         <td class="py-3">{{ $record->gender }}</td>
+                        <td class="py-3 space-x-2">
+                            <a href="" class="text-blue-700"><i class="fa-solid fa-user-pen"></i></a>
+                            <a href="" class="text-red-700"><i class="fa-solid fa-trash"></i></a>
+                        </td>
                     </tr>
                 @endforeach
             </table>
