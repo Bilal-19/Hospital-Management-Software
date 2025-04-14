@@ -160,4 +160,28 @@ class DoctorController extends Controller
             paginate(10);
         return view("Doctor.ViewAllAppoinments", with(compact("fetchAppoinments")));
     }
+
+    public function addDiagnosNote($id){
+        $findAppointmentRec = DB::table("appoinments")->find($id);
+        return view("Doctor.UpdateDiagnosis", with(compact("findAppointmentRec")));
+    }
+
+    public function updatePatientRecord($id, Request $request)
+    {
+        $findAppointmentRec = DB::table("appoinments")->find($id);
+
+        $isRecUpdated = DB::table("appoinments")->where("id", "=", $id)->update([
+            "diagnosis" => $request->diagnosis,
+            "medicine" => $request->medicine,
+            "symptoms" => $request->symptoms,
+            "updated_at" => now()
+        ]);
+
+        if ($isRecUpdated) {
+            toastr()->success("Updated: Diagnosis & Prescription");
+        } else {
+            toastr()->error("Something went wrong");
+        }
+        return redirect()->back();
+    }
 }

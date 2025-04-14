@@ -1,4 +1,4 @@
-@extends('DoctorLayout.main')
+@extends('ReceptionistLayout.main')
 
 @section('section')
     <!-- Main Content -->

@@ -73,8 +73,12 @@
 
                     <div class="flex flex-col">
                         <label for="patientName" class="mb-2">Patient Name:</label>
-                        <input type="text" required name="patientName" placeholder="Enter patient name"
-                            class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                        <select name="patientName" id="patientName" required
+                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
+                        @foreach ($fetchPatientName as $value)
+                            <option value="{{ $value }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
                     </div>
 
                     <div class="flex flex-col">

@@ -18,6 +18,10 @@ return new class extends Migration {
             $table->string("appoinmentTime");
             $table->string("patientName");
             $table->string("reasonForVisit");
+            $table->string("diagnosis")->nullable();
+            $table->string("medicine")->nullable();
+            $table->string("symptoms")->nullable();
+            $table->string("report")->nullable();
             $table->timestamps();
 
             // Foreign Key reference - Who created appoinment i.e receptionist

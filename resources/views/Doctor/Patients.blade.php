@@ -1,4 +1,4 @@
-@extends('ReceptionistLayout.main')
+@extends('DoctorLayout.main')
 
 @section('section')
     <!-- Main Content -->
@@ -9,9 +9,9 @@
                 <p class="text-gray-600 capitalize mb-5 md:mb-0">{{$countRecords}} records found</p>
             </div>
             <div>
-                <a href="{{ route('Receptionist.AddPatient') }}" class="bg-black text-white px-3 py-2 rounded-md"><i
+                {{-- <a href="{{ route('Doctor.AddPatient') }}" class="bg-black text-white px-3 py-2 rounded-md"><i
                         class="fa-solid fa-user-plus"></i> Add
-                    New Patient</a>
+                    New Patient</a> --}}
             </div>
         </div>
 

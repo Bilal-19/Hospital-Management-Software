@@ -8,3 +8,14 @@ label {
     font-weight: 500;
 }
 
+tr > th {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 500;
+    text-align: start;
+}
+
+tr > td {
+    color: #111827;
+    font-size: 12px;
+}

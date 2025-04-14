@@ -27,13 +27,15 @@ class ReceptionistController extends Controller
     {
         $fetchDoctorName = DB::table("doctors")->
             pluck('fullName');
+        $fetchPatientName = DB::table("patients")->pluck('fullName');
         $fetchAppoinments = DB::table("appoinments")->limit(3)->get();
-        return view("Receptionist.ManageAppoinments", with(compact("fetchDoctorName", "fetchAppoinments")));
+        return view("Receptionist.ManageAppoinments", with(compact("fetchDoctorName", "fetchAppoinments", "fetchPatientName")));
     }
 
-    public function allAppoinments(){
+    public function allAppoinments()
+    {
         $fetchAppoinments = DB::table("appoinments")->paginate(15);
-        return view("Receptionist.AllAppoinments", with(compact( "fetchAppoinments")));
+        return view("Receptionist.AllAppoinments", with(compact("fetchAppoinments")));
     }
 
     public function createAppoinment(Request $request)
@@ -150,5 +152,14 @@ class ReceptionistController extends Controller
     public function addPatient()
     {
         return view("Receptionist.AddPatient");
+    }
+
+    public function allPatients()
+    {
+        $fetchRecords = DB::table("patients")->
+            where("user_id", "=", Auth::user()->id)->
+            paginate(10);
+        $countRecords = DB::table("patients")->count();
+        return view("Receptionist.Patients", with(compact("fetchRecords","countRecords")));
     }
 }

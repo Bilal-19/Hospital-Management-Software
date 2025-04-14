@@ -45,10 +45,10 @@
                     <i class="w-2 fas fa-notes-medical"></i>
                     <span class="inline">Book Appoinments</span>
                 </a>
-                <a href="{{ route('Receptionist.PatientDirectory') }}"
-                    class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Receptionist.PatientDirectory') ? 'bg-white text-black rounded hover:bg-gray-200' : 'text-white' }}">
+                <a href="{{ route('Receptionist.AllPatients') }}"
+                    class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Receptionist.AllPatients') ? 'bg-white text-black rounded hover:bg-gray-200' : 'text-white' }}">
                     <i class="fa-solid fa-notes-medical"></i>
-                    <span class="inline">Patients</span>
+                    <span class="inline">All Patients</span>
                 </a>
                 <a href="{{ route('Receptionist.AllAppoinments') }}"
                     class="flex items-center gap-3 px-4 py-2 space-x-1 border-b {{ request()->routeIs('Receptionist.AllAppoinments') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">

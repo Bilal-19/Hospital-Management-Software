@@ -37,6 +37,9 @@ Route::post("/mark-todays-attendance",[DoctorController::class,'markTodayAttenda
 Route::post("/update-profile",[DoctorController::class,'updateMyProfile'])->name('Doctor.UpdateProfile');
 Route::post("/create-patient",[DoctorController::class,'createPatient'])->name('Doctor.CreatePatientProfile');
 Route::get("/doctor-all-appoinments",[DoctorController::class,'viewAllAppoinments'])->name('Doctor.AllAppoinments');
+Route::get("/add-diagnose/{id}",[DoctorController::class,'addDiagnosNote'])->name('Doctor.AddDiagnosNote');
+Route::post("/update-patient-record/{id}",[DoctorController::class,'updatePatientRecord'])->name('Doctor.UpdatePatientRecord');
+
 
 Route::get("/receptionist-dashboard",[ReceptionistController::class,'index'])->name('Receptionist.Dashboard');
 Route::get("/mark-attendance",[ReceptionistController::class,'markAttendance'])->name('Receptionist.MarkAttendance');
@@ -49,4 +52,5 @@ Route::post("/create-invoice",[ReceptionistController::class,'createBill'])->nam
 Route::get("/all-invoices",[ReceptionistController::class,'getInvoices'])->name('Receptionist.GetInvoices');
 Route::get("/all-doctors",[ReceptionistController::class,'allDoctors'])->name('Receptionist.AllDoctors');
 Route::get("/all-appoinments",[ReceptionistController::class,'allAppoinments'])->name('Receptionist.AllAppoinments');
+Route::get("/all-patients",[ReceptionistController::class,'allPatients'])->name('Receptionist.AllPatients');
 Route::get("/add-patient",[ReceptionistController::class,'addPatient'])->name('Receptionist.AddPatient');
