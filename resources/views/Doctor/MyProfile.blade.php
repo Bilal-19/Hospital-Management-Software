@@ -102,37 +102,37 @@
                 </div>
 
                 <div class="flex flex-col justify-center">
-                    <p>Available Days:</p>
+                    <label>Available Days:</label>
                     <div class="flex flex-row justify-between">
                         <div>
                             <span class="flex flex-row">
-                                <input type="checkbox" name="Monday" id="Monday" class="mr-2" {{$fetchRecord->availableOnMon == "on" ? "checked" : ""}}>
+                                <input type="checkbox" name="Monday" id="Monday" class="mr-2 font-normal" {{$fetchRecord->availableOnMon == "on" ? "checked" : ""}}>
                                 <label for="Monday">Monday</label>
                             </span>
 
                             <span class="flex flex-row">
-                                <input type="checkbox" name="Tuesday" id="Tuesday" class="mr-2" {{$fetchRecord->availableOnTue == "on" ? "checked" : ""}}>
+                                <input type="checkbox" name="Tuesday" id="Tuesday" class="mr-2 font-normal" {{$fetchRecord->availableOnTue == "on" ? "checked" : ""}}>
                                 <label for="Tuesday">Tuesday</label>
                             </span>
 
                             <span class="flex flex-row">
-                                <input type="checkbox" name="Wednesday" id="Wednesday" class="mr-2" {{$fetchRecord->availableOnWed == "on" ? "checked" : ""}}>
+                                <input type="checkbox" name="Wednesday" id="Wednesday" class="mr-2 font-normal" {{$fetchRecord->availableOnWed == "on" ? "checked" : ""}}>
                                 <label for="Wednesday">Wednesday</label>
                             </span>
                         </div>
                         <div>
                             <span class="flex flex-row">
-                                <input type="checkbox" name="Monday" id="Thursday" class="mr-2" {{$fetchRecord->availableOnThurs == "on" ? "checked" : ""}}>
+                                <input type="checkbox" name="Monday" id="Thursday" class="mr-2 font-normal" {{$fetchRecord->availableOnThurs == "on" ? "checked" : ""}}>
                                 <label for="Thursday">Thursday</label>
                             </span>
 
                             <span class="flex flex-row">
-                                <input type="checkbox" name="Friday" id="Friday" class="mr-2" {{$fetchRecord->availableOnFri == "on" ? "checked" : ""}}>
+                                <input type="checkbox" name="Friday" id="Friday" class="mr-2 font-normal" {{$fetchRecord->availableOnFri == "on" ? "checked" : ""}}>
                                 <label for="Friday">Friday</label>
                             </span>
 
                             <span class="flex flex-row">
-                                <input type="checkbox" name="Saturday" id="Saturday" class="mr-2" {{$fetchRecord->availableOnSat == "on" ? "checked" : ""}}>
+                                <input type="checkbox" name="Saturday" id="Saturday" class="mr-2 font-normal" {{$fetchRecord->availableOnSat == "on" ? "checked" : ""}}>
                                 <label for="Saturday">Saturday</label>
                             </span>
                         </div>

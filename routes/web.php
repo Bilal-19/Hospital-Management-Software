@@ -40,6 +40,8 @@ Route::get("/doctor-all-appoinments",[DoctorController::class,'viewAllAppoinment
 Route::get("/add-diagnose/{id}",[DoctorController::class,'addDiagnosNote'])->name('Doctor.AddDiagnosNote');
 Route::post("/update-patient-record/{id}",[DoctorController::class,'updatePatientRecord'])->name('Doctor.UpdatePatientRecord');
 Route::get("/patient-visit-history/{id}",[DoctorController::class,'patientVisitHistory'])->name('Doctor.patientVisitHistory');
+Route::get("/refer-patient/{id}",[DoctorController::class,'referToSpecialist'])->name('Doctor.ReferToSpecialist');
+Route::post("/create-referral",[DoctorController::class,'createReferral'])->name('Doctor.CreateReferral');
 
 
 Route::get("/receptionist-dashboard",[ReceptionistController::class,'index'])->name('Receptionist.Dashboard');

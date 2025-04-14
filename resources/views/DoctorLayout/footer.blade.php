@@ -8,6 +8,7 @@
          sidebar.classList.toggle('-translate-x-full');
      });
  </script>
+@stack("script")
  </body>
 
  </html>

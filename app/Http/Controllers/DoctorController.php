@@ -194,4 +194,30 @@ class DoctorController extends Controller
             get();
         return view("Doctor.PatientHistory", with(compact("findAppointmentHistory")));
     }
+
+    public function referToSpecialist($patientID)
+    {
+        $findPatient = DB::table("patients")->find($patientID);
+        $doctorsList = DB::table("doctors")->pluck("fullName");
+        return view("Doctor.Refer", with(compact("findPatient", "doctorsList")));
+    }
+
+    public function createReferral(Request $request)
+    {
+        $isRefferalCreated = DB::table("referral")->insert([
+            "doctorName" => $request->doctorName,
+            "patientName" => $request->patientName,
+            "reasons" => $request->reasons,
+            "notes" => $request->notes,
+            "doctorID" => Auth::user()->id,
+            "created_at" => now()
+        ]);
+
+        if ($isRefferalCreated){
+            toastr()->success("Successfully referred this patient to selected doctor");
+        } else {
+            toastr()->error("Sometmessage: hing went wrong. Try again later.");
+        }
+        return redirect()->back();
+    }
 }
