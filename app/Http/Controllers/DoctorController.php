@@ -43,7 +43,6 @@ class DoctorController extends Controller
     public function readPatient()
     {
         $fetchRecords = DB::table("patients")->
-            where("user_id", "=", Auth::user()->id)->
             paginate(10);
         $countRecords = DB::table("patients")->count();
         return view("Doctor.Patients", with(compact("fetchRecords", "countRecords")));
@@ -161,7 +160,8 @@ class DoctorController extends Controller
         return view("Doctor.ViewAllAppoinments", with(compact("fetchAppoinments")));
     }
 
-    public function addDiagnosNote($id){
+    public function addDiagnosNote($id)
+    {
         $findAppointmentRec = DB::table("appoinments")->find($id);
         return view("Doctor.UpdateDiagnosis", with(compact("findAppointmentRec")));
     }
@@ -183,5 +183,13 @@ class DoctorController extends Controller
             toastr()->error("Something went wrong");
         }
         return redirect()->back();
+    }
+
+    public function patientVisitHistory($id)
+    {
+
+        $findPatient = DB::table("patients")->find($id);
+        $findAppointmentHistory = DB::table("appoinments")->where("patientName","=", $findPatient->fullName)->get();
+        return view("Doctor.PatientHistory", with(compact("findAppointmentHistory")));
     }
 }

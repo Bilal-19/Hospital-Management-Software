@@ -46,7 +46,7 @@
                     <span class="inline">View Appointments</span>
                 </a>
                 <a href="{{route("Doctor.PatientDirectory")}}"
-                class="flex items-center gap-3 px-4 py-2 border-b text-white">
+                class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Doctor.PatientDirectory') ? 'bg-white text-black rounded hover:bg-gray-200' : 'text-white' }}">
                 <i class="fa-solid fa-calendar-check"></i>
                 <span class="inline">Patients</span>
             </a>

@@ -17,20 +17,26 @@
 
         <div class="w-full mt-10 bg-white p-6 rounded shadow overflow-auto">
             <table class="w-full">
-                <tr class="border-b border-gray-500 text-[#6B7280] text-xs">
-                    <th class="font-medium text-start py-3">Patient Name</th>
-                    <th class="font-medium text-start py-3">Age</th>
-                    <th class="font-medium text-start py-3">Contact Number</th>
-                    <th class="font-medium text-start py-3">Reason for Visit</th>
-                    <th class="font-medium text-start py-3">Gender</th>
+                <tr class="border-b border-gray-500">
+                    <th class="py-3">Patient Name</th>
+                    <th class="py-3">Age</th>
+                    <th class="py-3">Contact Number</th>
+                    <th class="py-3">Visit Reason</th>
+                    <th class="py-3">Gender</th>
+                    <th class="py-3">Action</th>
                 </tr>
                 @foreach ($fetchRecords as $record)
-                    <tr class="border-b border-gray-300 text-sm text-[#111827]">
+                    <tr class="border-b border-gray-300">
                         <td class="py-3">{{ $record->fullName }}</td>
                         <td class="py-3">{{ $record->age }}</td>
                         <td class="py-3">{{ $record->phoneNumber }}</td>
                         <td class="py-3">{{ $record->reasonForVisit }}</td>
                         <td class="py-3">{{ $record->gender }}</td>
+                        <td class="py-3">
+                            <a href="{{route("Doctor.patientVisitHistory", ["id"=>$record->id])}}">
+                                Visit History
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
             </table>

@@ -39,6 +39,7 @@ Route::post("/create-patient",[DoctorController::class,'createPatient'])->name('
 Route::get("/doctor-all-appoinments",[DoctorController::class,'viewAllAppoinments'])->name('Doctor.AllAppoinments');
 Route::get("/add-diagnose/{id}",[DoctorController::class,'addDiagnosNote'])->name('Doctor.AddDiagnosNote');
 Route::post("/update-patient-record/{id}",[DoctorController::class,'updatePatientRecord'])->name('Doctor.UpdatePatientRecord');
+Route::get("/patient-visit-history/{id}",[DoctorController::class,'patientVisitHistory'])->name('Doctor.patientVisitHistory');
 
 
 Route::get("/receptionist-dashboard",[ReceptionistController::class,'index'])->name('Receptionist.Dashboard');
