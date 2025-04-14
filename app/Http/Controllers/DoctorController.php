@@ -189,7 +189,9 @@ class DoctorController extends Controller
     {
 
         $findPatient = DB::table("patients")->find($id);
-        $findAppointmentHistory = DB::table("appoinments")->where("patientName","=", $findPatient->fullName)->get();
+        $findAppointmentHistory = DB::table("appoinments")->
+            where("patientName", "=", $findPatient->fullName)->
+            get();
         return view("Doctor.PatientHistory", with(compact("findAppointmentHistory")));
     }
 }

@@ -6,7 +6,7 @@
         <div class="bg-white p-6 rounded shadow flex flex-col md:flex-row justify-between md:items-center">
             <div>
                 <h2 class="text-xl font-semibold md:mb-4">Patients</h2>
-                <p class="text-gray-600 capitalize mb-5 md:mb-0">{{$countRecords}} records found</p>
+                <p class="text-gray-600 capitalize mb-5 md:mb-0">{{ $countRecords }} records found</p>
             </div>
             <div>
                 {{-- <a href="{{ route('Doctor.AddPatient') }}" class="bg-black text-white px-3 py-2 rounded-md"><i
@@ -33,7 +33,8 @@
                         <td class="py-3">{{ $record->reasonForVisit }}</td>
                         <td class="py-3">{{ $record->gender }}</td>
                         <td class="py-3">
-                            <a href="{{route("Doctor.patientVisitHistory", ["id"=>$record->id])}}">
+                            <a href="{{ route('Doctor.patientVisitHistory', ['id' => $record->id]) }}">
+                                <i class="fas fa-history"></i>
                                 Visit History
                             </a>
                         </td>

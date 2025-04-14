@@ -20,7 +20,9 @@
                         <td class="py-3">{{ $record->patientName }}</td>
                         <td class="py-3">{{ $record->reasonForVisit }}</td>
                         <td class="py-3">
-                            <a href="{{ route('Doctor.AddDiagnosNote', ['id' => $record->id]) }}">Add Notes</a>
+                            <a href="{{ route('Doctor.AddDiagnosNote', ['id' => $record->id]) }}" class="bg-black text-white px-2 py-2 rounded-md">
+                                <i class="fa-solid fa-notes-medical"></i> Add Notes
+                            </a>
                         </td>
                     </tr>
                 @endforeach
