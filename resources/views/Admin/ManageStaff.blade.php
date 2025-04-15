@@ -31,7 +31,7 @@
                         <td class="py-3">{{ $record->role }}</td>
                         <td class="py-3">{{ date('M d, Y', strtotime($record->created_at)) }}</td>
                         <td class="py-3 flex space-x-2">
-                            <a href="" class="text-blue-700"><i class="fa-solid fa-user-pen"></i></a>
+                            <a href="{{route("ResetPassword",["id"=>$record->id])}}" class="text-blue-700"><i class="fa-solid fa-key"></i></a>
                             <a href="" class="text-red-700"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>

@@ -153,4 +153,22 @@ class AuthenticationController extends EmailController
             return redirect()->back();
         }
     }
+
+    public function resetPassword($id)
+    {
+        $findAccount = DB::table("users")->find($id);
+        $userEmail = $findAccount->email;
+        $isPasswordReset = DB::table("users")->
+            where('email', '=', $userEmail)->
+            update([
+                'password' => Hash::make("12345678"),
+                'updated_at' => now()
+            ]);
+        if ($isPasswordReset){
+            toastr()->success("Password reset.");
+        } else {
+            toastr()->error("Try again later.");
+        }
+        return redirect()->back();
+    }
 }
