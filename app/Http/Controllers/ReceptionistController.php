@@ -87,6 +87,24 @@ class ReceptionistController extends Controller
         return redirect()->back();
     }
 
+    public function rescheduleAppointment(Request $request)
+    {
+        $updateAppointment = DB::table("appointments")->
+            where("id", "=", $request->id)->
+            update([
+                "appointmentDate" => $request->appointmentDate,
+                "appointmentTime" => $request->appointmentTime,
+                "updated_at" => now()
+            ]);
+
+        if ($updateAppointment){
+            toastr()->success("Appointment rescheduled successfully");
+        } else {
+            toastr()->info("Something went wrong. Try again later.");
+        }
+        return redirect()->back();
+    }
+
     //Patients
     public function addPatient()
     {
