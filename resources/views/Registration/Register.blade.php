@@ -1,7 +1,7 @@
 @extends("AuthenticationLayout.main")
 
 @section("main-section")
-<div class="w-full flex flex-col md:flex-row justify-between items-center">
+<div class="w-full flex flex-col md:flex-row items-center space-x-36">
     <div class="hidden md:block md:w-3/6 bg-[url('images/Registration.jpg')] min-h-screen bg-cover bg-no-repeat mb-0">
     </div>
     <div class="w-80 md:w-2/6 md:mr-10">
