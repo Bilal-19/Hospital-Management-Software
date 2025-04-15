@@ -88,7 +88,7 @@ class DoctorController extends Controller
 
         $countAttendance = DB::table("staff")->
             where("user_id", "=", Auth::user()->id)->
-            orWhere("created_at", "=", "$todaysDate%")->
+            whereDate("created_at", "=", today())->
             count();
 
         if ($countAttendance >= 1) {

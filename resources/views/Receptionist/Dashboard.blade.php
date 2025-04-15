@@ -3,8 +3,8 @@
 @section('section')
 @php
     $isAttendanceMarked = DB::table('staff')
-        ->where('created_at', '=', 'now()%')
-        ->orWhere('user_id', '=', Auth::user()->id)
+        ->whereDate('created_at', '=',today())
+        ->where('user_id', '=', Auth::user()->id)
         ->count();
 @endphp
     <!-- Main Content -->
@@ -14,7 +14,7 @@
             <p class="text-gray-600 capitalize">Welcome {{ Auth::user()->name }}</p>
             <div class="flex flex-row justify-between items-center">
                 <p class="text-gray-600 capitalize text-sm">Attendance Status:
-                    {{ $isAttendanceMarked == 1 ? 'Present' : 'Absent' }}</p>
+                    {{ $isAttendanceMarked >= 1 ? 'Present' : 'Absent' }}</p>
 
                 @if ($isAttendanceMarked == 0)
                     <form action="{{ route('Doctor.MarkPresent') }}" method="POST">
