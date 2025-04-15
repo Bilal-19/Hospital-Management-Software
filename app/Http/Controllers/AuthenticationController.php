@@ -171,4 +171,14 @@ class AuthenticationController extends EmailController
         }
         return redirect()->back();
     }
+
+    public function deleteAccount($id){
+        $isAccountDeleted = DB::table("users")->delete($id);
+        if ($isAccountDeleted){
+            toastr()->success("Account removed successfully.");
+        } else {
+            toastr()->error("Try again later.");
+        }
+        return redirect()->back();
+    }
 }
