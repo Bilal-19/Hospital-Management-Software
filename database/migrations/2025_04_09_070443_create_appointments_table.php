@@ -10,18 +10,19 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('appoinments', function (Blueprint $table) {
+        Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->string("department");
             $table->string("doctorName");
-            $table->date("appoinmentDate");
-            $table->string("appoinmentTime");
+            $table->date("appointmentDate");
+            $table->string("appointmentTime");
             $table->string("patientName");
             $table->string("reasonForVisit");
             $table->string("diagnosis")->nullable();
             $table->string("medicine")->nullable();
             $table->string("symptoms")->nullable();
             $table->string("report")->nullable();
+            $table->string("status")->default("confirmed");
             $table->timestamps();
 
             // Foreign Key reference - Who created appoinment i.e receptionist

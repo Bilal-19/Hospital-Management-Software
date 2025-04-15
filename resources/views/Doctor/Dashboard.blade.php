@@ -1,6 +1,6 @@
 @extends('DoctorLayout.main')
 @php
-    $fetchAppoinments = DB::table('appoinments')
+    $fetchAppoinments = DB::table('appointments')
         ->where('doctorName', '=', Auth::user()->name)
         ->limit(3)
         ->get();
@@ -12,8 +12,8 @@
 
     // Check no of today's appoinment -- count
 $todayDate = date('Y-m-d', strtotime(now()));
-$countTodayAppointment = DB::table('appoinments')
-    ->where('appoinmentDate', '=', $todayDate)
+$countTodayAppointment = DB::table('appointments')
+    ->where('appointmentDate', '=', $todayDate)
     ->orWhere('user_id', '=', Auth::user()->id)
         ->count();
 

@@ -26,7 +26,7 @@
         </div>
 
         @php
-            $countAppoinments = DB::table('appoinments')->count();
+            $countAppoinments = DB::table('appointments')->count();
             $totalRevenue = DB::table('receipt')
                 ->where('user_id', '=', Auth::user()->id)
                 ->sum('totalAmount');

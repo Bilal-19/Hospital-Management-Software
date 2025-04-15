@@ -57,3 +57,4 @@ Route::get("/all-doctors",[ReceptionistController::class,'allDoctors'])->name('R
 Route::get("/all-appoinments",[ReceptionistController::class,'allAppoinments'])->name('Receptionist.AllAppoinments');
 Route::get("/all-patients",[ReceptionistController::class,'allPatients'])->name('Receptionist.AllPatients');
 Route::get("/add-patient",[ReceptionistController::class,'addPatient'])->name('Receptionist.AddPatient');
+Route::get("/cancel-appointment/{id}",[ReceptionistController::class,'cancelAppointment'])->name('Receptionist.CancelAppointment');

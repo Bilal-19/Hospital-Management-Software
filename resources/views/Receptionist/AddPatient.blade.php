@@ -54,8 +54,7 @@
                 <div class="flex flex-col">
                     <label for="medicalHistory">Medical History:</label>
                     <textarea required name="medicalHistory" id="medicalHistory" rows="5" placeholder="Enter relevant medical history"
-                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none resize-none">
-                    </textarea>
+                        class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none resize-none"></textarea>
                 </div>
 
 

@@ -154,7 +154,7 @@ class DoctorController extends Controller
 
     public function viewAllAppoinments()
     {
-        $fetchAppoinments = DB::table("appoinments")->
+        $fetchAppoinments = DB::table("appointments")->
             where("doctorName", "=", Auth::user()->name)->
             paginate(10);
         return view("Doctor.ViewAllAppoinments", with(compact("fetchAppoinments")));
@@ -162,15 +162,15 @@ class DoctorController extends Controller
 
     public function addDiagnosNote($id)
     {
-        $findAppointmentRec = DB::table("appoinments")->find($id);
+        $findAppointmentRec = DB::table("appointments")->find($id);
         return view("Doctor.UpdateDiagnosis", with(compact("findAppointmentRec")));
     }
 
     public function updatePatientRecord($id, Request $request)
     {
-        $findAppointmentRec = DB::table("appoinments")->find($id);
+        $findAppointmentRec = DB::table("appointments")->find($id);
 
-        $isRecUpdated = DB::table("appoinments")->where("id", "=", $id)->update([
+        $isRecUpdated = DB::table("appointments")->where("id", "=", $id)->update([
             "diagnosis" => $request->diagnosis,
             "medicine" => $request->medicine,
             "symptoms" => $request->symptoms,
@@ -189,7 +189,7 @@ class DoctorController extends Controller
     {
 
         $findPatient = DB::table("patients")->find($id);
-        $findAppointmentHistory = DB::table("appoinments")->
+        $findAppointmentHistory = DB::table("appointments")->
             where("patientName", "=", $findPatient->fullName)->
             get();
         return view("Doctor.PatientHistory", with(compact("findAppointmentHistory")));

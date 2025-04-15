@@ -32,23 +32,30 @@ class ReceptionistController extends Controller
         $fetchDoctorName = DB::table("doctors")->
             pluck('fullName');
         $fetchPatientName = DB::table("patients")->pluck('fullName');
-        $fetchAppoinments = DB::table("appoinments")->limit(3)->get();
+        $fetchAppoinments = DB::table("appointments")
+            ->whereDate("appointmentDate", ">=", today())
+            ->where("status", "=", "confirmed")
+            ->limit(3)
+            ->get();
         return view("Receptionist.ManageAppoinments", with(compact("fetchDoctorName", "fetchAppoinments", "fetchPatientName")));
     }
 
     public function allAppoinments()
     {
-        $fetchAppoinments = DB::table("appoinments")->paginate(15);
+        $fetchAppoinments = DB::table("appointments")
+            ->whereDate("appointmentDate", ">=", today())
+            ->where("status", "=", "confirmed")
+            ->get();
         return view("Receptionist.AllAppoinments", with(compact("fetchAppoinments")));
     }
 
     public function createAppoinment(Request $request)
     {
-        $isAppoinmentCreated = DB::table("appoinments")->insert([
+        $isAppoinmentCreated = DB::table("appointments")->insert([
             "department" => $request->department,
             "doctorName" => $request->doctor,
-            "appoinmentDate" => $request->appoinmentDate,
-            "appoinmentTime" => $request->appoinmentTime,
+            "appointmentDate" => $request->appoinmentDate,
+            "appointmentTime" => $request->appoinmentTime,
             "patientName" => $request->patientName,
             "reasonForVisit" => $request->reasonForVisit,
             "user_id" => Auth::user()->id,
@@ -62,6 +69,22 @@ class ReceptionistController extends Controller
             toastr()->info("Something went wrong. Please check error message");
             return redirect()->back();
         }
+    }
+
+    public function cancelAppointment($id)
+    {
+        $isCancelled = DB::table("appointments")->
+            where("id", "=", $id)->
+            update([
+                "status" => "cancel",
+                "updated_at" => now()
+            ]);
+        if ($isCancelled) {
+            toastr()->success("Appoinment cancel successfully");
+        } else {
+            toastr()->info("Something went wrong.");
+        }
+        return redirect()->back();
     }
 
     //Patients

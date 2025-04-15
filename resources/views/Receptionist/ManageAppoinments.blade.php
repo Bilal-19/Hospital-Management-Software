@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="flex flex-col">
-                        <label for="patientName" class="mb-2">Patient Name:</label>
+                        <label for="patientName">Patient Name:</label>
                         <select name="patientName" id="patientName" required
                             class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
                             @foreach ($fetchPatientName as $value)
@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="flex flex-col">
-                        <label for="reasonForVisit" class="mb-2">Reason for Visit:</label>
+                        <label for="reasonForVisit">Reason for Visit:</label>
                         <input type="text" required name="reasonForVisit" placeholder="Enter patient name"
                             class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
                     </div>
@@ -97,10 +97,15 @@
             <div class="flex flex-row justify-between items-center mb-5">
                 <div>
                     <h3 class="text-lg font-semibold">Upcoming Appoinments</h3>
-                    <p class="text-gray-700 text-sm">{{ count($fetchAppoinments) }} records found</p>
+                    @if (count($fetchAppoinments) == 0)
+                        <p class="text-gray-700 text-sm">No records found</p>
+                    @else
+                        <p class="text-gray-700 text-sm">{{ count($fetchAppoinments) }} records found</p>
+                    @endif
                 </div>
                 <div>
-                    <a href="{{ route('Receptionist.AllAppoinments') }}" class="bg-black text-white px-3 py-2 rounded-md">View All Appointments</a>
+                    <a href="{{ route('Receptionist.AllAppoinments') }}"
+                        class="bg-black text-white px-3 py-2 rounded-md">View All Appointments</a>
                 </div>
             </div>
             <table class="w-80 md:w-full">
@@ -114,15 +119,16 @@
                 </tr>
                 @foreach ($fetchAppoinments as $record)
                     <tr class="border-b border-gray-300 text-sm text-[#111827]">
-                        <td class="py-3">{{ date('M d, Y', strtotime($record->appoinmentDate)) }}
-                            {{ $record->appoinmentTime }}</td>
+                        <td class="py-3">{{ date('M d, Y', strtotime($record->appointmentDate)) }}
+                            {{ $record->appointmentTime }}</td>
                         <td class="py-3">{{ $record->doctorName }}</td>
                         <td class="py-3">{{ $record->department }}</td>
                         <td class="py-3">{{ $record->patientName }}</td>
                         <td class="py-3">{{ $record->reasonForVisit }}</td>
                         <td class="py-3">
                             <a href="" class="font-medium text-black mr-3">Reschedule</a>
-                            <a href="" class="font-medium text-[#DC2626]">Cancel</a>
+                            <a href="{{ route('Receptionist.CancelAppointment', ['id' => $record->id]) }}"
+                                class="font-medium text-[#DC2626]">Cancel</a>
                         </td>
                     </tr>
                 @endforeach
