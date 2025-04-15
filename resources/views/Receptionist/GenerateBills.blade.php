@@ -11,8 +11,12 @@
                 <div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="flex flex-col">
                         <label>Patient</label>
-                        <input type="text" name="patientName" placeholder="Enter Patient Name"
+                        <select name="patientName"
                             class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                            @foreach ($fetchPatientDirectory as $value)
+                                <option value="{{ $value }}">{{ $value }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="flex flex-col">
@@ -97,7 +101,8 @@
                     <p class="text-sm text-black/80">{{ count($fetchBillHistory) }} records found</p>
                 </div>
                 <div>
-                    <a href="{{route("Receptionist.GetInvoices")}}" class="bg-black text-white px-3 py-2 rounded-md">View All Bills</a>
+                    <a href="{{ route('Receptionist.GetInvoices') }}" class="bg-black text-white px-3 py-2 rounded-md">View
+                        All Bills</a>
                 </div>
             </div>
             <table class="w-80 md:w-full">

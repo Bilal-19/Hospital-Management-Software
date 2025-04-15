@@ -97,7 +97,7 @@ class ReceptionistController extends Controller
                 "updated_at" => now()
             ]);
 
-        if ($updateAppointment){
+        if ($updateAppointment) {
             toastr()->success("Appointment rescheduled successfully");
         } else {
             toastr()->info("Something went wrong. Try again later.");
@@ -124,8 +124,13 @@ class ReceptionistController extends Controller
     public function generateBills()
     {
         $fetchDoctors = DB::table("doctors")->pluck('fullName');
-        $fetchBillHistory = DB::table("receipt")->where("user_id", "=", Auth::user()->id)->limit(3)->get();
-        return view("Receptionist.GenerateBills", with(compact("fetchBillHistory", "fetchDoctors")));
+        $fetchBillHistory = DB::table("receipt")->
+            where("user_id", "=", Auth::user()->id)->
+            limit(3)->
+            get();
+        $fetchPatientDirectory = DB::table("patients")->pluck("fullName");
+        return view("Receptionist.GenerateBills",
+        with(compact("fetchBillHistory", "fetchDoctors", "fetchPatientDirectory")));
     }
 
     public function createBill(Request $request)
