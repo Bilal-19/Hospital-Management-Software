@@ -23,7 +23,6 @@
                     <th class="font-medium text-start py-3">Contact Number</th>
                     <th class="font-medium text-start py-3">Reason for Visit</th>
                     <th class="font-medium text-start py-3">Gender</th>
-                    <th class="font-medium text-start py-3">Actions</th>
                 </tr>
                 @foreach ($fetchRecords as $record)
                     <tr class="border-b border-gray-300 text-sm text-[#111827]">
@@ -32,10 +31,6 @@
                         <td class="py-3">{{ $record->phoneNumber }}</td>
                         <td class="py-3">{{ $record->reasonForVisit }}</td>
                         <td class="py-3">{{ $record->gender }}</td>
-                        <td class="py-3 space-x-2">
-                            <a href="" class="text-blue-700"><i class="fa-solid fa-user-pen"></i></a>
-                            <a href="" class="text-red-700"><i class="fa-solid fa-trash"></i></a>
-                        </td>
                     </tr>
                 @endforeach
             </table>
