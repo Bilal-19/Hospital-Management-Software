@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class ReceptionistController extends Controller
 {
+    // Dashboard
     public function index()
     {
         if (Auth::check() && Auth::user()->role === "Receptionist") {
@@ -19,10 +20,13 @@ class ReceptionistController extends Controller
 
     public function markAttendance()
     {
-        $fetchMyAttendance = DB::table("staff")->where("user_id", "=", Auth::user()->id)->get();
+        $fetchMyAttendance = DB::table("staff")->
+            where("user_id", "=", Auth::user()->id)
+            ->get();
         return view("Receptionist.MarkAttendance", with(compact("fetchMyAttendance")));
     }
 
+    // Book Appointments
     public function manageAppointments()
     {
         $fetchDoctorName = DB::table("doctors")->
@@ -60,38 +64,22 @@ class ReceptionistController extends Controller
         }
     }
 
-    public function receptionistProfile()
+    //Patients
+    public function addPatient()
     {
-        // 'first() - used to fetch single record'
-        $UserID = Auth::user()->id;
-        $fetchRecord = DB::table("receptionist")->where('user_id', '=', $UserID)->first();
-        return view("Receptionist.MyProfile", with(compact("fetchRecord")));
+        return view("Receptionist.AddPatient");
     }
 
-    public function updateReceptionistProfile(Request $request)
+    public function allPatients()
     {
-        $UserID = Auth::user()->id;
-        $isUpdated = DB::table("receptionist")->
-            where("user_id", "=", $UserID)->
-            update([
-                "fullName" => $request->fullName,
-                "gender" => $request->gender,
-                "emailAddress" => $request->emailAddress,
-                "phoneNumber" => $request->phoneNumber,
-                "assignedDepartment" => $request->assignedDepartment,
-                "shiftTiming" => $request->shiftTiming,
-                "joiningDate" => $request->joiningDate,
-                "updated_at" => now()
-            ]);
-        if ($isUpdated) {
-            toastr()->success("Profile updated.");
-            return redirect()->back();
-        } else {
-            toastr()->error("Something went wrong. Try again later.");
-            return redirect()->back();
-        }
+        $fetchRecords = DB::table("patients")->
+            where("user_id", "=", Auth::user()->id)->
+            paginate(10);
+        $countRecords = DB::table("patients")->count();
+        return view("Receptionist.Patients", with(compact("fetchRecords", "countRecords")));
     }
 
+    // Billing & Invoices
     public function generateBills()
     {
         $fetchDoctors = DB::table("doctors")->pluck('fullName');
@@ -136,6 +124,8 @@ class ReceptionistController extends Controller
         return view("Receptionist.Invoices", with(compact("fetchBillHistory")));
     }
 
+
+    //All Doctors
     public function allDoctors(Request $request)
     {
         if ($request->search) {
@@ -149,17 +139,39 @@ class ReceptionistController extends Controller
         return view("Receptionist.AllDoctors", with(compact("fetchRecords")));
     }
 
-    public function addPatient()
+    //Salary Receipt
+
+
+    //My Profile
+    public function receptionistProfile()
     {
-        return view("Receptionist.AddPatient");
+        // 'first() - used to fetch single record'
+        $UserID = Auth::user()->id;
+        $fetchRecord = DB::table("receptionist")->where('user_id', '=', $UserID)->first();
+        return view("Receptionist.MyProfile", with(compact("fetchRecord")));
     }
 
-    public function allPatients()
+    public function updateReceptionistProfile(Request $request)
     {
-        $fetchRecords = DB::table("patients")->
-            where("user_id", "=", Auth::user()->id)->
-            paginate(10);
-        $countRecords = DB::table("patients")->count();
-        return view("Receptionist.Patients", with(compact("fetchRecords","countRecords")));
+        $UserID = Auth::user()->id;
+        $isUpdated = DB::table("receptionist")->
+            where("user_id", "=", $UserID)->
+            update([
+                "fullName" => $request->fullName,
+                "gender" => $request->gender,
+                "emailAddress" => $request->emailAddress,
+                "phoneNumber" => $request->phoneNumber,
+                "assignedDepartment" => $request->assignedDepartment,
+                "shiftTiming" => $request->shiftTiming,
+                "joiningDate" => $request->joiningDate,
+                "updated_at" => now()
+            ]);
+        if ($isUpdated) {
+            toastr()->success("Profile updated.");
+            return redirect()->back();
+        } else {
+            toastr()->error("Something went wrong. Try again later.");
+            return redirect()->back();
+        }
     }
 }
