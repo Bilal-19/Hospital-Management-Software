@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EmailController;
@@ -60,3 +61,6 @@ Route::get("/add-patient",[ReceptionistController::class,'addPatient'])->name('R
 Route::get("/cancel-appointment/{id}",[ReceptionistController::class,'cancelAppointment'])->name('Receptionist.CancelAppointment');
 Route::post("/reschedule-appointment",[ReceptionistController::class,'rescheduleAppointment'])->name('Receptionist.RescheduleAppointment');
 Route::get("/download-invoice/{id}",[ReceptionistController::class,'downloadInvoice'])->name('Receptionist.DownloadInvoice');
+
+
+Route::get("/admin-dashboard",[AdminController::class,'index'])->name('Admin.Dashboard');

@@ -71,7 +71,7 @@ class AuthenticationController extends EmailController
             if ($request->role === "Doctor") {
                 $this->createRoleBaseAccount("doctors", $userID, $request->username, $request->email);
                 toastr()->success("Account created successfully.");
-            } else if ($request->role === "Receptionist"){
+            } else if ($request->role === "Receptionist") {
                 $this->createRoleBaseAccount("receptionist", $userID, $request->username, $request->email);
                 toastr()->success("Account created successfully.");
             }
@@ -98,6 +98,8 @@ class AuthenticationController extends EmailController
                 return view("Doctor.Dashboard");
             } elseif ($userRole == 'Receptionist') {
                 return view("Receptionist.Dashboard");
+            } elseif ($userRole == 'Admin') {
+                return view("Admin.Dashboard");
             } else {
                 return view("Registration.Login");
             }
@@ -137,8 +139,9 @@ class AuthenticationController extends EmailController
 
     }
 
-    public function LogOutUser(){
-        if (Auth::check()){
+    public function LogOutUser()
+    {
+        if (Auth::check()) {
             Auth::logout();
             return view("Registration.Login");
         } else {
