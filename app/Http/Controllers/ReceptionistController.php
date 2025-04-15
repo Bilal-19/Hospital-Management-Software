@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class ReceptionistController extends Controller
@@ -129,8 +129,10 @@ class ReceptionistController extends Controller
             limit(3)->
             get();
         $fetchPatientDirectory = DB::table("patients")->pluck("fullName");
-        return view("Receptionist.GenerateBills",
-        with(compact("fetchBillHistory", "fetchDoctors", "fetchPatientDirectory")));
+        return view(
+            "Receptionist.GenerateBills",
+            with(compact("fetchBillHistory", "fetchDoctors", "fetchPatientDirectory"))
+        );
     }
 
     public function createBill(Request $request)
@@ -168,6 +170,13 @@ class ReceptionistController extends Controller
             where("user_id", "=", Auth::user()->id)->
             get();
         return view("Receptionist.Invoices", with(compact("fetchBillHistory")));
+    }
+
+    public function downloadInvoice($id)
+    {
+        $findInvoice = DB::table("receipt")->find($id);
+        $loadFile = Pdf::loadView("PDF.PdfInvoice", with(compact("findInvoice")));
+        return $loadFile->download("Invoice.pdf");
     }
 
 

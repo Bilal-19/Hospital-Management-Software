@@ -59,3 +59,4 @@ Route::get("/all-patients",[ReceptionistController::class,'allPatients'])->name(
 Route::get("/add-patient",[ReceptionistController::class,'addPatient'])->name('Receptionist.AddPatient');
 Route::get("/cancel-appointment/{id}",[ReceptionistController::class,'cancelAppointment'])->name('Receptionist.CancelAppointment');
 Route::post("/reschedule-appointment",[ReceptionistController::class,'rescheduleAppointment'])->name('Receptionist.RescheduleAppointment');
+Route::get("/download-invoice/{id}",[ReceptionistController::class,'downloadInvoice'])->name('Receptionist.DownloadInvoice');

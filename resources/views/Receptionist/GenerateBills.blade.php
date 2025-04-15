@@ -130,7 +130,7 @@
                             @endif
                         </td>
                         <td class="py-3">
-                            <a href="" class="font-medium text-black mr-3">
+                            <a href="{{route("Receptionist.DownloadInvoice",["id"=>$record->id])}}" class="font-medium text-black mr-3">
                                 <i class="fa-solid fa-file-arrow-down"></i>
                             </a>
                         </td>
