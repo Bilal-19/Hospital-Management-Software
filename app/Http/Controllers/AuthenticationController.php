@@ -74,6 +74,11 @@ class AuthenticationController extends EmailController
             } else if ($request->role === "Receptionist") {
                 $this->createRoleBaseAccount("receptionist", $userID, $request->username, $request->email);
                 toastr()->success("Account created successfully.");
+            } else if ($request->role === "Patient") {
+                $this->createRoleBaseAccount("patients", $userID, $request->username, $request->email);
+                toastr()->success("Account created successfully.");
+            } else {
+                toastr()->info("Something went wrong. Please try again later.");
             }
             return redirect()->back();
         }

@@ -64,3 +64,4 @@ Route::get("/download-invoice/{id}",[ReceptionistController::class,'downloadInvo
 
 
 Route::get("/admin-dashboard",[AdminController::class,'index'])->name('Admin.Dashboard');
+Route::get("/manage-staff",[AdminController::class,'manageStaff'])->name('Admin.ManageStaff');

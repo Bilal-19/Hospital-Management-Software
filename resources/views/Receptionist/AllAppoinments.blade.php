@@ -23,7 +23,7 @@
                         <td class="py-3">{{ $record->patientName }}</td>
                         <td class="py-3">{{ $record->reasonForVisit }}</td>
                         <td class="py-3">
-                            <button href="" onclick="openRescheduleModal({{ $record->id }})" type="button"
+                            <button onclick="openRescheduleModal({{ $record->id }})" type="button"
                                 class="font-medium text-black mr-3">Reschedule</button>
                             <a href="{{ route('Receptionist.CancelAppointment', ['id' => $record->id]) }}"
                                 class="font-medium text-[#DC2626]">Cancel</a>
@@ -85,7 +85,7 @@
         </div>
     </main>
 
-    @push('custom-js-script')
+    @push('script')
         <script>
             function openRescheduleModal(id) {
                 document.getElementById('rescheduleModal').classList.remove('hidden');

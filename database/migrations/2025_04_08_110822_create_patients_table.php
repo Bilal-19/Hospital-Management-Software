@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->string('fullName');
-            $table->string('age');
-            $table->string('gender');
+            $table->string('age')->nullable();
+            $table->string('gender')->nullable();
             $table->string('emailAddress');
-            $table->string('phoneNumber');
-            $table->string('reasonForVisit');
-            $table->string('medicalHistory');
+            $table->string('phoneNumber')->nullable();
+            $table->string('reasonForVisit')->nullable();
+            $table->string('medicalHistory')->nullable();
             $table->timestamps();
 
             // Foreign Key

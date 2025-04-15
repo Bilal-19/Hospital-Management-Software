@@ -35,7 +35,7 @@
                     <i class="fa-solid fa-house"></i>
                     <span class="inline">Dashboard</span>
                 </a>
-                <a href="#" class="flex items-center space-x-2 px-4 py-2 border-b text-white">
+                <a href="{{route("Admin.ManageStaff")}}" class="flex items-center space-x-2 px-4 py-2 border-b text-white">
                     <i class="fa-solid fa-users"></i>
                     <span class="inline">Manage Staff</span>
                 </a>
