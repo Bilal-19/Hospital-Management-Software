@@ -77,20 +77,30 @@ class AdminController extends Controller
         $grossEarning = $houseRentAllowance + $travelAllowance + $medicalAllowance + $basicSalary;
 
 
-        DB::table("salary")->insert([
-            "employeeId" => $id,
-            "employeeName" => $findEmp->name,
-            "employeeRole" => $findEmp->role,
-            "salaryMonth" => date("M-Y",strtotime(now())),
-            "basicSalary" => $basicSalary,
-            "houseRentAllowance" => $houseRentAllowance,
-            "travelAllowance" => $travelAllowance,
-            "medicalAllowance" => $medicalAllowance,
-            "grossEarning" => $grossEarning,
-            "created_at" => now()
-        ]);
+        // Check salary count of employee for the current month
+        $month = date("M-Y", strtotime(now()));
+        $countSal = DB::table("salary")->
+            where("employeeID", "=", $id)->
+            where("salaryMonth", "=", $month)->
+            count();
 
-        toastr()->success("Salary Slip Generated");
+        if ($countSal >= 1) {
+            toastr()->info("Salary of selected employee already generated.");
+        } else {
+            DB::table("salary")->insert([
+                "employeeId" => $id,
+                "employeeName" => $findEmp->name,
+                "employeeRole" => $findEmp->role,
+                "salaryMonth" => $month,
+                "basicSalary" => $basicSalary,
+                "houseRentAllowance" => $houseRentAllowance,
+                "travelAllowance" => $travelAllowance,
+                "medicalAllowance" => $medicalAllowance,
+                "grossEarning" => $grossEarning,
+                "created_at" => now()
+            ]);
+            toastr()->success("Salary Slip Generated.");
+        }
         return redirect()->back();
     }
 }
