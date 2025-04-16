@@ -27,7 +27,7 @@ class AdminController extends Controller
             where("role", "!=", "Admin")->
             where("role", "!=", "Patient")
             ->pluck('name');
-        $fetchAllStaffShift = DB::table("shift")->get();
+        $fetchAllStaffShift = DB::table("shift")->limit(4)->get();
         return view("Admin.ShiftManagement", with(compact("fetchStaffList","fetchAllStaffShift")));
     }
 
