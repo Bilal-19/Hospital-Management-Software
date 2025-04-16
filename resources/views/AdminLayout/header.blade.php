@@ -39,7 +39,7 @@
                     <i class="fa-solid fa-users"></i>
                     <span class="inline">Manage Staff</span>
                 </a>
-                <a href="#" class="flex items-center space-x-2 px-4 py-2 border-b text-white">
+                <a href="{{route("Admin.ShiftManagement")}}" class="flex items-center space-x-2 px-4 py-2 border-b text-white">
                     <i class="fa-solid fa-clock"></i>
                     <span class="inline">Shift Management</span>
                 </a>

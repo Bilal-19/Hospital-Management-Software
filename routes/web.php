@@ -67,3 +67,5 @@ Route::get("/download-invoice/{id}",[ReceptionistController::class,'downloadInvo
 
 Route::get("/admin-dashboard",[AdminController::class,'index'])->name('Admin.Dashboard');
 Route::get("/manage-staff",[AdminController::class,'manageStaff'])->name('Admin.ManageStaff');
+Route::get("/manage-shift",[AdminController::class,'shiftManagement'])->name('Admin.ShiftManagement');
+Route::post("/create-shift",[AdminController::class,'createShift'])->name('Admin.CreateShift');
