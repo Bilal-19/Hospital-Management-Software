@@ -28,10 +28,11 @@ class AdminController extends Controller
             where("role", "!=", "Patient")
             ->pluck('name');
         $fetchAllStaffShift = DB::table("shift")->limit(4)->get();
-        return view("Admin.ShiftManagement", with(compact("fetchStaffList","fetchAllStaffShift")));
+        return view("Admin.ShiftManagement", with(compact("fetchStaffList", "fetchAllStaffShift")));
     }
 
-    public function createShift(Request $request){
+    public function createShift(Request $request)
+    {
         $isShiftCreated = DB::table("shift")->insert([
             "staffName" => $request->staffName,
             "startDate" => $request->startDate,
@@ -41,11 +42,55 @@ class AdminController extends Controller
             "created_at" => now()
         ]);
 
-        if ($isShiftCreated){
+        if ($isShiftCreated) {
             toastr()->success("Shift assigned to selected employee.");
         } else {
             toastr()->info("Something went wrong. Please try again later.");
         }
+        return redirect()->back();
+    }
+
+    public function employeePaySlip()
+    {
+        $fetchSalaryRecords = DB::table("salary")->get();
+        return view("Admin.StaffPaySlip", with(compact("fetchSalaryRecords")));
+    }
+
+    public function generatePaySlip($id)
+    {
+        $findEmp = DB::table("users")->where("id", "=", $id)->first();
+        $empRole = $findEmp->role;
+
+        // Allowance
+        $houseRentAllowance = 10000;
+        $travelAllowance = 5000;
+        $medicalAllowance = 3000;
+
+        if ($empRole == "Doctor") {
+            $basicSalary = 80000;
+        } elseif ($empRole == "Receptionist") {
+            $basicSalary = 45000;
+        } else {
+            $basicSalary = 30000;
+        }
+
+        $grossEarning = $houseRentAllowance + $travelAllowance + $medicalAllowance + $basicSalary;
+
+
+        DB::table("salary")->insert([
+            "employeeId" => $id,
+            "employeeName" => $findEmp->name,
+            "employeeRole" => $findEmp->role,
+            "salaryMonth" => date("M-Y",strtotime(now())),
+            "basicSalary" => $basicSalary,
+            "houseRentAllowance" => $houseRentAllowance,
+            "travelAllowance" => $travelAllowance,
+            "medicalAllowance" => $medicalAllowance,
+            "grossEarning" => $grossEarning,
+            "created_at" => now()
+        ]);
+
+        toastr()->success("Salary Slip Generated");
         return redirect()->back();
     }
 }

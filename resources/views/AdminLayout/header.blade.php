@@ -37,15 +37,15 @@
                 </a>
                 <a href="{{route("Admin.ManageStaff")}}" class="flex items-center space-x-2 px-4 py-2 border-b {{ request()->routeIs('Admin.ManageStaff') ? 'bg-white text-black rounded hover:bg-gray-200' : 'text-white' }}">
                     <i class="fa-solid fa-users"></i>
-                    <span class="inline">Manage Staff</span>
+                    <span class="inline">Manage Users</span>
                 </a>
                 <a href="{{route("Admin.ShiftManagement")}}" class="flex items-center space-x-2 px-4 py-2 border-b {{ request()->routeIs('Admin.ShiftManagement') ? 'bg-white text-black rounded hover:bg-gray-200' : 'text-white' }}">
                     <i class="fa-solid fa-clock"></i>
                     <span class="inline">Shift Management</span>
                 </a>
-                <a href="#" class="flex items-center space-x-2 px-4 py-2 border-b text-white">
+                <a href="{{route("Admin.EmployeePaySlip")}}" class="flex items-center space-x-2 px-4 py-2 border-b text-white">
                     <i class="fa-solid fa-sack-dollar"></i>
-                    <span class="inline">Salary Management</span>
+                    <span class="inline">Staff Pay Slip</span>
                 </a>
                 <a href="#" class="flex items-center space-x-2 px-4 py-2 border-b text-white">
                     <i class="fa-solid fa-building-user"></i>
