@@ -22,7 +22,10 @@
                         <td class="py-3">{{ $record->email }}</td>
                         <td class="py-3">{{ $record->grossEarning }} PKR</td>
                         <td class="py-3">
-                            <a href="{{route("Admin.DownloadSlip", ["id" => $record->id])}}">Download Slip</a>
+                            <a href="{{route("Admin.DownloadSlip", ["id" => $record->id])}}" class="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-800">
+                                <i class="fa-solid fa-file-arrow-down"></i>
+                                Download Slip
+                            </a>
                         </td>
                     </tr>
                 @endforeach
