@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -102,5 +102,14 @@ class AdminController extends Controller
             toastr()->success("Salary Slip Generated.");
         }
         return redirect()->back();
+    }
+
+    public function downloadSlip($id)
+    {
+        $findSalRecord = DB::table("salary")->find($id);
+        $findStaffRecord = DB::table("users")->
+            where("id", "=", $findSalRecord->employeeId)->
+            first();
+        return Pdf::loadView("PDF.SalarySlip", with(compact("findSalRecord", "findStaffRecord")))->download("SalarySlip.pdf");
     }
 }
