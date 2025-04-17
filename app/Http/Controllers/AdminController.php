@@ -21,12 +21,17 @@ class AdminController extends Controller
         return view("Admin.ManageStaff", with(compact("users")));
     }
 
-    public function shiftManagement()
+    public function getHospitalStaff()
     {
         $fetchStaffList = DB::table("users")->
             where("role", "!=", "Admin")->
             where("role", "!=", "Patient")
             ->pluck('name');
+        return $fetchStaffList;
+    }
+    public function shiftManagement()
+    {
+        $fetchStaffList = $this->getHospitalStaff();
         $fetchAllStaffShift = DB::table("shift")->limit(4)->get();
         return view("Admin.ShiftManagement", with(compact("fetchStaffList", "fetchAllStaffShift")));
     }
@@ -111,5 +116,58 @@ class AdminController extends Controller
             where("id", "=", $findSalRecord->employeeId)->
             first();
         return Pdf::loadView("PDF.SalarySlip", with(compact("findSalRecord", "findStaffRecord")))->download("SalarySlip.pdf");
+    }
+
+    public function departmentManagement()
+    {
+        $fetchDepartments = DB::table("departments")->
+            pluck('departmentName');
+        $fetchStaff = $this->getHospitalStaff();
+        return view("Admin.DepartmentManagement", with(compact("fetchDepartments", "fetchStaff")));
+    }
+
+    public function createDepartment(Request $request)
+    {
+        $isRecordCreated = DB::table("departments")->insert([
+            "departmentName" => $request->departmentName,
+            "created_at" => now()
+        ]);
+
+        if ($isRecordCreated) {
+            toastr()->success("Department added successfully.");
+        } else {
+            toastr()->info("Something went wrong.");
+        }
+        return redirect()->back();
+    }
+
+    public function assignDepartmentToStaff(Request $request)
+    {
+        $staffName = $request->staffName;
+        $findStaff = DB::table("users")->
+            where("name", "=", $staffName)->
+            first();
+        $staffRole = $findStaff->role;
+
+        if ($staffRole == "Doctor") {
+            DB::table("doctors")->
+                where("fullName", "=", $staffName)
+                ->update([
+                    "department" => $request->departmentName,
+                    "updated_at" => now()
+                ]);
+            toastr()->success("Assigned department to the staff.");
+        } elseif ($staffRole == "Receptionist") {
+            DB::table("receptionist")->
+                where("fullName", "=", $staffName)
+                ->update([
+                    "assignedDepartment" => $request->departmentName,
+                    "updated_at" => now()
+                ]);
+            toastr()->success("Assigned department to the staff.");
+        } else {
+            toastr()->info("Something went wrong. Please try again later.");
+        }
+        return redirect()->back();
     }
 }

@@ -47,7 +47,7 @@
                     <i class="fa-solid fa-sack-dollar"></i>
                     <span class="inline">Employee Pay Slip</span>
                 </a>
-                <a href="#" class="flex items-center space-x-2 px-4 py-2 border-b text-white">
+                <a href="{{route("Admin.DepartmentManagement")}}" class="flex items-center space-x-2 px-4 py-2 border-b {{ request()->routeIs("Admin.DepartmentManagement") ? 'bg-white text-black rounded hover:bg-gray-200' : 'text-white' }}">
                     <i class="fa-solid fa-building-user"></i>
                     <span class="inline">Departments</span>
                 </a>

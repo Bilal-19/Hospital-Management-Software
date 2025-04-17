@@ -72,3 +72,6 @@ Route::get("/create-shift",[AdminController::class,'createShift'])->name('Admin.
 Route::get("/pay-slip",[AdminController::class,'employeePaySlip'])->name('Admin.EmployeePaySlip');
 Route::get("/generate-pay-slip/{id}",[AdminController::class,'generatePaySlip'])->name('Admin.GeneratePaySlip');
 Route::get("/download-slip/{id}",[AdminController::class,'downloadSlip'])->name('Admin.DownloadSlip');
+Route::get("/departments",[AdminController::class,'departmentManagement'])->name('Admin.DepartmentManagement');
+Route::post("/create-department",[AdminController::class,'createDepartment'])->name('Admin.CreateDepartment');
+Route::post("/assign-department",[AdminController::class,'assignDepartmentToStaff'])->name('Admin.AssignDepartment');
