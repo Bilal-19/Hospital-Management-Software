@@ -1,7 +1,7 @@
 @extends('AdminLayout.main')
 @section('section')
     <!-- Main Content -->
-    <main class="flex-1 p-6">
+    <main class="flex-1">
         <div class="bg-white p-6 rounded shadow">
             <h2 class="text-xl font-semibold mb-10">Assign Shift to Staff</h2>
 
