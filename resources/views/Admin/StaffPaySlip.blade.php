@@ -12,6 +12,7 @@
                     <th class="font-medium text-start py-3">Role</th>
                     <th class="font-medium text-start py-3">Email</th>
                     <th class="font-medium text-start py-3">Amount Paid</th>
+                    <th class="font-medium text-start py-3">Paid On</th>
                     <th class="font-medium text-start py-3">Actions</th>
                 </tr>
                 @foreach ($fetchSalaryRecords as $record)
@@ -21,6 +22,7 @@
                         <td class="py-3">{{ $record->role }}</td>
                         <td class="py-3">{{ $record->email }}</td>
                         <td class="py-3">{{ $record->grossEarning }} PKR</td>
+                        <td class="py-3">{{ date("d M Y", strtotime($record->created_at)) }}</td>
                         <td class="py-3">
                             <a href="{{route("Admin.DownloadSlip", ["id" => $record->id])}}" class="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-800">
                                 <i class="fa-solid fa-file-arrow-down"></i>

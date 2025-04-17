@@ -43,9 +43,9 @@
                     <i class="fa-solid fa-clock"></i>
                     <span class="inline">Shift Management</span>
                 </a>
-                <a href="{{route("Admin.EmployeePaySlip")}}" class="flex items-center space-x-2 px-4 py-2 border-b text-white">
+                <a href="{{route("Admin.EmployeePaySlip")}}" class="flex items-center space-x-2 px-4 py-2 border-b {{ request()->routeIs("Admin.EmployeePaySlip") ? 'bg-white text-black rounded hover:bg-gray-200' : 'text-white' }}">
                     <i class="fa-solid fa-sack-dollar"></i>
-                    <span class="inline">Staff Pay Slip</span>
+                    <span class="inline">Employee Pay Slip</span>
                 </a>
                 <a href="#" class="flex items-center space-x-2 px-4 py-2 border-b text-white">
                     <i class="fa-solid fa-building-user"></i>
