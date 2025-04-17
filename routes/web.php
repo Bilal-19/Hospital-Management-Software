@@ -75,3 +75,4 @@ Route::get("/download-slip/{id}",[AdminController::class,'downloadSlip'])->name(
 Route::get("/departments",[AdminController::class,'departmentManagement'])->name('Admin.DepartmentManagement');
 Route::post("/create-department",[AdminController::class,'createDepartment'])->name('Admin.CreateDepartment');
 Route::post("/assign-department",[AdminController::class,'assignDepartmentToStaff'])->name('Admin.AssignDepartment');
+Route::get("/staff-attendance",[AdminController::class,'staffAttendance'])->name('Admin.StaffAttendance');

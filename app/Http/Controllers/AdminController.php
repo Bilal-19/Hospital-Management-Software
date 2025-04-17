@@ -203,4 +203,11 @@ class AdminController extends Controller
             get();
         return $fetchDoctors;
     }
+
+    public function staffAttendance()
+    {
+        return DB::table("users")->
+            join("staff", "users.id", "=", "staff.user_id")->
+            get();
+    }
 }
