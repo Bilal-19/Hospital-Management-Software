@@ -52,7 +52,9 @@ class AdminController extends Controller
 
     public function employeePaySlip()
     {
-        $fetchSalaryRecords = DB::table("salary")->get();
+        $fetchSalaryRecords = DB::table("users")->
+            join("salary", "users.id", "=", "salary.employeeId")->
+            get();
         return view("Admin.StaffPaySlip", with(compact("fetchSalaryRecords")));
     }
 
@@ -89,8 +91,6 @@ class AdminController extends Controller
         } else {
             DB::table("salary")->insert([
                 "employeeId" => $id,
-                "employeeName" => $findEmp->name,
-                "employeeRole" => $findEmp->role,
                 "salaryMonth" => $month,
                 "basicSalary" => $basicSalary,
                 "houseRentAllowance" => $houseRentAllowance,

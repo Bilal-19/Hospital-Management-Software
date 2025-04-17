@@ -12,9 +12,6 @@ return new class extends Migration {
     {
         Schema::create('salary', function (Blueprint $table) {
             $table->id();
-            $table->integer("employeeId");
-            $table->string("employeeName");
-            $table->string("employeeRole");
             $table->string("salaryMonth");
             $table->string("basicSalary");
             $table->string("houseRentAllowance");
@@ -22,6 +19,9 @@ return new class extends Migration {
             $table->string("medicalAllowance");
             $table->string("grossEarning");
             $table->timestamps();
+
+            $table->unsignedBigInteger("employeeId");
+            $table->foreign('employeeId')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
