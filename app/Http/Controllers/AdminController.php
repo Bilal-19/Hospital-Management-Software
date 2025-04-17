@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\AssignOp\Concat;
+use function Laravel\Prompts\select;
 
 class AdminController extends Controller
 {
@@ -21,7 +23,7 @@ class AdminController extends Controller
         return view("Admin.ManageStaff", with(compact("users")));
     }
 
-    public function getHospitalStaff()
+    public function getHospitalStaffNames()
     {
         $fetchStaffList = DB::table("users")->
             where("role", "!=", "Admin")->
@@ -31,7 +33,7 @@ class AdminController extends Controller
     }
     public function shiftManagement()
     {
-        $fetchStaffList = $this->getHospitalStaff();
+        $fetchStaffList = $this->getHospitalStaffNames();
         $fetchAllStaffShift = DB::table("shift")->limit(4)->get();
         return view("Admin.ShiftManagement", with(compact("fetchStaffList", "fetchAllStaffShift")));
     }
@@ -118,11 +120,35 @@ class AdminController extends Controller
         return Pdf::loadView("PDF.SalarySlip", with(compact("findSalRecord", "findStaffRecord")))->download("SalarySlip.pdf");
     }
 
-    public function departmentManagement()
+    public function DoctorAndUserInnerJoin()
+    {
+        $fetchDoctors = DB::table("users")->
+            join("doctors", "doctors.user_id", "=", "users.id")->
+            select('name', 'department', 'role')->get();
+        return $fetchDoctors;
+    }
+
+    public function ReceptionistAndUserInnerJoin()
+    {
+        $fetchReceptionist = DB::table("users")->
+            join("receptionist", "receptionist.user_id", "=", "users.id")->
+            select('name', 'department', 'role')->
+            get();
+        return $fetchReceptionist;
+    }
+
+    public function getDepartmentNames()
     {
         $fetchDepartments = DB::table("departments")->
             pluck('departmentName');
-        $fetchStaff = $this->getHospitalStaff();
+        return $fetchDepartments;
+    }
+
+    public function departmentManagement()
+    {
+        $fetchDepartments = $this->getDepartmentNames();
+        $fetchStaff = $this->DoctorAndUserInnerJoin()->concat($this->ReceptionistAndUserInnerJoin());
+        // return $fetchStaff;
         return view("Admin.DepartmentManagement", with(compact("fetchDepartments", "fetchStaff")));
     }
 
@@ -141,6 +167,15 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+    public function updateStaffDepartment($tableName, $staffName, $department)
+    {
+        return DB::table($tableName)->
+            where("fullName", "=", $staffName)
+            ->update([
+                "department" => $department,
+                "updated_at" => now()
+            ]);
+    }
     public function assignDepartmentToStaff(Request $request)
     {
         $staffName = $request->staffName;
@@ -150,24 +185,22 @@ class AdminController extends Controller
         $staffRole = $findStaff->role;
 
         if ($staffRole == "Doctor") {
-            DB::table("doctors")->
-                where("fullName", "=", $staffName)
-                ->update([
-                    "department" => $request->departmentName,
-                    "updated_at" => now()
-                ]);
+            $this->updateStaffDepartment("doctors", $staffName, $request->departmentName);
             toastr()->success("Assigned department to the staff.");
         } elseif ($staffRole == "Receptionist") {
-            DB::table("receptionist")->
-                where("fullName", "=", $staffName)
-                ->update([
-                    "assignedDepartment" => $request->departmentName,
-                    "updated_at" => now()
-                ]);
+            $this->updateStaffDepartment("receptionist", $staffName, $request->departmentName);
             toastr()->success("Assigned department to the staff.");
         } else {
             toastr()->info("Something went wrong. Please try again later.");
         }
         return redirect()->back();
+    }
+
+    public function getStaffDepartment()
+    {
+        $fetchDoctors = DB::table("users")->
+            join("doctors", "doctors.user_id", "=", "users.id")->
+            get();
+        return $fetchDoctors;
     }
 }

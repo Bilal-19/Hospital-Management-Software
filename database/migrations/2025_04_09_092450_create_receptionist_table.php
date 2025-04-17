@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("phoneNumber")->nullable();
             $table->string("gender")->nullable();
             $table->string("shiftTiming")->nullable();
-            $table->string("assignedDepartment")->nullable();
+            $table->string("department")->nullable();
             $table->date("joiningDate")->nullable();
             $table->timestamps();
 
