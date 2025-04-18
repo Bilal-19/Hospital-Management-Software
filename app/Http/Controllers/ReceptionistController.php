@@ -220,9 +220,7 @@ class ReceptionistController extends Controller
             update([
                 "fullName" => $request->fullName,
                 "gender" => $request->gender,
-                "emailAddress" => $request->emailAddress,
                 "phoneNumber" => $request->phoneNumber,
-                "assignedDepartment" => $request->assignedDepartment,
                 "shiftTiming" => $request->shiftTiming,
                 "joiningDate" => $request->joiningDate,
                 "updated_at" => now()

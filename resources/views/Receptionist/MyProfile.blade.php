@@ -27,7 +27,7 @@
                 <div class="flex flex-col">
                     <label for="emailAddress">Email Address:</label>
                     <input type="email" name="emailAddress" id="emailAddress" value="{{ $fetchRecord->emailAddress }}"
-                        class="bg-gray-100 px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                        class="bg-gray-100 px-3 py-1 rounded-md border border-slate-300 focus:outline-none" readonly>
                 </div>
 
                 <div class="flex flex-col">
@@ -38,17 +38,8 @@
 
                 <div class="flex flex-col">
                     <label for="assignedDepartment">Assigned Department:</label>
-                    <select name="assignedDepartment" id="assignedDepartment"
-                        class="bg-gray-100 px-3 py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
-                        @php
-                            $departmentArr = ['Front Desk', 'OPD', 'Emergency', 'General Medicine'];
-                        @endphp
-                        @foreach ($departmentArr as $value)
-                            <option value="{{ $value }}"
-                                {{ $fetchRecord->assignedDepartment == $value ? 'selected' : '' }}>{{ $value }}
-                            </option>
-                        @endforeach
-                    </select>
+                    <input type="text" name="assignedDepartment" id="assignedDepartment" value="{{ $fetchRecord->department }}"
+                    class="bg-gray-100 px-3 py-1 rounded-md border border-slate-300 focus:outline-none" readonly>
                 </div>
 
                 <div class="flex flex-col">
