@@ -195,6 +195,12 @@ class ReceptionistController extends Controller
     }
 
     //Salary Receipt
+    public function fetchSalaries()
+    {
+        $userID = Auth::user()->id;
+        $fetchSalaries = DB::table("salary")->where("employeeId", "=", $userID)->get();
+        return view("Receptionist.MySalary", with(compact("fetchSalaries")));
+    }
 
 
     //My Profile
