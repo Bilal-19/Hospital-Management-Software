@@ -206,8 +206,9 @@ class AdminController extends Controller
 
     public function staffAttendance()
     {
-        return DB::table("users")->
+        $fetchStaffAttendance = DB::table("users")->
             join("staff", "users.id", "=", "staff.user_id")->
             get();
+        return view("Admin.StaffAttendance", with(compact("fetchStaffAttendance")));
     }
 }

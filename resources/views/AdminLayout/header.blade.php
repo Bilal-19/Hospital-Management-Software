@@ -51,7 +51,7 @@
                     <i class="fa-solid fa-building-user"></i>
                     <span class="inline">Departments</span>
                 </a>
-                <a href="#" class="flex items-center space-x-2 px-4 py-2 border-b text-white">
+                <a href="{{route("Admin.StaffAttendance")}}" class="flex items-center space-x-2 px-4 py-2 border-b {{ request()->routeIs("Admin.StaffAttendance") ? 'bg-white text-black rounded hover:bg-gray-200' : 'text-white' }}">
                     <i class="fa-regular fa-calendar-days"></i>
                     <span class="inline">Attendance</span>
                 </a>
