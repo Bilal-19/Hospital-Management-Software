@@ -5,6 +5,14 @@
         <div class="w-full mt-5">
             <div class="overflow-x-auto bg-white rounded p-6">
                 <h2 class="text-xl font-semibold mb-4">Staff Attendance</h2>
+                <form action="">
+                    <div class="md:w-full flex flex-col md:flex-row md:space-x-4">
+                        <input name="employeeName" type="text" placeholder="Employee Name" onfocus="(this.type='date')" class="border border-[#9CA3AF] rounded-md p-1 focus:outline-none w-80 md:w-2/5">
+                        <input name="startDate" type="text" placeholder="Start date" onfocus="(this.type='date')" class="border border-[#9CA3AF] rounded-md p-1 focus:outline-none w-80 md:w-2/5">
+                        <input name="endDate" type="text" placeholder="End Date" onfocus="(this.type='date')" class="border border-[#9CA3AF] rounded-md p-1 focus:outline-none w-80 md:w-2/5">
+                        <button class="border border-[#9CA3AF] rounded-md px-3 py-1 bg-black text-white w-80 md:w-1/5">Search</button>
+                    </div>
+                </form>
                 <table class="min-w-max md:w-full">
                     <tr class="border-b border-gray-500">
                         <th class="p-3">ID</th>
