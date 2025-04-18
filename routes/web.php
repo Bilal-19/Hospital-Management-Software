@@ -67,6 +67,9 @@ Route::get("/cancel-appointment/{id}",[ReceptionistController::class,'cancelAppo
 Route::post("/reschedule-appointment",[ReceptionistController::class,'rescheduleAppointment'])->name('Receptionist.RescheduleAppointment');
 Route::get("/download-invoice/{id}",[ReceptionistController::class,'downloadInvoice'])->name('Receptionist.DownloadInvoice');
 Route::get("/my-salary", [ReceptionistController::class, 'fetchSalaries'])->name('Receptionist.MySalary');
+Route::get("/all-inventories", [ReceptionistController::class, 'readInventories'])->name('Receptionist.Inventories');
+Route::get("/add-inventory", [ReceptionistController::class, 'addInventory'])->name('Receptionist.AddInventory');
+
 
 Route::get("/admin-dashboard",[AdminController::class,'index'])->name('Admin.Dashboard');
 Route::get("/manage-staff",[AdminController::class,'manageStaff'])->name('Admin.ManageStaff');

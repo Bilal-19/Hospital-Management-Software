@@ -233,4 +233,14 @@ class ReceptionistController extends Controller
             return redirect()->back();
         }
     }
+
+    public function readInventories()
+    {
+        $fetchInventories = DB::table("inventory")->get();
+        return view("Receptionist.Inventory", with(compact("fetchInventories")));
+    }
+
+    public function addInventory(){
+        return view("Receptionist.AddInventory");
+    }
 }

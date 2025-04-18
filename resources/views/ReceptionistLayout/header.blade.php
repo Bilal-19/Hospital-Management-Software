@@ -55,8 +55,8 @@
                     <i class="fa-solid fa-user-doctor"></i>
                     <span class="inline">All Doctors</span>
                 </a>
-                <a href="#"
-                    class="flex items-center gap-3 px-4 py-2 border-b text-white">
+                <a href="{{route("Receptionist.Inventories")}}"
+                    class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Receptionist.Inventories') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
                     <i class="fa-solid fa-warehouse"></i>
                     <span class="inline">Manage Inventory</span>
                 </a>
