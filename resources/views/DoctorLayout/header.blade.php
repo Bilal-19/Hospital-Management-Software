@@ -40,18 +40,18 @@
                     <i class="fa-solid fa-calendar-check"></i>
                     <span class="inline">All Attendance</span>
                 </a>
-                <a href="{{route("Doctor.AllAppoinments")}}"
+                <a href="{{ route('Doctor.AllAppoinments') }}"
                     class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Doctor.AllAppoinments') ? 'bg-white text-black rounded hover:bg-gray-200' : 'text-white' }}">
                     <i class="fas fa-calendar-day"></i>
                     <span class="inline">View Appointments</span>
                 </a>
-                <a href="{{route("Doctor.PatientDirectory")}}"
-                class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Doctor.PatientDirectory') ? 'bg-white text-black rounded hover:bg-gray-200' : 'text-white' }}">
-                <i class="fas fa-user-injured"></i>
-                <span class="inline">Patients</span>
-            </a>
-                <a href="#"
-                    class="flex items-center gap-3 px-4 py-2 border-b text-white">
+                <a href="{{ route('Doctor.PatientDirectory') }}"
+                    class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Doctor.PatientDirectory') ? 'bg-white text-black rounded hover:bg-gray-200' : 'text-white' }}">
+                    <i class="fas fa-user-injured"></i>
+                    <span class="inline">Patients</span>
+                </a>
+                <a href="{{ route('Doctor.MySalary') }}"
+                    class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Doctor.MySalary') ? 'bg-white text-black rounded hover:bg-gray-200' : 'text-white' }}">
                     <i class="fa-solid fa-file-invoice-dollar"></i>
                     <span class="inline">Salary Receipt</span>
                 </a>

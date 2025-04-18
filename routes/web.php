@@ -46,7 +46,7 @@ Route::post("/update-patient-record/{id}",[DoctorController::class,'updatePatien
 Route::get("/patient-visit-history/{id}",[DoctorController::class,'patientVisitHistory'])->name('Doctor.patientVisitHistory');
 Route::get("/refer-patient/{id}",[DoctorController::class,'referToSpecialist'])->name('Doctor.ReferToSpecialist');
 Route::post("/create-referral",[DoctorController::class,'createReferral'])->name('Doctor.CreateReferral');
-Route::get("/my-salary", [DoctorController::class, 'fetchSalaries'])->name('Doctor.Salaries');
+Route::get("/my-salary", [DoctorController::class, 'fetchSalaries'])->name('Doctor.MySalary');
 
 
 
