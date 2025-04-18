@@ -12,7 +12,11 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view("Admin.Dashboard");
+        if (Auth::user() && Auth::user()->role=="Admin"){
+            return view("Admin.Dashboard");
+        } else {
+            return view("Registration.Login");
+        }
     }
 
     public function manageStaff()

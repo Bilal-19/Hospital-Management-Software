@@ -22,7 +22,7 @@ Route::get("/login", [AuthenticationController::class, 'LoginView'])->name('Logi
 Route::get("/register", [AuthenticationController::class, 'RegisterView'])->name('Register');
 Route::get("/forget-password", [AuthenticationController::class, 'forgetPassword'])->name('Forget.Password');
 Route::post("/create-account", [AuthenticationController::class, 'createUserAccount'])->name('Create.Account');
-Route::post("/verify-credentials", [AuthenticationController::class, 'VerifyUserCredentials'])->name('VerifyUserCredentials');
+Route::post("/verify-credentials", [AuthenticationController::class, 'LoginUser'])->name('VerifyUserCredentials');
 Route::post("/send-password", [AuthenticationController::class, 'sendPassword'])->name('sendPassword');
 Route::get("/generate-password", [AuthenticationController::class, 'generatePassword'])->name('Generate.Password');
 Route::get("/sign-out", [AuthenticationController::class, 'LogOutUser'])->name('LogOutUser');

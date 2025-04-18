@@ -62,7 +62,7 @@ class AuthenticationController extends EmailController
                 [
                     'name' => $request->username,
                     'email' => $request->email,
-                    'password' => Hash::make($request->password),
+                    'password' => $request->password ? Hash::make($request->password) : Hash::make(12345678),
                     'role' => $request->role,
                     'created_at' => now()
                 ]
@@ -80,36 +80,42 @@ class AuthenticationController extends EmailController
             } else {
                 toastr()->info("Something went wrong. Please try again later.");
             }
-            return redirect()->back();
+            return redirect()->route("Login");
         }
     }
 
-    public function VerifyUserCredentials(Request $request)
+    public function checkCredentials($email, $password)
     {
-        $userCredentials = $request->validate(
-            [
-                'email' => 'required',
-                'password' => 'required'
-            ]
-        )
-        ;
-        $haveAccount = Auth::attempt($userCredentials);
-        // Redirect user based on their role.
+        $findUser = DB::table("users")->
+            where("email", "=", $email)->first();
+        if ($findUser && Hash::check($password, $findUser->password)) {
+            return $findUser;
+        } else {
+            return null;
+        }
 
-        if ($haveAccount) {
-            $userRole = Auth::user()->role;
+    }
+    public function LoginUser(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
 
-            if ($userRole == 'Doctor') {
-                return view("Doctor.Dashboard");
-            } elseif ($userRole == 'Receptionist') {
-                return view("Receptionist.Dashboard");
-            } elseif ($userRole == 'Admin') {
-                return view("Admin.Dashboard");
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            if ($user) {
+                if ($user->role == 'Doctor') {
+                    return view("Doctor.Dashboard");
+                } elseif ($user->role == 'Receptionist') {
+                    return view("Receptionist.Dashboard");
+                } elseif ($user->role == 'Admin') {
+                    return view("Admin.Dashboard");
+                } else {
+                    return view("Registration.Login");
+                }
             } else {
-                return view("Registration.Login");
+                toastr()->error("User with this email doesnot exist.");
             }
         } else {
-            toastr()->error("User with this email doesnot exist.");
+            toastr()->info("Invalid email or Password");
             return view("Registration.Login");
         }
     }
@@ -141,7 +147,6 @@ class AuthenticationController extends EmailController
             toastr()->error("User with this email doesn't exist");
             return redirect()->back();
         }
-
     }
 
     public function LogOutUser()
@@ -164,7 +169,7 @@ class AuthenticationController extends EmailController
                 'password' => Hash::make("12345678"),
                 'updated_at' => now()
             ]);
-        if ($isPasswordReset){
+        if ($isPasswordReset) {
             toastr()->success("Password reset.");
         } else {
             toastr()->error("Try again later.");
@@ -172,9 +177,10 @@ class AuthenticationController extends EmailController
         return redirect()->back();
     }
 
-    public function deleteAccount($id){
+    public function deleteAccount($id)
+    {
         $isAccountDeleted = DB::table("users")->delete($id);
-        if ($isAccountDeleted){
+        if ($isAccountDeleted) {
             toastr()->success("Account removed successfully.");
         } else {
             toastr()->error("Try again later.");
