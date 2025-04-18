@@ -213,11 +213,18 @@ class DoctorController extends Controller
             "created_at" => now()
         ]);
 
-        if ($isRefferalCreated){
+        if ($isRefferalCreated) {
             toastr()->success("Successfully referred this patient to selected doctor");
         } else {
             toastr()->error("Sometmessage: hing went wrong. Try again later.");
         }
         return redirect()->back();
+    }
+
+    public function fetchSalaries()
+    {
+        $userID = Auth::user()->id;
+        $fetchSalaries = DB::table("salary")->where("employeeId", "=", $userID)->get();
+        return view("Doctor.ViewSalaryReceipt", with(compact("fetchSalaries")));
     }
 }
