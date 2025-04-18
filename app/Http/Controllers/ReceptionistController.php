@@ -240,7 +240,13 @@ class ReceptionistController extends Controller
         return view("Receptionist.Inventory", with(compact("fetchInventories")));
     }
 
-    public function addInventory(){
+    public function addInventory()
+    {
         return view("Receptionist.AddInventory");
+    }
+
+    public function createInventory(Request $request)
+    {
+        print_r($request->all());
     }
 }

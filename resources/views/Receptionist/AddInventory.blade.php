@@ -6,7 +6,8 @@
         <div class="bg-white p-6 rounded shadow">
             <h2 class="text-xl font-semibold mb-10">Add Inventory</h2>
 
-            <form action="">
+            <form action="{{route("Receptionist.CreateInventory")}}" method="post">
+                @csrf
                 <div class="w-full grid grid-cols-3 gap-5">
                     <div class="flex flex-col">
                         <label for="itemName">Item Name:</label>
