@@ -12,7 +12,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        if (Auth::user() && Auth::user()->role=="Admin"){
+        if (Auth::user() && Auth::user()->role == "Admin") {
             return view("Admin.Dashboard");
         } else {
             return view("Registration.Login");
@@ -208,11 +208,19 @@ class AdminController extends Controller
         return $fetchDoctors;
     }
 
-    public function staffAttendance()
+    public function staffAttendance(Request $request)
     {
-        $fetchStaffAttendance = DB::table("users")->
-            join("staff", "users.id", "=", "staff.user_id")->
-            get();
+        if ($request->employeeName && $request->startDate && $request->endDate) {
+            $fetchStaffAttendance = DB::table("users")->
+                join("staff", "users.id", "=", "staff.user_id")->
+                where('name', '=', $request->employeeName)->
+                orWhereDate('staff.created_at', $request->startDate, $request->endDate)->
+                get();
+        } else {
+            $fetchStaffAttendance = DB::table("users")->
+                join("staff", "users.id", "=", "staff.user_id")->
+                get();
+        }
         return view("Admin.StaffAttendance", with(compact("fetchStaffAttendance")));
     }
 }
