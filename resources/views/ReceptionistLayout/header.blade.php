@@ -55,7 +55,13 @@
                     <i class="fa-solid fa-user-doctor"></i>
                     <span class="inline">All Doctors</span>
                 </a>
-                <a href="{{route("Receptionist.MySalary")}}" class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Receptionist.MySalary') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-2 border-b text-white">
+                    <i class="fa-solid fa-warehouse"></i>
+                    <span class="inline">Manage Inventory</span>
+                </a>
+                <a href="{{ route('Receptionist.MySalary') }}"
+                    class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Receptionist.MySalary') ? 'bg-white text-emerald-700 rounded-md' : 'text-white' }}">
                     <i class="fa-solid fa-file-invoice-dollar"></i>
                     <span class="inline">Salary Receipt</span>
                 </a>
