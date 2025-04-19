@@ -10,7 +10,8 @@
                     <p class="text-sm text-black/80">{{ count($fetchInventories) }} records found</p>
                 </div>
                 <div>
-                    <a href="{{route("Receptionist.AddInventory")}}" class="bg-black text-white px-3 py-2 rounded-md">Add Inventory</a>
+                    <a href="{{ route('Receptionist.AddInventory') }}" class="bg-black text-white px-3 py-2 rounded-md">Add
+                        Inventory</a>
                 </div>
             </div>
             <table class="w-80 md:w-full">
@@ -27,7 +28,16 @@
                         <td class="py-3">{{ $record->id }}</td>
                         <td class="py-3">{{ $record->itemName }}</td>
                         <td class="py-3">{{ $record->quantityInStock }}</td>
-                        <td class="py-3">{{ $record->perUnitPrice }}</td>
+                        <td class="py-3">{{ $record->pricePerUnit }} PKR</td>
+                        <td class="py-3">
+                            @if ($record->status == 'Available')
+                                <p class="text-green-700">{{ $record->status }}</p>
+                            @elseif ($record->status == 'Low Stock')
+                                <p class="text-orange-700">{{ $record->status }}</p>
+                            @elseif ($record->status == 'Out of Stock')
+                                <p class="text-red-700">{{ $record->status }}</p>
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             </table>

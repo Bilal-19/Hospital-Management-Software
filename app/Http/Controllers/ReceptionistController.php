@@ -247,6 +247,39 @@ class ReceptionistController extends Controller
 
     public function createInventory(Request $request)
     {
-        print_r($request->all());
+        $stockQuantity = $request->quantityInStock;
+        $stockLevel = $request->minimumStockLevel;
+        if ($stockQuantity > $stockLevel) {
+            $status = "Available";
+        } elseif ($stockQuantity < $stockLevel) {
+            $status = "Low Stock";
+        } elseif ($stockQuantity === 0) {
+            $status = "Out of Stock";
+        } elseif ($request->expiryDate > today()) {
+            $status = "Expired";
+        }
+        $addInventory = DB::table("inventory")->insert([
+            "itemName" => $request->itemName,
+            "category" => $request->category,
+            "quantityInStock" => $stockQuantity,
+            "unit" => $request->unit,
+            "minimumStockLevel" => $stockLevel,
+            "batchNumber" => $request->batchNumber,
+            "expiryDate" => $request->expiryDate,
+            "supplierName" => $request->supplierName,
+            "purchaseDate" => $request->purchaseDate,
+            "pricePerUnit" => $request->pricePerUnit,
+            "totalValue" => $request->pricePerUnit * $request->quantityInStock,
+            "status" => $status,
+            "notes" => $request->notes,
+            "created_at" => now()
+        ]);
+
+        if ($addInventory) {
+            toastr()->success("Item added to inventory");
+        } else {
+            toastr()->info("Something went wrong. Please check error message.");
+        }
+        return redirect()->back();
     }
 }

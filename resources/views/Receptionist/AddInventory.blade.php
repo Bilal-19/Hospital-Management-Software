@@ -8,7 +8,7 @@
 
             <form action="{{route("Receptionist.CreateInventory")}}" method="post">
                 @csrf
-                <div class="w-full grid grid-cols-3 gap-5">
+                <div class="w-full grid grid-cols-2 gap-5">
                     <div class="flex flex-col">
                         <label for="itemName">Item Name:</label>
                         <input type="text" name="itemName" placeholder="Enter item name"
@@ -29,7 +29,7 @@
                     <div class="flex flex-col">
                         <label for="quantityInStock">Stock Quantity:</label>
                         <input type="number" name="quantityInStock" placeholder="Enter stock quantity"
-                            class="border border-[#9CA3AF] rounded-md px-2 p-1 focus:outline-none" min="5">
+                            class="border border-[#9CA3AF] rounded-md px-2 p-1 focus:outline-none" min="0">
                     </div>
 
                     <div class="flex flex-col">
@@ -71,14 +71,9 @@
                     </div>
 
                     <div class="flex flex-col">
-                        <label for="status">Select Status:</label>
-                        <select name="status" id="status"
+                        <label for="pricePerUnit">Per Unit Price:</label>
+                        <input type="text" name="pricePerUnit" placeholder="Enter per unit price"
                             class="border border-[#9CA3AF] rounded-md px-2 p-1 focus:outline-none">
-                            <option value="Available">Available</option>
-                            <option value="Low Stock">Low Stock</option>
-                            <option value="Out of Stock">Out of Stock</option>
-                            <option value="Expired">Expired</option>
-                        </select>
                     </div>
 
                     <div class="flex flex-col">
