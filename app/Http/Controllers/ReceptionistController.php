@@ -245,25 +245,29 @@ class ReceptionistController extends Controller
         return view("Receptionist.AddInventory");
     }
 
-    public function createInventory(Request $request)
+    public function getInventoryStatus($stockQuantity, $stockLevel, $expiryDate)
     {
-        $stockQuantity = $request->quantityInStock;
-        $stockLevel = $request->minimumStockLevel;
-        if ($stockQuantity > $stockLevel) {
+        if ($stockQuantity >= $stockLevel) {
             $status = "Available";
         } elseif ($stockQuantity < $stockLevel) {
             $status = "Low Stock";
         } elseif ($stockQuantity === 0) {
             $status = "Out of Stock";
-        } elseif ($request->expiryDate > today()) {
+        } elseif ($expiryDate > today()) {
             $status = "Expired";
         }
+        return $status;
+    }
+
+    public function createInventory(Request $request)
+    {
+        $status = $this->getInventoryStatus($request->quantityInStock, $request->minimumStockLevel, $request->expiryDate);
         $addInventory = DB::table("inventory")->insert([
             "itemName" => $request->itemName,
             "category" => $request->category,
-            "quantityInStock" => $stockQuantity,
+            "quantityInStock" => $request->quantityInStock,
             "unit" => $request->unit,
-            "minimumStockLevel" => $stockLevel,
+            "minimumStockLevel" => $request->minimumStockLevel,
             "batchNumber" => $request->batchNumber,
             "expiryDate" => $request->expiryDate,
             "supplierName" => $request->supplierName,
@@ -305,23 +309,13 @@ class ReceptionistController extends Controller
 
     public function updateInventory($id, Request $request)
     {
-        $stockQuantity = $request->quantityInStock;
-        $stockLevel = $request->minimumStockLevel;
-        if ($stockQuantity > $stockLevel) {
-            $status = "Available";
-        } elseif ($stockQuantity < $stockLevel) {
-            $status = "Low Stock";
-        } elseif ($stockQuantity === 0) {
-            $status = "Out of Stock";
-        } elseif ($request->expiryDate > today()) {
-            $status = "Expired";
-        }
+        $status = $this->getInventoryStatus($request->quantityInStock, $request->minimumStockLevel, $request->expiryDate);
         $isUpdated = DB::table("inventory")->where("id", "=", $id)->update([
             "itemName" => $request->itemName,
             "category" => $request->category,
-            "quantityInStock" => $stockQuantity,
+            "quantityInStock" => $request->quantityInStock,
             "unit" => $request->unit,
-            "minimumStockLevel" => $stockLevel,
+            "minimumStockLevel" => $request->minimumStockLevel,
             "batchNumber" => $request->batchNumber,
             "expiryDate" => $request->expiryDate,
             "supplierName" => $request->supplierName,
@@ -333,7 +327,7 @@ class ReceptionistController extends Controller
             "updated_at" => now()
         ]);
 
-        if ($isUpdated){
+        if ($isUpdated) {
             toastr()->success("Inventory updated.");
         } else {
             toastr()->error("Something went wrong. Please try again later.");

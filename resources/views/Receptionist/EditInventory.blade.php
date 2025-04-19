@@ -4,7 +4,8 @@
     <!-- Main Content -->
     <main class="flex-1 p-6">
         <div class="bg-white p-6 rounded shadow">
-            <h2 class="text-xl font-semibold mb-10">Edit Inventory</h2>
+            <h2 class="text-xl font-semibold">Edit Inventory</h2>
+            <p class="text-gray-500 text-sm mb-8">Last updated: {{date('d M Y, h:i:sa', strtotime($findInventory->updated_at))}}</p>
 
             <form action="{{ route('Receptionist.UpdateInventory', ['id'=>$findInventory->id]) }}" method="post">
                 @csrf
