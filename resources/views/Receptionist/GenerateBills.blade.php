@@ -8,7 +8,7 @@
 
             <form action="{{ route('Receptionist.CreateBill') }}" method="post" autocomplete="off">
                 @csrf
-                <div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-x-5 gap-y-2">
                     <div class="flex flex-col">
                         <label>Patient</label>
                         <select name="patientName"
@@ -27,36 +27,6 @@
                                 <option value="{{ $value }}">{{ $value }}</option>
                             @endforeach
                         </select>
-                    </div>
-
-                    <div class="flex flex-col">
-                        <label>Services</label>
-                        <div class="w-full flex flex-row justify-between">
-                            <input type="text" name="serviceName" placeholder="Service Description"
-                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none md:w-2/3 mr-1">
-                            <input type="number" name="serviceAmount" id="serviceAmount" placeholder="Amount"
-                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none md:w-1/3">
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col">
-                        <label>Lab Tests</label>
-                        <div class="w-full flex flex-row justify-between">
-                            <input type="text" name="testName" placeholder="Test Name"
-                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none md:w-2/3 mr-1">
-                            <input type="number" name="testCost" placeholder="Cost" id="testCost"
-                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none md:w-1/3">
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col">
-                        <label>Medicines</label>
-                        <div class="w-full flex flex-row justify-between">
-                            <input type="text" name="medicineName" placeholder="Medicine Name"
-                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none md:w-2/3 mr-1">
-                            <input type="number" name="medicinePrice" placeholder="Price" id="medicinePrice"
-                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none md:w-1/3">
-                        </div>
                     </div>
 
                     <div>
@@ -82,6 +52,38 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="flex flex-col col-span-3">
+                        <label>Services</label>
+                        <div class="w-full flex flex-row justify-between">
+                            <input type="text" name="serviceName" placeholder="Service Description"
+                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none md:w-2/3 mr-1">
+                            <input type="number" name="serviceAmount" id="serviceAmount" placeholder="Amount"
+                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none md:w-1/3">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col col-span-3">
+                        <label>Lab Tests</label>
+                        <div class="w-full flex flex-row justify-between">
+                            <input type="text" name="testName" placeholder="Test Name"
+                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none md:w-2/3 mr-1">
+                            <input type="number" name="testCost" placeholder="Cost" id="testCost"
+                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none md:w-1/3">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col col-span-3">
+                        <label>Medicines</label>
+                        <div class="w-full flex flex-row justify-between">
+                            <input type="text" name="medicineName" placeholder="Medicine Name"
+                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none md:w-2/3 mr-1">
+                            <input type="number" name="medicinePrice" placeholder="Total Price" id="medicinePrice"
+                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none md:w-1/3" min="1">
+                        </div>
+                    </div>
+
+
                 </div>
 
                 <div class="flex flex-row my-5 space-x-2">
@@ -105,6 +107,14 @@
                         All Bills</a>
                 </div>
             </div>
+            <form action="">
+                <div class="w-full flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+                    <input type="date" class="w-80 md:w-1/4 bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                    <input type="text" placeholder="Patient Name" class="w-80 md:w-1/4 bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                    <input type="text" placeholder="Doctor Name" class="w-80 md:w-1/4 bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                    <button class="w-80 md:w-1/4 px-3 py-1 rounded bg-black text-white">Search</button>
+                </div>
+            </form>
             <table class="w-80 md:w-full">
                 <tr class="border-b border-gray-500 text-[#6B7280] text-xs">
                     <th class="font-medium text-start py-3">Date</th>
@@ -130,7 +140,8 @@
                             @endif
                         </td>
                         <td class="py-3">
-                            <a href="{{route("Receptionist.DownloadInvoice",["id"=>$record->id])}}" class="font-medium text-black mr-3">
+                            <a href="{{ route('Receptionist.DownloadInvoice', ['id' => $record->id]) }}"
+                                class="font-medium text-black mr-3">
                                 <i class="fa-solid fa-file-arrow-down"></i>
                             </a>
                         </td>
