@@ -70,8 +70,6 @@
                             <select name="role" class="border border-[#9CA3AF] rounded-md p-1 focus:outline-none">
                                 <option value="Doctor">Doctor</option>
                                 <option value="Receptionist">Receptionist</option>
-                                <option value="Pharmacists">Pharmacist</option>
-                                <option value="Lab Technicians">Lab Technicians</option>
                                 <option value="Patient">Patient</option>
                             </select>
                         </div>
