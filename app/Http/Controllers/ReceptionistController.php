@@ -45,7 +45,8 @@ class ReceptionistController extends Controller
         $fetchAppoinments = DB::table("appointments")
             ->whereDate("appointmentDate", ">=", today())
             ->where("status", "=", "confirmed")
-            ->get();
+            ->orderBy("appointmentDate")
+            ->paginate(10);
         return view("Receptionist.AllAppoinments", with(compact("fetchAppoinments")));
     }
 
@@ -114,7 +115,6 @@ class ReceptionistController extends Controller
     public function allPatients()
     {
         $fetchRecords = DB::table("patients")->
-            where("user_id", "=", Auth::user()->id)->
             paginate(10);
         $countRecords = DB::table("patients")->count();
         return view("Receptionist.Patients", with(compact("fetchRecords", "countRecords")));

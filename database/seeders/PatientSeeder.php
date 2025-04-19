@@ -37,7 +37,7 @@ class PatientSeeder extends Seeder
                     ]
                 ),
                 "medicalHistory" => $fakeRecord->realText(50),
-                "user_id" => 2
+                "user_id" => 1
             ]);
         }
     }

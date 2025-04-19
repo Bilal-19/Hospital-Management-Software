@@ -16,7 +16,7 @@ class AppoinmentSeeder extends Seeder
     {
         $fakeRecord = Faker::create();
         for ($i = 0; $i <= 20; $i++) {
-            DB::table('appoinments')->insert([
+            DB::table('appointments')->insert([
                 "department" => $fakeRecord->randomElement([
                     'Cardiology',
                     'Neurology',
@@ -26,8 +26,8 @@ class AppoinmentSeeder extends Seeder
                     'General Medicine',
                 ]),
                 "doctorName" => "Dr. Salik",
-                "appoinmentDate" => $fakeRecord->date("Y-m-d", "2024-12-31"),
-                "appoinmentTime" => $fakeRecord->time(),
+                "appointmentDate" => $fakeRecord->dateTimeBetween(now(),"+5 months"),
+                "appointmentTime" => $fakeRecord->time(),
                 "patientName" => $fakeRecord->firstName(),
                 "reasonForVisit" => $fakeRecord->randomElement(
                     [

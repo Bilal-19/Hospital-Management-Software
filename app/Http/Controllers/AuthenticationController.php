@@ -80,7 +80,7 @@ class AuthenticationController extends EmailController
             } else {
                 toastr()->info("Something went wrong. Please try again later.");
             }
-            return redirect()->route("Login");
+            return redirect()->back();
         }
     }
 

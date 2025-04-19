@@ -4,7 +4,8 @@
     <!-- Main Content -->
     <main class="flex-1 p-6">
         <div class="w-full bg-white rounded shadow p-6">
-            <h3 class="text-lg font-semibold mb-4">All Appoinments</h3>
+            <h3 class="text-lg font-semibold">All Appoinments</h3>
+            <p class="text-gray-500 text-sm mb-5">{{count($fetchAppoinments)}} records found</p>
             <table class="w-80 md:w-full">
                 <tr class="border-b border-gray-500 text-[#6B7280] text-xs">
                     <th class="font-medium text-start py-3">Date & Time</th>

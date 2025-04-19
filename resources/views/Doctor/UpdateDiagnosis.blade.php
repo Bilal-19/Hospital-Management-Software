@@ -9,8 +9,8 @@
                 @csrf
                 <p class="mb-3 text-[#374151] text-sm font-medium">Patient: {{ $findAppointmentRec->patientName }}</p>
                 <div class="flex md:flex-row space-x-20 my-3 text-[#374151] text-sm font-medium">
-                    <p>Date: {{ $findAppointmentRec->appoinmentDate }}</p>
-                    <p>Time: {{ $findAppointmentRec->appoinmentTime }}</p>
+                    <p>Date: {{ $findAppointmentRec->appointmentDate }}</p>
+                    <p>Time: {{ $findAppointmentRec->appointmentTime }}</p>
                 </div>
                 <p class="text-[#374151] text-sm font-medium">Visit Reason: {{ $findAppointmentRec->reasonForVisit }}</p>
 

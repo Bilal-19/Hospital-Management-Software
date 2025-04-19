@@ -15,8 +15,8 @@
                 </tr>
                 @foreach ($fetchAppoinments as $record)
                     <tr class="border-b border-gray-300 text-sm text-[#111827]">
-                        <td class="py-3">{{ date('M d, Y', strtotime($record->appoinmentDate)) }}</td>
-                        <td class="py-3">{{ $record->appoinmentTime }}</td>
+                        <td class="py-3">{{ date('M d, Y', strtotime($record->appointmentDate)) }}</td>
+                        <td class="py-3">{{ $record->appointmentTime }}</td>
                         <td class="py-3">{{ $record->patientName }}</td>
                         <td class="py-3">{{ $record->reasonForVisit }}</td>
                         <td class="py-3">
