@@ -70,6 +70,7 @@ Route::get("/my-salary", [ReceptionistController::class, 'fetchSalaries'])->name
 Route::get("/all-inventories", [ReceptionistController::class, 'readInventories'])->name('Receptionist.Inventories');
 Route::get("/add-inventory", [ReceptionistController::class, 'addInventory'])->name('Receptionist.AddInventory');
 Route::post("/create-inventory", [ReceptionistController::class, 'createInventory'])->name('Receptionist.CreateInventory');
+Route::get("/delete-inventory/{id}", [ReceptionistController::class, 'deleteInventory'])->name('Receptionist.DeleteInventory');
 
 
 Route::get("/admin-dashboard",[AdminController::class,'index'])->name('Admin.Dashboard');

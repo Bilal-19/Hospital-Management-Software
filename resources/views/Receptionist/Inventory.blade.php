@@ -38,6 +38,11 @@
                                 <p class="text-red-700">{{ $record->status }}</p>
                             @endif
                         </td>
+                        <td class="py-3 space-x-3">
+                            <a href="" class="text-blue-700"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="{{ route('Receptionist.DeleteInventory', ['id' => $record->id]) }}"
+                                class="text-red-700"><i class="fa-solid fa-trash"></i></a>
+                        </td>
                     </tr>
                 @endforeach
             </table>

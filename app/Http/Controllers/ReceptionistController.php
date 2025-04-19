@@ -282,4 +282,18 @@ class ReceptionistController extends Controller
         }
         return redirect()->back();
     }
+
+    public function deleteInventory($id)
+    {
+        $isDeleted = DB::table("inventory")->
+            where("id", "=", $id)
+            ->delete();
+
+        if ($isDeleted) {
+            toastr()->success("Inventory removed.");
+        } else {
+            toastr()->info("Something went wrong. Please check error message.");
+        }
+        return redirect()->back();
+    }
 }
