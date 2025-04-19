@@ -234,9 +234,16 @@ class ReceptionistController extends Controller
         }
     }
 
-    public function readInventories()
+    public function readInventories(Request $request)
     {
-        $fetchInventories = DB::table("inventory")->get();
+        if ($request->search) {
+            $fetchInventories = DB::table("inventory")->
+                where("itemName", "=", $request->search)->
+                orWhere("supplierName", "=", $request->search)->
+                get();
+        } else {
+            $fetchInventories = DB::table("inventory")->get();
+        }
         return view("Receptionist.Inventory", with(compact("fetchInventories")));
     }
 
