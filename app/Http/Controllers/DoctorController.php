@@ -221,7 +221,7 @@ class DoctorController extends Controller
         return redirect()->back();
     }
 
-    public function fetchSalaries()
+    public function fetchMySalReceipts()
     {
         $userID = Auth::user()->id;
         $fetchSalaries = DB::table("salary")->where("employeeId", "=", $userID)->get();
