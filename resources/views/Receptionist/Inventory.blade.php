@@ -39,7 +39,7 @@
                             @endif
                         </td>
                         <td class="py-3 space-x-3">
-                            <a href="" class="text-blue-700"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="{{route("Receptionist.EditInventory", ["id"=>$record->id])}}" class="text-blue-700"><i class="fa-solid fa-pen-to-square"></i></a>
                             <a href="{{ route('Receptionist.DeleteInventory', ['id' => $record->id]) }}"
                                 class="text-red-700"><i class="fa-solid fa-trash"></i></a>
                         </td>

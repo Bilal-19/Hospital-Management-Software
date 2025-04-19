@@ -71,7 +71,8 @@ Route::get("/all-inventories", [ReceptionistController::class, 'readInventories'
 Route::get("/add-inventory", [ReceptionistController::class, 'addInventory'])->name('Receptionist.AddInventory');
 Route::post("/create-inventory", [ReceptionistController::class, 'createInventory'])->name('Receptionist.CreateInventory');
 Route::get("/delete-inventory/{id}", [ReceptionistController::class, 'deleteInventory'])->name('Receptionist.DeleteInventory');
-
+Route::get("/edit-inventory/{id}", [ReceptionistController::class, 'editInventory'])->name('Receptionist.EditInventory');
+Route::post("/update-inventory/{id}", [ReceptionistController::class, 'updateInventory'])->name('Receptionist.UpdateInventory');
 
 Route::get("/admin-dashboard",[AdminController::class,'index'])->name('Admin.Dashboard');
 Route::get("/manage-staff",[AdminController::class,'manageStaff'])->name('Admin.ManageStaff');

@@ -296,4 +296,48 @@ class ReceptionistController extends Controller
         }
         return redirect()->back();
     }
+
+    public function editInventory($id)
+    {
+        $findInventory = DB::table("inventory")->find($id);
+        return view("Receptionist.EditInventory", with(compact("findInventory")));
+    }
+
+    public function updateInventory($id, Request $request)
+    {
+        $stockQuantity = $request->quantityInStock;
+        $stockLevel = $request->minimumStockLevel;
+        if ($stockQuantity > $stockLevel) {
+            $status = "Available";
+        } elseif ($stockQuantity < $stockLevel) {
+            $status = "Low Stock";
+        } elseif ($stockQuantity === 0) {
+            $status = "Out of Stock";
+        } elseif ($request->expiryDate > today()) {
+            $status = "Expired";
+        }
+        $isUpdated = DB::table("inventory")->where("id", "=", $id)->update([
+            "itemName" => $request->itemName,
+            "category" => $request->category,
+            "quantityInStock" => $stockQuantity,
+            "unit" => $request->unit,
+            "minimumStockLevel" => $stockLevel,
+            "batchNumber" => $request->batchNumber,
+            "expiryDate" => $request->expiryDate,
+            "supplierName" => $request->supplierName,
+            "purchaseDate" => $request->purchaseDate,
+            "pricePerUnit" => $request->pricePerUnit,
+            "totalValue" => $request->pricePerUnit * $request->quantityInStock,
+            "status" => $status,
+            "notes" => $request->notes,
+            "updated_at" => now()
+        ]);
+
+        if ($isUpdated){
+            toastr()->success("Inventory updated.");
+        } else {
+            toastr()->error("Something went wrong. Please try again later.");
+        }
+        return redirect()->back();
+    }
 }
