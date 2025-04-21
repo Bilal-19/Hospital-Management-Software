@@ -4,7 +4,7 @@
     <!-- Main Content -->
     <main class="flex-1 p-6 overflow-x-auto">
         <div class="w-full bg-white rounded shadow p-6 mt-5">
-            <h3 class="text-lg font-semibold">All Appoinments</h3>
+            <h3 class="text-lg font-semibold">All Appointments</h3>
             <p class="text-gray-500 text-sm">{{count($fetchAppoinments)}} records found</p>
             <form action="{{route("Doctor.AllAppoinments")}}" method="get" class="w-full flex flex-col md:flex-row md:space-x-2 my-5 space-y-2 md:space-y-0" autocomplete="off">
                 <input type="text" name="search" placeholder="Search by patient name, reason for visit"

@@ -36,8 +36,8 @@ class DoctorController extends Controller
         if (Auth::user()) {
             $userID = Auth::user()->id;
             $fetchRecord = DB::table("doctors")->where("user_id", "=", $userID)->first();
-            $myShift = DB::table("shift")->where("staffName","=",Auth::user()->name)->first();
-            return view("Doctor.MyProfile", with(compact("fetchRecord","myShift")));
+            $myShift = DB::table("shift")->where("staffName", "=", Auth::user()->name)->first();
+            return view("Doctor.MyProfile", with(compact("fetchRecord", "myShift")));
         }
     }
 
@@ -159,16 +159,18 @@ class DoctorController extends Controller
         }
     }
 
-    public function viewAllAppoinments(Request $request)
+    public function viewAllAppointments(Request $request)
     {
         $search = $request->search;
+        // print_r($search);
 
         if ($search) {
             $fetchAppoinments = DB::table("appointments")->
                 where("doctorName", "=", Auth::user()->name)->
-                where("patientName", "=", $search)->
                 where("appointmentDate", ">=", today())->
-                Where("reasonForVisit", "=", $search)->
+                orWhere("patientName", "=", $search)->
+                orWhere("reasonForVisit", "=", $search)->
+                orWhere("department", "=", $search)->
                 orderBy("appointmentDate")->
                 paginate(15);
         } else {
