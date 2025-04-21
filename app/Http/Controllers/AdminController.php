@@ -61,11 +61,20 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function employeePaySlip()
+    public function employeePaySlip(Request $request)
     {
-        $fetchSalaryRecords = DB::table("users")->
-            join("salary", "users.id", "=", "salary.employeeId")->
-            get();
+        if ($request->search) {
+            $fetchSalaryRecords = DB::table("users")->
+                join("salary", "users.id", "=", "salary.employeeId")->
+                where("users.name", "like", $request->search)->
+                orWhere("users.email", "like", $request->search)->
+                orWhere("users.role", "like", $request->search)->
+                get();
+        } else {
+            $fetchSalaryRecords = DB::table("users")->
+                join("salary", "users.id", "=", "salary.employeeId")->
+                get();
+        }
         return view("Admin.StaffPaySlip", with(compact("fetchSalaryRecords")));
     }
 
