@@ -2,6 +2,7 @@
 @php
     $fetchAppoinments = DB::table('appointments')
         ->where('doctorName', '=', Auth::user()->name)
+        ->where("appointmentDate",">=",today())
         ->limit(3)
         ->orderBy("appointmentDate")
         ->get();
