@@ -57,6 +57,12 @@
                 </div>
 
                 <div class="flex flex-col">
+                    <label for="availableDays">Available Days:</label>
+                    <input type="text" name="availableDays" id="availableDays" value="{{ $myShift->applicableDays ?? "Not assigned"}}"
+                    class="bg-gray-100 px-3 py-1 rounded-md border border-slate-300 focus:outline-none" readonly>
+                </div>
+
+                <div class="flex flex-col">
                     <label for="joiningDate">Joining Date::</label>
                     <input type="date" name="joiningDate" id="joiningDate" value="{{ $fetchRecord->joiningDate }}"
                         class="bg-gray-100 px-3 py-1 rounded-md border border-slate-300 focus:outline-none w-80">

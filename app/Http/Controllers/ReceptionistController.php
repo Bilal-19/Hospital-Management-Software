@@ -208,8 +208,9 @@ class ReceptionistController extends Controller
     {
         // 'first() - used to fetch single record'
         $UserID = Auth::user()->id;
+        $myShift = DB::table("shift")->where("staffName","=",Auth::user()->name)->first();$myShift = DB::table("shift")->where("staffName","=",Auth::user()->name)->first();
         $fetchRecord = DB::table("receptionist")->where('user_id', '=', $UserID)->first();
-        return view("Receptionist.MyProfile", with(compact("fetchRecord")));
+        return view("Receptionist.MyProfile", with(compact("fetchRecord", "myShift")));
     }
 
     public function updateReceptionistProfile(Request $request)
