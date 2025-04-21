@@ -4,7 +4,7 @@
     <!-- Main Content -->
     <main class="flex-1 p-6 overflow-x-auto">
         <div class="w-full bg-white rounded shadow p-6">
-            <h3 class="text-lg font-semibold">All Appoinments</h3>
+            <h3 class="text-lg font-semibold">All Appointments</h3>
             <p class="text-gray-500 text-sm mb-5">{{count($fetchAppoinments)}} records found</p>
             <div class="overflow-x-auto">
                 <table class="min-w-max md:w-full">
@@ -88,7 +88,7 @@
         </div>
     </main>
 
-    @push('script')
+    @push('custom-js-script')
         <script>
             function openRescheduleModal(id) {
                 document.getElementById('rescheduleModal').classList.remove('hidden');
