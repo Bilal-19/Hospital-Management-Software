@@ -3,6 +3,7 @@
     $fetchAppoinments = DB::table('appointments')
         ->where('doctorName', '=', Auth::user()->name)
         ->limit(3)
+        ->orderBy("appointmentDate")
         ->get();
 
     $isAttendanceMarked = DB::table('staff')
