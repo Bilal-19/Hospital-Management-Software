@@ -6,7 +6,7 @@
         <div class="w-full bg-white rounded shadow p-6 mt-5">
             <h3 class="text-lg font-semibold">All Appoinments</h3>
             <p class="text-gray-500 text-sm">{{count($fetchAppoinments)}} records found</p>
-            <form action="" method="get" class="w-full flex flex-col md:flex-row md:space-x-2 my-5 space-y-2 md:space-y-0" autocomplete="off">
+            <form action="{{route("Doctor.AllAppoinments")}}" method="get" class="w-full flex flex-col md:flex-row md:space-x-2 my-5 space-y-2 md:space-y-0" autocomplete="off">
                 <input type="text" name="search" placeholder="Search by patient name, reason for visit"
                     class="border border-[#9CA3AF] rounded-md p-1 focus:outline-none w-70 md:w-4/5 text-sm">
                 <button class="w-70 md:w-1/5 bg-black text-white rounded-md">Search</button>

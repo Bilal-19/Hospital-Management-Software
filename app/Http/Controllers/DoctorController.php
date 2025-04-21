@@ -40,12 +40,18 @@ class DoctorController extends Controller
         }
     }
 
-    public function readPatient()
+    public function readPatient(Request $request)
     {
-        $fetchRecords = DB::table("patients")->
-            paginate(10);
-        $countRecords = DB::table("patients")->count();
-        return view("Doctor.Patients", with(compact("fetchRecords", "countRecords")));
+        if ($request->search) {
+            $fetchRecords = DB::table("patients")->
+                where("fullName", "=", $request->search)->
+                orWhere("reasonForVisit", "=", $request->search)->
+                paginate(10);
+        } else {
+            $fetchRecords = DB::table("patients")->
+                paginate(10);
+        }
+        return view("Doctor.Patients", with(compact("fetchRecords")));
     }
 
 
@@ -160,12 +166,14 @@ class DoctorController extends Controller
             $fetchAppoinments = DB::table("appointments")->
                 where("doctorName", "=", Auth::user()->name)->
                 where("patientName", "=", $search)->
-                orWhere("reasonForVisit", "=", $search)->
+                where("appointmentDate", ">=", today())->
+                Where("reasonForVisit", "=", $search)->
                 orderBy("appointmentDate")->
                 paginate(15);
         } else {
             $fetchAppoinments = DB::table("appointments")->
                 where("doctorName", "=", Auth::user()->name)->
+                where("appointmentDate", ">=", today())->
                 orderBy("appointmentDate")->
                 paginate(15);
         }

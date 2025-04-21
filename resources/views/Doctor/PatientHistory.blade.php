@@ -16,7 +16,7 @@
                 </tr>
                 @foreach ($findAppointmentHistory as $record)
                     <tr class="border-b border-gray-300">
-                        <td class="py-3">{{ date('d-M-Y', strtotime($record->appoinmentDate)) }}</td>
+                        <td class="py-3">{{ date('d-M-Y', strtotime($record->appointmentDate)) }}</td>
                         <td class="py-3">{{ $record->reasonForVisit }}</td>
                         <td class="py-3">{{ $record->diagnosis }}</td>
                         <td class="py-3">{{ $record->medicine }}</td>
