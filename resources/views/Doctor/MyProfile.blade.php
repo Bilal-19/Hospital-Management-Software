@@ -102,45 +102,9 @@
                     </select>
                 </div>
 
-                <div class="flex flex-col justify-center">
+                <div class="flex flex-col">
                     <label>Available Days:</label>
-                    <div class="flex flex-row justify-between">
-                        <div>
-                            <span class="flex flex-row">
-                                <input type="checkbox" name="Monday" id="Monday" class="mr-2 font-normal" {{$fetchRecord->availableOnMon == "on" ? "checked" : ""}}>
-                                <label for="Monday">Monday</label>
-                            </span>
-
-                            <span class="flex flex-row">
-                                <input type="checkbox" name="Tuesday" id="Tuesday" class="mr-2 font-normal" {{$fetchRecord->availableOnTue == "on" ? "checked" : ""}}>
-                                <label for="Tuesday">Tuesday</label>
-                            </span>
-
-                            <span class="flex flex-row">
-                                <input type="checkbox" name="Wednesday" id="Wednesday" class="mr-2 font-normal" {{$fetchRecord->availableOnWed == "on" ? "checked" : ""}}>
-                                <label for="Wednesday">Wednesday</label>
-                            </span>
-                        </div>
-                        <div>
-                            <span class="flex flex-row">
-                                <input type="checkbox" name="Monday" id="Thursday" class="mr-2 font-normal" {{$fetchRecord->availableOnThurs == "on" ? "checked" : ""}}>
-                                <label for="Thursday">Thursday</label>
-                            </span>
-
-                            <span class="flex flex-row">
-                                <input type="checkbox" name="Friday" id="Friday" class="mr-2 font-normal" {{$fetchRecord->availableOnFri == "on" ? "checked" : ""}}>
-                                <label for="Friday">Friday</label>
-                            </span>
-
-                            <span class="flex flex-row">
-                                <input type="checkbox" name="Saturday" id="Saturday" class="mr-2 font-normal" {{$fetchRecord->availableOnSat == "on" ? "checked" : ""}}>
-                                <label for="Saturday">Saturday</label>
-                            </span>
-                        </div>
-                    </div>
-
-
-
+                    <input type="text" readonly value="{{$myShift->applicableDays}}" class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
                 </div>
 
             </div>
