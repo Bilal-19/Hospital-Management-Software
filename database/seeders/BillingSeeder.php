@@ -68,7 +68,8 @@ class BillingSeeder extends Seeder
                     "credit",
                     "insurance"
                 ]),
-                "user_id" => 5
+                "user_id" => 5,
+                "created_at" => now()
             ]);
         }
     }

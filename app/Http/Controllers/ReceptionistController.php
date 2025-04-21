@@ -121,13 +121,23 @@ class ReceptionistController extends Controller
     }
 
     // Billing & Invoices
-    public function generateBills()
+    public function generateBills(Request $request)
     {
+        if ($request->invoiceDate && $request->patientName && $request->doctorName) {
+            $fetchBillHistory = DB::table("receipt")->
+                where("user_id", "=", Auth::user()->id)->
+                where("patientName", "=", $request->patientName)->
+                where("doctorName", "=", $request->doctorName)->
+                where("created_at", 'like', "$request->invoiceDate%")->
+                limit(3)->
+                get();
+        } else {
+            $fetchBillHistory = DB::table("receipt")->
+                where("user_id", "=", Auth::user()->id)->
+                limit(3)->
+                get();
+        }
         $fetchDoctors = DB::table("doctors")->pluck('fullName');
-        $fetchBillHistory = DB::table("receipt")->
-            where("user_id", "=", Auth::user()->id)->
-            limit(3)->
-            get();
         $fetchPatientDirectory = DB::table("patients")->pluck("fullName");
         return view(
             "Receptionist.GenerateBills",
@@ -164,11 +174,21 @@ class ReceptionistController extends Controller
         }
     }
 
-    public function getInvoices()
+    public function getInvoices(Request $request)
     {
-        $fetchBillHistory = DB::table("receipt")->
-            where("user_id", "=", Auth::user()->id)->
-            get();
+        if ($request->invoiceDate && $request->patientName && $request->doctorName) {
+            $fetchBillHistory = DB::table("receipt")->
+                where("user_id", "=", Auth::user()->id)->
+                where("patientName", "=", $request->patientName)->
+                where("doctorName", "=", $request->doctorName)->
+                where("created_at", 'like', "$request->invoiceDate%")->
+                limit(3)->
+                get();
+        } else {
+            $fetchBillHistory = DB::table("receipt")->
+                where("user_id", "=", Auth::user()->id)->
+                get();
+        }
         return view("Receptionist.Invoices", with(compact("fetchBillHistory")));
     }
 
@@ -208,7 +228,8 @@ class ReceptionistController extends Controller
     {
         // 'first() - used to fetch single record'
         $UserID = Auth::user()->id;
-        $myShift = DB::table("shift")->where("staffName","=",Auth::user()->name)->first();$myShift = DB::table("shift")->where("staffName","=",Auth::user()->name)->first();
+        $myShift = DB::table("shift")->where("staffName", "=", Auth::user()->name)->first();
+        $myShift = DB::table("shift")->where("staffName", "=", Auth::user()->name)->first();
         $fetchRecord = DB::table("receptionist")->where('user_id', '=', $UserID)->first();
         return view("Receptionist.MyProfile", with(compact("fetchRecord", "myShift")));
     }

@@ -107,11 +107,11 @@
                         All Bills</a>
                 </div>
             </div>
-            <form action="">
+            <form action="{{route("Receptionist.GenerateBills")}}" method="get" class="my-5">
                 <div class="w-full flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
-                    <input type="date" class="w-75 md:w-1/4 bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
-                    <input type="text" placeholder="Patient Name" class="w-75 md:w-1/4 bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
-                    <input type="text" placeholder="Doctor Name" class="w-75 md:w-1/4 bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                    <input required name="invoiceDate" type="text" placeholder="Select Date" onfocus="(this.type='date')" class="w-75 md:w-1/4 bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                    <input required name="patientName" type="text" placeholder="Patient Name" class="w-75 md:w-1/4 bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                    <input required name="doctorName" type="text" placeholder="Doctor Name" class="w-75 md:w-1/4 bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
                     <button class="w-75 md:w-1/4 px-3 py-1 rounded bg-black text-white">Search</button>
                 </div>
             </form>
