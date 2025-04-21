@@ -152,11 +152,23 @@ class DoctorController extends Controller
         }
     }
 
-    public function viewAllAppoinments()
+    public function viewAllAppoinments(Request $request)
     {
-        $fetchAppoinments = DB::table("appointments")->
-            where("doctorName", "=", Auth::user()->name)->
-            paginate(10);
+        $search = $request->search;
+
+        if ($search) {
+            $fetchAppoinments = DB::table("appointments")->
+                where("doctorName", "=", Auth::user()->name)->
+                where("patientName", "=", $search)->
+                orWhere("reasonForVisit", "=", $search)->
+                orderBy("appointmentDate")->
+                paginate(15);
+        } else {
+            $fetchAppoinments = DB::table("appointments")->
+                where("doctorName", "=", Auth::user()->name)->
+                orderBy("appointmentDate")->
+                paginate(15);
+        }
         return view("Doctor.ViewAllAppoinments", with(compact("fetchAppoinments")));
     }
 
