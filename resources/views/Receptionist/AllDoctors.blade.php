@@ -2,14 +2,15 @@
 
 @section('section')
     <!-- Main Content -->
-    <main class="flex-1 p-6">
+    <main class="flex-1 p-6 overflow-x-auto">
         <div class="p-6">
             <h2 class="text-xl font-semibold">All Doctors</h2>
             <p class="text-gray-600 text-sm mb-5">{{ count($fetchRecords) }} records found</p>
-            <div class="w-full mb-10">
-                <form action="{{route("Receptionist.AllDoctors")}}" method="get" class="flex flex-row">
-                    <input type="text" name="search" placeholder="Search by doctor name or department" class="w-4/5 focus:outline-none border border-gray-300 px-3 text-sm py-2">
-                    <button class="w-1/5 bg-black text-white px-3 py-1">Search</button>
+            <div class="w-70 md:w-full mb-10">
+                <form action="{{ route('Receptionist.AllDoctors') }}" method="get" class="flex flex-row">
+                    <input type="text" name="search" placeholder="Search by doctor name or department"
+                        class="w-72 md:w-4/5 focus:outline-none border border-gray-300 px-3 text-sm py-2">
+                    <button class="w-20 md:w-1/5 bg-black text-white px-1 md:px-3 py-1 text-sm">Search</button>
                 </form>
             </div>
 
@@ -17,8 +18,18 @@
                 @foreach ($fetchRecords as $record)
                     <div class="flex items-center space-x-3 bg-white p-6 rounded-md shadow">
                         <div>
-                            <img src="{{ 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGRvY3RvcnN8ZW58MHx8MHx8fDA%3D' }}"
-                                alt="profile" class="rounded-full size-16 object-cover">
+                            @if ($record->profilePicture)
+                                <img src="{{ asset('Doctors/Profile/' . $record->profilePicture) }}" alt="profile"
+                                    class="rounded-full size-16 object-cover">
+                            @else
+                                @if ($record->gender == 'Male')
+                                    <img src="https://www.shutterstock.com/image-vector/male-doctor-smiling-selfconfidence-flat-260nw-2281709217.jpg"
+                                        alt="profile" class="rounded-full size-16 object-cover">
+                                @else
+                                <img src="https://img.freepik.com/premium-vector/female-doctor-character-physician-hospital-checkup-patient-healthy-treatment-personnel_505557-11354.jpg?semt=ais_hybrid&w=740"
+                                        alt="profile" class="rounded-full size-16 object-cover">
+                                @endif
+                            @endif
                         </div>
                         <div>
                             <h4 class="font-semibold text-lg">{{ $record->fullName }}</h4>
