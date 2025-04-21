@@ -42,7 +42,7 @@
                 </a>
                 <a href="{{ route('Receptionist.AllPatients') }}"
                     class="flex items-center gap-3 px-4 py-2 border-b {{ request()->routeIs('Receptionist.AllPatients') ? 'bg-white text-black rounded hover:bg-gray-200' : 'text-white' }}">
-                    <i class="fa-solid fa-notes-medical"></i>
+                    <i class="fas fa-user-injured"></i>
                     <span class="inline">Patients</span>
                 </a>
                 <a href="{{ route('Receptionist.GenerateBills') }}"
