@@ -130,7 +130,8 @@ class AdminController extends Controller
         $findStaffRecord = DB::table("users")->
             where("id", "=", $findSalRecord->employeeId)->
             first();
-        return Pdf::loadView("PDF.SalarySlip", with(compact("findSalRecord", "findStaffRecord")))->download("SalarySlip.pdf");
+        $slipName = $findStaffRecord->name;
+        return Pdf::loadView("PDF.SalarySlip", with(compact("findSalRecord", "findStaffRecord")))->download("${slipName}-SalarySlip.pdf");
     }
 
     public function DoctorAndUserInnerJoin()
