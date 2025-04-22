@@ -5,7 +5,7 @@
     <main class="flex-1 p-6">
         <div class="bg-white p-6 rounded shadow mb-10">
             <h2 class="text-xl font-semibold mb-4">Register New Patient</h2>
-        </div>
+
 
         <form action="{{route("Doctor.CreatePatientProfile")}}" method="POST" autocomplete="off">
             @csrf
@@ -61,6 +61,8 @@
             </div>
             <button class="bg-black text-white px-3 py-1 rounded-md mt-5">Register Patient</button>
         </form>
+
+    </div>
     </main>
     </div>
 @endsection

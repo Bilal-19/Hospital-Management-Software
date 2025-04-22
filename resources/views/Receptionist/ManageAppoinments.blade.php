@@ -4,7 +4,7 @@
     <!-- Main Content -->
     <main class="flex-1 p-6 overflow-x-auto">
         <div class="w-80 md:w-full bg-white rounded shadow p-6 mb-10">
-            <h3 class="text-lg font-semibold mb-4">Book Appoinment</h3>
+            <h3 class="text-lg font-semibold mb-4">Book Appointment</h3>
 
             <form action="{{ route('Receptionist.CreateAppoinment') }}" method="post" autocomplete="off">
                 @csrf
@@ -96,7 +96,7 @@
         <div class="w-full bg-white rounded shadow p-6">
             <div class="flex flex-col md:flex-row justify-between md:items-center mb-5 space-y-3 md:space-y-0">
                 <div>
-                    <h3 class="text-lg font-semibold">Upcoming Appoinments</h3>
+                    <h3 class="text-lg font-semibold">Upcoming Appointments</h3>
                     @if (count($fetchAppoinments) == 0)
                         <p class="text-gray-700 text-sm">No records found</p>
                     @else
