@@ -51,6 +51,13 @@ class AuthenticationController extends EmailController
 
     public function createUserAccount(Request $request)
     {
+        // Form Validation
+        $request->validate([
+            "username" => "required",
+            "email" => "required",
+            "password" => "required",
+            "role" => "required",
+        ]);
         // Check if email already exist or not
         $isEmailAlreadyExist = $this->getEmailCount($request->email);
 
@@ -98,6 +105,12 @@ class AuthenticationController extends EmailController
     public function LoginUser(Request $request)
     {
         $credentials = $request->only('email', 'password');
+
+        // Form Validation
+        $request->validate([
+            "email" => "required|email",
+            "password" => "required"
+        ]);
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
