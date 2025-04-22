@@ -12,31 +12,45 @@
                     <label for="staffName">Select Staff Name:</label>
                     <select name="staffName"
                         class="bg-white px-3 py-1.5 rounded-md border border-slate-300 focus:outline-none">
+                        <option value="">Select Staff Name</option>
                         @foreach ($fetchStaffList as $record)
                             <option value="{{ $record }}">{{ $record }}</option>
                         @endforeach
                     </select>
+                    @error('staffName')
+                        <span class="text-red-700 text-sm">{{ 'Please select staff name' }}</span>
+                    @enderror
                 </div>
 
                 <div class="flex flex-col">
                     <label for="startDate">Start Date:</label>
                     <input type="date" name="startDate"
                         class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                        @error('startDate')
+                        <span class="text-red-700 text-sm">{{ 'Please select shift start date' }}</span>
+                    @enderror
                 </div>
 
                 <div class="flex flex-col">
                     <label for="endDate">End Date:</label>
                     <input type="date" name="endDate"
                         class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                        @error('endDate')
+                        <span class="text-red-700 text-sm">{{ 'Please select shift end date' }}</span>
+                    @enderror
                 </div>
 
                 <div class="flex flex-col">
                     <label for="applicableDays">Applicable Days:</label>
                     <select name="applicableDays"
                         class="bg-white px-3 py-1.5 rounded-md border border-slate-300 focus:outline-none">
+                        <option value="">Select Applicable Days</option>
                         <option value="Monday to Friday">Monday to Friday</option>
                         <option value="Monday to Saturday">Monday to Saturday</option>
                     </select>
+                    @error('applicableDays')
+                        <span class="text-red-700 text-sm">{{ 'Please select applicable days' }}</span>
+                    @enderror
                 </div>
 
                 <div class="md:col-span-2 mt-3">

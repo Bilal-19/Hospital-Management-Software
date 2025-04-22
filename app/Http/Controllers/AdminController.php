@@ -44,6 +44,13 @@ class AdminController extends Controller
 
     public function createShift(Request $request)
     {
+        // Form Validation
+        $request->validate([
+            "staffName" => "required",
+            "startDate" => "required",
+            "endDate" => "required",
+            "applicableDays" => "required"
+        ]);
         $isShiftCreated = DB::table("shift")->insert([
             "staffName" => $request->staffName,
             "startDate" => $request->startDate,
