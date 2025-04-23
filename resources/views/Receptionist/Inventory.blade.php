@@ -35,7 +35,7 @@
                             <td class="p-3">{{ $record->id }}</td>
                             <td class="p-3">{{ $record->itemName }}</td>
                             <td class="p-3">{{ $record->quantityInStock }}</td>
-                            <td class="p-3">{{ $record->pricePerUnit }} PKR</td>
+                            <td class="p-3">{{ $record->pricePerUnit }} USD</td>
                             <td class="p-3">{{ $record->supplierName }}</td>
                             <td class="p-3">
                                 @if ($record->status == 'Available')
