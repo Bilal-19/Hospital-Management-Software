@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class DoctorController extends Controller
 {
+    // Dashboard
     public function index()
     {
         if (Auth::check() && Auth::user()->role === "Doctor") {
@@ -19,80 +20,9 @@ class DoctorController extends Controller
         }
     }
 
-    public function markDoctorAttendance()
-    {
-        if (Auth::check() && Auth::user()->role === "Doctor") {
-            $userID = Auth::user()->id;
-            $fetchMyAttendance = DB::table("staff")->where("user_id", "=", $userID)->get();
-            return view("Doctor.MarkAttendance", with(compact("fetchMyAttendance")));
-        } else {
-            return view("Registration.Login");
-        }
-
-    }
-
-    public function myProfile()
-    {
-        if (Auth::user()) {
-            $userID = Auth::user()->id;
-            $fetchRecord = DB::table("doctors")->where("user_id", "=", $userID)->first();
-            $myShift = DB::table("shift")->where("staffName", "=", Auth::user()->name)->first();
-            return view("Doctor.MyProfile", with(compact("fetchRecord", "myShift")));
-        }
-    }
-
-    public function readPatient(Request $request)
-    {
-        if ($request->search) {
-            $fetchRecords = DB::table("patients")->
-                where("fullName", "=", $request->search)->
-                orWhere("reasonForVisit", "=", $request->search)->
-                paginate(10);
-        } else {
-            $fetchRecords = DB::table("patients")->
-                paginate(10);
-        }
-        return view("Doctor.Patients", with(compact("fetchRecords")));
-    }
-
-
-
-    public function createPatient(Request $request)
-    {
-        $newPatientCreated = DB::table("patients")->insert([
-            "fullName" => $request->fullName,
-            "age" => $request->age,
-            "gender" => $request->gender,
-            "emailAddress" => $request->emailAddress,
-            "phoneNumber" => $request->phoneNumber,
-            "reasonForVisit" => $request->reasonForVisit,
-            "medicalHistory" => $request->medicalHistory,
-            "user_id" => Auth::user()->id,
-            "created_at" => now()
-        ]);
-
-        $newUserRec = DB::table("users")->insert([
-            "name" => $request->fullName,
-            "email" => $request->emailAddress,
-            "password" => Hash::make("12345678"),
-            "role" => "Patient",
-            "created_at" => now()
-        ]);
-
-        if ($newPatientCreated && $newUserRec) {
-            toastr()->success("Patient registered successfully.");
-            return redirect()->back();
-        } else {
-            toastr()->info("Please check error message. Something went wrong.");
-            return redirect()->back();
-        }
-    }
 
     public function markTodayAttendance(Request $request)
     {
-        $carbonDate = Carbon::now();
-        $todaysDate = $carbonDate->toDateString();
-
         $countAttendance = DB::table("staff")->
             where("user_id", "=", Auth::user()->id)->
             whereDate("created_at", "=", today())->
@@ -116,53 +46,22 @@ class DoctorController extends Controller
 
     }
 
-    public function updateMyProfile(Request $request)
+    // All Attendance
+    public function markDoctorAttendance()
     {
-        if ($request->file("profilePicture")) {
-            $imagePath = time() . '.' . $request->profilePicture->getClientOriginalExtension();
-            $request->profilePicture->move("Doctors/Profile", $imagePath);
+        if (Auth::check() && Auth::user()->role === "Doctor") {
+            $userID = Auth::user()->id;
+            $fetchMyAttendance = DB::table("staff")->where("user_id", "=", $userID)->get();
+            return view("Doctor.MarkAttendance", with(compact("fetchMyAttendance")));
         } else {
-            $extractImagePath = DB::table("doctors")->
-                select("profilePicture")->
-                where("user_id", "=", Auth::user()->id)->
-                first();
-            $imagePath = $extractImagePath->profilePicture;
-        }
-        $isUpdated = DB::table("doctors")
-            ->where('user_id', '=', Auth::user()->id)
-            ->update([
-                "fullName" => $request->fullName,
-                "gender" => $request->gender,
-                "dateOfBirth" => $request->dateOfBirth,
-                "profilePicture" => $imagePath,
-                "emailAddress" => $request->emailAddress,
-                "phoneNumber" => $request->phoneNumber,
-                "department" => $request->department,
-                "yearsOfExperience" => $request->yearsOfExperience,
-                "licenseNumber" => $request->licenseNumber,
-                "consultationFee" => $request->consultationFee,
-                "availableOnMon" => $request->Monday,
-                "availableOnTue" => $request->Tuesday,
-                "availableOnWed" => $request->Wednesday,
-                "availableOnThurs" => $request->Thursday,
-                "availableOnFri" => $request->Friday,
-                "availableOnSat" => $request->Saturday,
-                "status" => $request->status,
-                "updated_at" => now()
-            ]);
-        if ($isUpdated) {
-            toastr()->success("Profile updated");
-            return redirect()->back();
-        } else {
-            toastr()->error("Something went wrong");
-            return redirect()->back();
+            return view("Registration.Login");
         }
     }
 
+    // View Appointments
     public function viewAllAppointments(Request $request)
     {
         $search = $request->search;
-        // print_r($search);
 
         if ($search) {
             $fetchAppoinments = DB::table("appointments")->
@@ -181,6 +80,22 @@ class DoctorController extends Controller
                 paginate(15);
         }
         return view("Doctor.ViewAllAppoinments", with(compact("fetchAppoinments")));
+    }
+
+
+    // Patients
+    public function readPatient(Request $request)
+    {
+        if ($request->search) {
+            $fetchRecords = DB::table("patients")->
+                where("fullName", "=", $request->search)->
+                orWhere("reasonForVisit", "=", $request->search)->
+                paginate(10);
+        } else {
+            $fetchRecords = DB::table("patients")->
+                paginate(10);
+        }
+        return view("Doctor.Patients", with(compact("fetchRecords")));
     }
 
     public function addDiagnosNote($id)
@@ -244,10 +159,100 @@ class DoctorController extends Controller
         return redirect()->back();
     }
 
+
+
+    public function createPatient(Request $request)
+    {
+        $newPatientCreated = DB::table("patients")->insert([
+            "fullName" => $request->fullName,
+            "age" => $request->age,
+            "gender" => $request->gender,
+            "emailAddress" => $request->emailAddress,
+            "phoneNumber" => $request->phoneNumber,
+            "reasonForVisit" => $request->reasonForVisit,
+            "medicalHistory" => $request->medicalHistory,
+            "user_id" => Auth::user()->id,
+            "created_at" => now()
+        ]);
+
+        $newUserRec = DB::table("users")->insert([
+            "name" => $request->fullName,
+            "email" => $request->emailAddress,
+            "password" => Hash::make("12345678"),
+            "role" => "Patient",
+            "created_at" => now()
+        ]);
+
+        if ($newPatientCreated && $newUserRec) {
+            toastr()->success("Patient registered successfully.");
+            return redirect()->back();
+        } else {
+            toastr()->info("Please check error message. Something went wrong.");
+            return redirect()->back();
+        }
+    }
+
+
+    // Salary Receipt
     public function fetchMySalReceipts()
     {
         $userID = Auth::user()->id;
         $fetchSalaries = DB::table("salary")->where("employeeId", "=", $userID)->get();
         return view("Doctor.ViewSalaryReceipt", with(compact("fetchSalaries")));
+    }
+
+
+    // My Profile
+    public function myProfile()
+    {
+        if (Auth::user()) {
+            $userID = Auth::user()->id;
+            $fetchRecord = DB::table("doctors")->where("user_id", "=", $userID)->first();
+            $myShift = DB::table("shift")->where("staffName", "=", Auth::user()->name)->first();
+            return view("Doctor.MyProfile", with(compact("fetchRecord", "myShift")));
+        }
+    }
+
+    public function updateMyProfile(Request $request)
+    {
+        if ($request->file("profilePicture")) {
+            $imagePath = time() . '.' . $request->profilePicture->getClientOriginalExtension();
+            $request->profilePicture->move("Doctors/Profile", $imagePath);
+        } else {
+            $extractImagePath = DB::table("doctors")->
+                select("profilePicture")->
+                where("user_id", "=", Auth::user()->id)->
+                first();
+            $imagePath = $extractImagePath->profilePicture;
+        }
+        $isUpdated = DB::table("doctors")
+            ->where('user_id', '=', Auth::user()->id)
+            ->update([
+                "fullName" => $request->fullName,
+                "gender" => $request->gender,
+                "dateOfBirth" => $request->dateOfBirth,
+                "profilePicture" => $imagePath,
+                "emailAddress" => $request->emailAddress,
+                "phoneNumber" => $request->phoneNumber,
+                "department" => $request->department,
+                "yearsOfExperience" => $request->yearsOfExperience,
+                "licenseNumber" => $request->licenseNumber,
+                "consultationFee" => $request->consultationFee,
+                "availableOnMon" => $request->Monday,
+                "availableOnTue" => $request->Tuesday,
+                "availableOnWed" => $request->Wednesday,
+                "availableOnThurs" => $request->Thursday,
+                "availableOnFri" => $request->Friday,
+                "availableOnSat" => $request->Saturday,
+                "status" => $request->status,
+                "updated_at" => now()
+            ]);
+        if ($isUpdated) {
+            toastr()->success("Profile updated");
+            return redirect()->back();
+        } else {
+            toastr()->error("Something went wrong");
+            return redirect()->back();
+        }
     }
 }
