@@ -47,6 +47,7 @@
                         </tr>
                     @endforeach
                 </table>
+                <p class="my-5">{{$fetchBillHistory}}</p>
             </div>
         </div>
     </main>

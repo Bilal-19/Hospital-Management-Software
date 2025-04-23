@@ -148,10 +148,17 @@ class ReceptionistController extends Controller
         return view("Receptionist.AddPatient");
     }
 
-    public function allPatients()
+    public function allPatients(Request $request)
     {
-        $fetchRecords = DB::table("patients")->
-            paginate(10);
+        if ($request->search) {
+            $fetchRecords = DB::table("patients")->
+                where("fullName", "=", $request->search)->
+                orWhere("reasonForVisit", "=", $request->search)->
+                paginate(10);
+        } else {
+            $fetchRecords = DB::table("patients")->
+                paginate(10);
+        }
         $countRecords = DB::table("patients")->count();
         return view("Receptionist.Patients", with(compact("fetchRecords", "countRecords")));
     }
@@ -235,7 +242,7 @@ class ReceptionistController extends Controller
         } else {
             $fetchBillHistory = DB::table("receipt")->
                 where("user_id", "=", Auth::user()->id)->
-                get();
+                paginate(10);
         }
         return view("Receptionist.Invoices", with(compact("fetchBillHistory")));
     }
