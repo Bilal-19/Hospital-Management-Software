@@ -19,11 +19,16 @@ class AdminController extends Controller
         }
     }
 
-    public function manageStaff()
+    public function getStaff()
     {
         $users = DB::table("users")->
             where("role", "!=", "Admin")->
             get();
+        return $users;
+    }
+    public function manageStaff()
+    {
+        $users = $this->getStaff();
         return view("Admin.ManageStaff", with(compact("users")));
     }
 
@@ -85,23 +90,28 @@ class AdminController extends Controller
         return view("Admin.StaffPaySlip", with(compact("fetchSalaryRecords")));
     }
 
+    public function getBasicSalary($empRole)
+    {
+        if ($empRole == "Doctor") {
+            $basicSalary = 1000;
+        } elseif ($empRole == "Receptionist") {
+            $basicSalary = 450;
+        } else {
+            $basicSalary = 300;
+        }
+        return $basicSalary;
+    }
     public function generatePaySlip($id)
     {
         $findEmp = DB::table("users")->where("id", "=", $id)->first();
         $empRole = $findEmp->role;
 
         // Allowance
-        $houseRentAllowance = 10000;
-        $travelAllowance = 5000;
-        $medicalAllowance = 3000;
+        $houseRentAllowance = 200;
+        $travelAllowance = 50;
+        $medicalAllowance = 150;
 
-        if ($empRole == "Doctor") {
-            $basicSalary = 80000;
-        } elseif ($empRole == "Receptionist") {
-            $basicSalary = 45000;
-        } else {
-            $basicSalary = 30000;
-        }
+        $basicSalary = $this->getBasicSalary($empRole);
 
         $grossEarning = $houseRentAllowance + $travelAllowance + $medicalAllowance + $basicSalary;
 
@@ -169,12 +179,15 @@ class AdminController extends Controller
     {
         $fetchDepartments = $this->getDepartmentNames();
         $fetchStaff = $this->DoctorAndUserInnerJoin()->concat($this->ReceptionistAndUserInnerJoin());
-        // return $fetchStaff;
         return view("Admin.DepartmentManagement", with(compact("fetchDepartments", "fetchStaff")));
     }
 
     public function createDepartment(Request $request)
     {
+        // Form Validation
+        $request->validate([
+            "departmentName" => "required"
+        ]);
         $isRecordCreated = DB::table("departments")->insert([
             "departmentName" => $request->departmentName,
             "created_at" => now()

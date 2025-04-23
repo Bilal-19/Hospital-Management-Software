@@ -11,6 +11,9 @@
                         <label for="departmentName">Department Name:</label>
                         <input type="text" name="departmentName" placeholder="Enter department name"
                             class="border border-[#9CA3AF] rounded-md p-1 focus:outline-none">
+                        @error('departmentName')
+                            <span class="text-red-700 text-sm">{{ 'Please enter department name' }}</span>
+                        @enderror
                     </div>
                     <button class="my-5 bg-black text-white px-3 py-2 rounded text-sm">Create Department</button>
                 </form>
