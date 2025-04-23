@@ -89,23 +89,23 @@
             </tr>
             <tr>
                 <th class="label">Basic Salary:</th>
-                <td class="value">{{ $findSalRecord->basicSalary }} PKR</td>
+                <td class="value">{{ $findSalRecord->basicSalary }} USD</td>
             </tr>
             <tr>
                 <th class="label">Home Rent Allowance:</th>
-                <td class="value">{{ $findSalRecord->houseRentAllowance }} PKR</td>
+                <td class="value">{{ $findSalRecord->houseRentAllowance }} USD</td>
             </tr>
             <tr>
                 <th class="label">Travel Allowance:</th>
-                <td class="value">{{ $findSalRecord->travelAllowance }} PKR</td>
+                <td class="value">{{ $findSalRecord->travelAllowance }} USD</td>
             </tr>
             <tr>
                 <th class="label">Medical Allowance:</th>
-                <td class="value">{{ $findSalRecord->medicalAllowance }} PKR</td>
+                <td class="value">{{ $findSalRecord->medicalAllowance }} USD</td>
             </tr>
             <tr class="total-row">
                 <th class="label">Gross Earning:</th>
-                <td class="value">{{ $findSalRecord->grossEarning }} PKR</td>
+                <td class="value">{{ $findSalRecord->grossEarning }} USD</td>
             </tr>
         </table>
 
