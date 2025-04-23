@@ -28,7 +28,7 @@
                             <td class="py-3 px-3">{{ $record->name }}</td>
                             <td class="py-3 px-3">{{ $record->role }}</td>
                             <td class="py-3 px-3">{{ $record->email }}</td>
-                            <td class="py-3 px-3">{{ $record->grossEarning }} PKR</td>
+                            <td class="py-3 px-3">{{ $record->grossEarning }} USD</td>
                             <td class="py-3 px-3">{{ date('d M Y', strtotime($record->created_at)) }}</td>
                             <td class="py-3 px-3">
                                 <a href="{{ route('Admin.DownloadSlip', ['id' => $record->id]) }}"

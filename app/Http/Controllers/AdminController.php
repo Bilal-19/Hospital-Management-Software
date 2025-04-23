@@ -5,11 +5,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\AssignOp\Concat;
-use function Laravel\Prompts\select;
 
 class AdminController extends Controller
 {
+    // Dashboard
     public function index()
     {
         if (Auth::user() && Auth::user()->role == "Admin") {
@@ -19,6 +18,7 @@ class AdminController extends Controller
         }
     }
 
+    // Manage Users
     public function getStaff()
     {
         $users = DB::table("users")->
@@ -32,6 +32,7 @@ class AdminController extends Controller
         return view("Admin.ManageStaff", with(compact("users")));
     }
 
+    // Shift Management
     public function getHospitalStaffNames()
     {
         $fetchStaffList = DB::table("users")->
@@ -43,7 +44,7 @@ class AdminController extends Controller
     public function shiftManagement()
     {
         $fetchStaffList = $this->getHospitalStaffNames();
-        $fetchAllStaffShift = DB::table("shift")->limit(4)->get();
+        $fetchAllStaffShift = DB::table("shift")->get();
         return view("Admin.ShiftManagement", with(compact("fetchStaffList", "fetchAllStaffShift")));
     }
 
@@ -73,6 +74,7 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+    // Employee Pay Slip
     public function employeePaySlip(Request $request)
     {
         if ($request->search) {
@@ -101,6 +103,15 @@ class AdminController extends Controller
         }
         return $basicSalary;
     }
+
+    public function countEmpSalary($id, $month)
+    {
+        $countSal = DB::table("salary")->
+            where("employeeID", "=", $id)->
+            where("salaryMonth", "=", $month)->
+            count();
+        return $countSal;
+    }
     public function generatePaySlip($id)
     {
         $findEmp = DB::table("users")->where("id", "=", $id)->first();
@@ -118,10 +129,7 @@ class AdminController extends Controller
 
         // Check salary count of employee for the current month
         $month = date("M-Y", strtotime(now()));
-        $countSal = DB::table("salary")->
-            where("employeeID", "=", $id)->
-            where("salaryMonth", "=", $month)->
-            count();
+        $countSal = $this->countEmpSalary($id, $month);
 
         if ($countSal >= 1) {
             toastr()->info("Salary of selected employee already generated.");
@@ -151,6 +159,7 @@ class AdminController extends Controller
         return Pdf::loadView("PDF.SalarySlip", with(compact("findSalRecord", "findStaffRecord")))->download("${slipName}-SalarySlip.pdf");
     }
 
+    // Departments
     public function DoctorAndUserInnerJoin()
     {
         $fetchDoctors = DB::table("users")->
@@ -238,6 +247,8 @@ class AdminController extends Controller
         return $fetchDoctors;
     }
 
+
+    // Attendance
     public function staffAttendance(Request $request)
     {
         if ($request->employeeName && $request->startDate && $request->endDate) {
