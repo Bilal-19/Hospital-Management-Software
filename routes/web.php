@@ -53,14 +53,14 @@ Route::get("/doctor-salary", [DoctorController::class, 'fetchMySalReceipts'])->n
 Route::get("/receptionist-dashboard",[ReceptionistController::class,'index'])->name('Receptionist.Dashboard');
 Route::get("/mark-attendance",[ReceptionistController::class,'markAttendance'])->name('Receptionist.MarkAttendance');
 Route::get("/appointments",[ReceptionistController::class,'manageAppointments'])->name('Receptionist.ManageAppointments');
-Route::post("/create-appointment",[ReceptionistController::class,'createAppoinment'])->name('Receptionist.CreateAppoinment');
+Route::post("/create-appointment",[ReceptionistController::class,'createAppointment'])->name('Receptionist.CreateAppoinment');
 Route::get("/receptionist-profile",[ReceptionistController::class,'receptionistProfile'])->name('Receptionist.Profile');
 Route::post("/update-receptionist-profile",[ReceptionistController::class,'updateReceptionistProfile'])->name('Receptionist.UpdateProfile');
 Route::get("/generate-bill",[ReceptionistController::class,'generateBills'])->name('Receptionist.GenerateBills');
 Route::post("/create-invoice",[ReceptionistController::class,'createBill'])->name('Receptionist.CreateBill');
 Route::get("/all-invoices",[ReceptionistController::class,'getInvoices'])->name('Receptionist.GetInvoices');
 Route::get("/all-doctors",[ReceptionistController::class,'allDoctors'])->name('Receptionist.AllDoctors');
-Route::get("/all-appoinments",[ReceptionistController::class,'allAppoinments'])->name('Receptionist.AllAppoinments');
+Route::get("/all-appointments",[ReceptionistController::class,'allAppointments'])->name('Receptionist.AllAppointments');
 Route::get("/all-patients",[ReceptionistController::class,'allPatients'])->name('Receptionist.AllPatients');
 Route::get("/add-patient",[ReceptionistController::class,'addPatient'])->name('Receptionist.AddPatient');
 Route::get("/cancel-appointment/{id}",[ReceptionistController::class,'cancelAppointment'])->name('Receptionist.CancelAppointment');

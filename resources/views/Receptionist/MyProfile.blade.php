@@ -7,7 +7,7 @@
             class="bg-white rounded-md shadow px-6 py-6 mt-5">
             @csrf
             <h2 class="text-xl font-semibold mb-1">My Profile</h2>
-            <p class="text-sm text-gray-600">Last updated on {{date("d-M-Y", strtotime($fetchRecord->updated_at))}}</p>
+            <p class="text-sm text-gray-600">Last updated on {{date("d-M-Y, h:i a", strtotime($fetchRecord->updated_at))}}</p>
             <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-5 space-y-1 md:space-y-0 mt-10">
                 <div class="flex flex-col">
                     <label for="fullName">Full Name:</label>
@@ -65,7 +65,7 @@
                 <div class="flex flex-col">
                     <label for="joiningDate">Joining Date::</label>
                     <input type="date" name="joiningDate" id="joiningDate" value="{{ $fetchRecord->joiningDate }}"
-                        class="bg-gray-100 px-3 py-1 rounded-md border border-slate-300 focus:outline-none w-80">
+                        class="bg-gray-100 px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
                 </div>
 
             </div>

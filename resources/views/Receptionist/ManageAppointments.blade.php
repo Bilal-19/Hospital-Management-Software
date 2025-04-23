@@ -10,45 +10,46 @@
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                     <div class="flex flex-col">
-                        <label for="department">Department:</label>
-                        <select name="department" id="department" required
-                            class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
-                            @php
-                                $departmentArr = [
-                                    'Cardiology',
-                                    'Neurology',
-                                    'Pediatrics',
-                                    'Orthopedics',
-                                    'Dermatology',
-                                    'General Medicine',
-                                ];
-                            @endphp
-                            @foreach ($departmentArr as $value)
+                        <label for="department">Select Department:</label>
+                        <select name="department" id="department"
+                            class="bg-white py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
+                            <option value=""></option>
+                            @foreach ($fetchDepartments as $value)
                                 <option value="{{ $value }}">{{ $value }}</option>
                             @endforeach
                         </select>
+                        @error('department')
+                            <span class="text-red-700 text-sm">{{ 'Please select department' }}</span>
+                        @enderror
                     </div>
 
                     <div class="flex flex-col">
-                        <label for="doctor">Doctor:</label>
-                        <select name="doctor" id="doctor" required
+                        <label for="doctor">Select Doctor:</label>
+                        <select name="doctor" id="doctor"
                             class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
+                            <option value=""></option>
                             @foreach ($fetchDoctorName as $value)
                                 <option value="{{ $value }}">{{ $value }}</option>
                             @endforeach
                         </select>
+                        @error('doctor')
+                            <span class="text-red-700 text-sm">{{ 'Please select doctor name from this list' }}</span>
+                        @enderror
                     </div>
 
                     <div class="flex flex-col">
                         <label for="date">Date:</label>
-                        <input type="text" required name="appoinmentDate" placeholder="Select appoinment date"
+                        <input type="text" name="appointmentDate" placeholder="Select appoinment date"
                             onfocus="(this.type='date')"
                             class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                        @error('appointmentDate')
+                            <span class="text-red-700 text-sm">{{ 'Please select appoitment date' }}</span>
+                        @enderror
                     </div>
 
                     <div class="flex flex-col">
-                        <label for="appoinmentTime">Available Time Slot:</label>
-                        <select name="appoinmentTime" required id="appoinmentTime"
+                        <label for="appointmentTime">Available Time Slot:</label>
+                        <select name="appointmentTime" id="appointmentTime"
                             class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
                             @php
                                 $timeSlotArr = [
@@ -65,31 +66,43 @@
                                     '3:00 PM',
                                 ];
                             @endphp
+                            <option value=""></option>
                             @foreach ($timeSlotArr as $value)
                                 <option value="{{ $value }}">{{ $value }}</option>
                             @endforeach
                         </select>
+                        @error('appointmentTime')
+                            <span class="text-red-700 text-sm">{{ 'Please select available time slot' }}</span>
+                        @enderror
                     </div>
 
                     <div class="flex flex-col">
                         <label for="patientName">Patient Name:</label>
-                        <select name="patientName" id="patientName" required
+                        <select name="patientName" id="patientName"
                             class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
                             @foreach ($fetchPatientName as $value)
+                            <option value=""></option>
                                 <option value="{{ $value }}">{{ $value }}</option>
                             @endforeach
                         </select>
+                        @error('patientName')
+                            <span class="text-red-700 text-sm">{{ 'Please select patient name' }}</span>
+                        @enderror
                     </div>
 
                     <div class="flex flex-col">
                         <label for="reasonForVisit">Reason for Visit:</label>
-                        <input type="text" required name="reasonForVisit" placeholder="Enter patient name"
+                        <input type="text" name="reasonForVisit" placeholder="Enter patient name"
                             class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                        @error('reasonForVisit')
+                            <span class="text-red-700 text-sm">{{ 'Please enter visit reason of patient' }}</span>
+                        @enderror
                     </div>
                 </div>
                 <button
-                    class="w-full bg-black text-white py-2 rounded-md mt-5 hover:transform duration-500 hover:bg-black/90">Book
-                    Now</button>
+                    class="w-full bg-black text-white py-2 rounded-md mt-5 hover:transform duration-500 hover:bg-black/90">
+                    <i class="fa-regular fa-paper-plane"></i> Book Now
+                </button>
             </form>
         </div>
 
@@ -97,15 +110,17 @@
             <div class="flex flex-col md:flex-row justify-between md:items-center mb-5 space-y-3 md:space-y-0">
                 <div>
                     <h3 class="text-lg font-semibold">Upcoming Appointments</h3>
-                    @if (count($fetchAppoinments) == 0)
+                    @if (count($fetchAppointments) == 0)
                         <p class="text-gray-700 text-sm">No records found</p>
                     @else
-                        <p class="text-gray-700 text-sm">{{ count($fetchAppoinments) }} records found</p>
+                        <p class="text-gray-700 text-sm">{{ count($fetchAppointments) }} records found</p>
                     @endif
                 </div>
                 <div>
-                    <a href="{{ route('Receptionist.AllAppoinments') }}"
-                        class="bg-black text-white px-3 py-2 rounded-md">View All Appointments</a>
+                    <a href="{{ route('Receptionist.AllAppointments') }}"
+                        class="bg-black text-white px-3 py-2 rounded-md">
+                        <i class="fa-solid fa-eye"></i>
+                        View All Appointments</a>
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -118,7 +133,7 @@
                         <th class="font-medium text-start py-3">Reason for Visit</th>
                         <th class="font-medium text-start py-3">Actions</th>
                     </tr>
-                    @foreach ($fetchAppoinments as $record)
+                    @foreach ($fetchAppointments as $record)
                         <tr class="border-b border-gray-300 text-sm text-[#111827]">
                             <td class="py-3">{{ date('M d, Y', strtotime($record->appointmentDate)) }}
                                 {{ $record->appointmentTime }}</td>
@@ -137,55 +152,56 @@
                 </table>
             </div>
 
-             <!-- Modal -->
-             <div id="rescheduleModal"
-             class="fixed inset-0 z-50 hidden bg-black bg-opacity-40 flex items-center justify-center">
-             <div class="bg-white rounded-lg w-96 p-6 shadow-md">
-                 <h2 class="text-lg font-semibold mb-4">Reschedule Appointment</h2>
-                 <form method="POST" action="{{route("Receptionist.RescheduleAppointment")}}">
-                     @csrf
-                     <input type="hidden" name="id" id="appointmentId">
+            <!-- Modal -->
+            <div id="rescheduleModal"
+                class="fixed inset-0 z-50 hidden bg-black bg-opacity-40 flex items-center justify-center">
+                <div class="bg-white rounded-lg w-96 p-6 shadow-md">
+                    <h2 class="text-lg font-semibold mb-4">Reschedule Appointment</h2>
+                    <form method="POST" action="{{ route('Receptionist.RescheduleAppointment') }}">
+                        @csrf
+                        <input type="hidden" name="id" id="appointmentId">
 
-                     <div class="flex flex-col my-3">
-                         <label for="date">Date:</label>
-                         <input type="text" required name="appointmentDate" placeholder="Select appoinment date"
-                             onfocus="(this.type='date')"
-                             class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
-                     </div>
+                        <div class="flex flex-col my-3">
+                            <label for="date">Date:</label>
+                            <input type="text" required name="appointmentDate" placeholder="Select appoinment date"
+                                onfocus="(this.type='date')"
+                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                        </div>
 
-                     <div class="flex flex-col my-3">
-                         <label for="appoinmentTime">Available Time Slot:</label>
-                         <select name="appointmentTime" required id="appoinmentTime"
-                             class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
-                             @php
-                                 $timeSlotArr = [
-                                     '9:00 AM',
-                                     '9:30 AM',
-                                     '10:00 AM',
-                                     '10:30 AM',
-                                     '11:00 AM',
-                                     '11:30 AM',
-                                     '12:00 PM',
-                                     '12:30 PM',
-                                     '2:00 PM',
-                                     '2:30 PM',
-                                     '3:00 PM',
-                                 ];
-                             @endphp
-                             @foreach ($timeSlotArr as $value)
-                                 <option value="{{ $value }}">{{ $value }}</option>
-                             @endforeach
-                         </select>
-                     </div>
+                        <div class="flex flex-col my-3">
+                            <label for="appoinmentTime">Available Time Slot:</label>
+                            <select name="appointmentTime" required id="appoinmentTime"
+                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
+                                @php
+                                    $timeSlotArr = [
+                                        '9:00 AM',
+                                        '9:30 AM',
+                                        '10:00 AM',
+                                        '10:30 AM',
+                                        '11:00 AM',
+                                        '11:30 AM',
+                                        '12:00 PM',
+                                        '12:30 PM',
+                                        '2:00 PM',
+                                        '2:30 PM',
+                                        '3:00 PM',
+                                    ];
+                                @endphp
+                                @foreach ($timeSlotArr as $value)
+                                    <option value="{{ $value }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                     <div class="flex justify-end space-x-2">
-                         <button type="button" onclick="closeRescheduleModal()"
-                             class="bg-gray-300 px-3 py-1 rounded text-sm">Cancel</button>
-                         <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded text-sm">Confirm</button>
-                     </div>
-                 </form>
-             </div>
-         </div>
+                        <div class="flex justify-end space-x-2">
+                            <button type="button" onclick="closeRescheduleModal()"
+                                class="bg-gray-300 px-3 py-1 rounded text-sm">Cancel</button>
+                            <button type="submit"
+                                class="bg-blue-600 text-white px-3 py-1 rounded text-sm">Confirm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
         </div>
     </main>

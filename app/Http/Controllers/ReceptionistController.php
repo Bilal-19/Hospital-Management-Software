@@ -27,32 +27,68 @@ class ReceptionistController extends Controller
     }
 
     // Book Appointments
+
+    public function getDoctorNames()
+    {
+        $fetchDoctorName = DB::table("doctors")->pluck('fullName');
+        return $fetchDoctorName;
+    }
+
+    public function getPatientNames()
+    {
+        $fetchPatientName = DB::table("patients")->pluck('fullName');
+        return $fetchPatientName;
+    }
+
+    public function getAppointments($limitVal = null)
+    {
+        if ($limitVal) {
+            return DB::table("appointments")
+                ->whereDate("appointmentDate", ">=", today())
+                ->where("status", "=", "confirmed")
+                ->limit($limitVal)
+                ->orderBy("appointmentDate")
+                ->get();
+        } else {
+            return DB::table("appointments")
+                ->whereDate("appointmentDate", ">=", today())
+                ->where("status", "=", "confirmed")
+                ->orderBy("appointmentDate")
+                ->paginate(10);
+        }
+    }
     public function manageAppointments()
     {
-        $fetchDoctorName = DB::table("doctors")->
-            pluck('fullName');
-        $fetchPatientName = DB::table("patients")->pluck('fullName');
-        $fetchAppoinments = DB::table("appointments")
-            ->whereDate("appointmentDate", ">=", today())
-            ->where("status", "=", "confirmed")
-            ->limit(3)
-            ->get();
-        return view("Receptionist.ManageAppoinments", with(compact("fetchDoctorName", "fetchAppoinments", "fetchPatientName")));
+        $fetchDoctorName = $this->getDoctorNames();
+        $fetchPatientName = $this->getPatientNames();
+        $fetchAppointments = $this->getAppointments(3);
+        $fetchDepartments = DB::table("departments")->pluck("departmentName");
+        return view("Receptionist.ManageAppointments", with(compact(
+            "fetchDoctorName",
+            "fetchAppointments",
+            "fetchPatientName",
+            "fetchDepartments"
+        )));
     }
 
-    public function allAppoinments()
+    public function allAppointments()
     {
-        $fetchAppoinments = DB::table("appointments")
-            ->whereDate("appointmentDate", ">=", today())
-            ->where("status", "=", "confirmed")
-            ->orderBy("appointmentDate")
-            ->paginate(10);
-        return view("Receptionist.AllAppoinments", with(compact("fetchAppoinments")));
+        $fetchAppointments = $this->getAppointments();
+        return view("Receptionist.AllAppointments", with(compact("fetchAppointments")));
     }
 
-    public function createAppoinment(Request $request)
+    public function createAppointment(Request $request)
     {
-        $isAppoinmentCreated = DB::table("appointments")->insert([
+        // Form Validation
+        $request->validate([
+            "department" => "required",
+            "doctor" => "required",
+            "appointmentDate" => "required",
+            "appointmentTime" => "required",
+            "patientName" => "required",
+            "reasonForVisit" => "required",
+        ]);
+        $isAppointmentCreated = DB::table("appointments")->insert([
             "department" => $request->department,
             "doctorName" => $request->doctor,
             "appointmentDate" => $request->appoinmentDate,
@@ -63,8 +99,8 @@ class ReceptionistController extends Controller
             "created_at" => now()
         ]);
 
-        if ($isAppoinmentCreated) {
-            toastr()->success("Appoinment booked successfully");
+        if ($isAppointmentCreated) {
+            toastr()->success("Appointment booked successfully");
             return redirect()->back();
         } else {
             toastr()->info("Something went wrong. Please check error message");
@@ -81,7 +117,7 @@ class ReceptionistController extends Controller
                 "updated_at" => now()
             ]);
         if ($isCancelled) {
-            toastr()->success("Appoinment cancel successfully");
+            toastr()->success("Appointment cancel successfully");
         } else {
             toastr()->info("Something went wrong.");
         }
@@ -137,7 +173,7 @@ class ReceptionistController extends Controller
                 limit(3)->
                 get();
         }
-        $fetchDoctors = DB::table("doctors")->pluck('fullName');
+        $fetchDoctors = $this->getDoctorNames();
         $fetchPatientDirectory = DB::table("patients")->pluck("fullName");
         return view(
             "Receptionist.GenerateBills",
@@ -147,6 +183,18 @@ class ReceptionistController extends Controller
 
     public function createBill(Request $request)
     {
+        // Form Validation
+        $request->validate([
+            "patientName" => "required",
+            "doctorName" => "required",
+            "serviceName" => "required",
+            "serviceAmount" => "required",
+            "testName" => "required",
+            "testCost" => "required",
+            "medicineName" => "required",
+            "medicinePrice" => "required",
+            "paymentMode" => "required",
+        ]);
         $isInvoiceGenerated = DB::table("receipt")->insert(
             [
                 "patientName" => $request->patientName,
@@ -229,7 +277,6 @@ class ReceptionistController extends Controller
         // 'first() - used to fetch single record'
         $UserID = Auth::user()->id;
         $myShift = DB::table("shift")->where("staffName", "=", Auth::user()->name)->first();
-        $myShift = DB::table("shift")->where("staffName", "=", Auth::user()->name)->first();
         $fetchRecord = DB::table("receptionist")->where('user_id', '=', $UserID)->first();
         return view("Receptionist.MyProfile", with(compact("fetchRecord", "myShift")));
     }
@@ -256,6 +303,7 @@ class ReceptionistController extends Controller
         }
     }
 
+    // Inventory Management
     public function readInventories(Request $request)
     {
         if ($request->search) {
@@ -290,7 +338,25 @@ class ReceptionistController extends Controller
 
     public function createInventory(Request $request)
     {
-        $status = $this->getInventoryStatus($request->quantityInStock, $request->minimumStockLevel, $request->expiryDate);
+        $status = $this->getInventoryStatus(
+            $request->quantityInStock,
+            $request->minimumStockLevel,
+            $request->expiryDate
+        );
+
+        // Form Validation
+        $request->validate([
+            "itemName" => "required",
+            "category" => "required",
+            "quantityInStock" => "required",
+            "unit" => "required",
+            "minimumStockLevel" => "required",
+            "batchNumber" => "required",
+            "expiryDate" => "required",
+            "supplierName" => "required",
+            "pricePerUnit" => "required",
+        ]);
+
         $addInventory = DB::table("inventory")->insert([
             "itemName" => $request->itemName,
             "category" => $request->category,
@@ -304,7 +370,7 @@ class ReceptionistController extends Controller
             "pricePerUnit" => $request->pricePerUnit,
             "totalValue" => $request->pricePerUnit * $request->quantityInStock,
             "status" => $status,
-            "notes" => $request->notes,
+            "notes" => $request->notes ?? "Not provided",
             "created_at" => now()
         ]);
 

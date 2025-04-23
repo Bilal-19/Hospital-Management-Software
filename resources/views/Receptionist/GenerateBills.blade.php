@@ -13,20 +13,28 @@
                         <label>Patient</label>
                         <select name="patientName"
                             class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                            <option value="">Select Patient Name</option>
                             @foreach ($fetchPatientDirectory as $value)
                                 <option value="{{ $value }}">{{ $value }}</option>
                             @endforeach
                         </select>
+                        @error('patientName')
+                            <span class="text-red-700 text-sm">{{ 'Please select patient name from the list' }}</span>
+                        @enderror
                     </div>
 
                     <div class="flex flex-col">
                         <label>Doctor</label>
                         <select name="doctorName"
                             class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                            <option value="">Select Doctor Name</option>
                             @foreach ($fetchDoctors as $value)
                                 <option value="{{ $value }}">{{ $value }}</option>
                             @endforeach
                         </select>
+                        @error('doctorName')
+                            <span class="text-red-700 text-sm">{{ 'Please select doctor name from the list' }}</span>
+                        @enderror
                     </div>
 
                     <div>
@@ -51,35 +59,69 @@
                                 <label>Insurance</label>
                             </div>
                         </div>
+                        @error('paymentMode')
+                            <span class="text-red-700 text-sm">{{ 'Please select payment mode' }}</span>
+                        @enderror
                     </div>
 
                     <div class="flex flex-col col-span-1 md:col-span-3">
                         <label>Services</label>
-                        <div class="w-70 md:w-full flex flex-row justify-between">
-                            <input type="text" name="serviceName" placeholder="Service Description"
-                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none min-w-25 md:w-2/3 mr-1">
-                            <input type="number" name="serviceAmount" id="serviceAmount" placeholder="Amount"
-                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none min-w-20 md:w-1/3">
+                        <div class="w-70 md:w-full flex flex-row justify-between space-x-5">
+                            <div class="flex flex-col w-3/4">
+                                <input type="text" name="serviceName" placeholder="Service Description"
+                                    class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none min-w-25 md:w-full mr-1">
+                                @error('serviceName')
+                                    <span class="text-red-700 text-sm">{{ 'Please enter service name' }}</span>
+                                @enderror
+                            </div>
+                            <div class="flex flex-col w-1/4">
+                                <input type="number" name="serviceAmount" id="serviceAmount" placeholder="Amount"
+                                    class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none min-w-20 md:w-full">
+                                @error('serviceAmount')
+                                    <span class="text-red-700 text-sm">{{ 'Please enter service amount' }}</span>
+                                @enderror
+                            </div>
                         </div>
                     </div>
 
                     <div class="flex flex-col col-span-1 md:col-span-3">
                         <label>Lab Tests</label>
-                        <div class="w-70 md:w-full flex flex-row justify-between">
-                            <input type="text" name="testName" placeholder="Test Name"
-                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none min-w-25 md:w-2/3 mr-1">
-                            <input type="number" name="testCost" placeholder="Cost" id="testCost"
-                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none min-w-20 md:w-1/3">
+                        <div class="w-70 md:w-full flex flex-row justify-between space-x-5">
+                            <div class="flex flex-col w-3/4">
+                                <input type="text" name="testName" placeholder="Test Name"
+                                    class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none min-w-25 md:w-full mr-1">
+                                @error('testName')
+                                    <span class="text-red-700 text-sm">{{ 'Please enter lab test name' }}</span>
+                                @enderror
+                            </div>
+                            <div class="flex flex-col w-1/4">
+                                <input type="number" name="testCost" placeholder="Cost" id="testCost"
+                                    class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none min-w-20 md:w-full">
+                                @error('testCost')
+                                    <span class="text-red-700 text-sm">{{ 'Please enter lab test cost' }}</span>
+                                @enderror
+                            </div>
                         </div>
                     </div>
 
                     <div class="flex flex-col col-span-1 md:col-span-3">
                         <label>Medicines</label>
-                        <div class="w-70 md:w-full flex flex-row justify-between">
-                            <input type="text" name="medicineName" placeholder="Medicine Name"
-                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none min-w-25 md:w-2/3 mr-1">
-                            <input type="number" name="medicinePrice" placeholder="Total Price" id="medicinePrice"
-                                class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none min-w-20 md:w-1/3" min="1">
+                        <div class="w-70 md:w-full flex flex-row justify-between space-x-5">
+                            <div class="flex flex-col w-3/4">
+                                <input type="text" name="medicineName" placeholder="Medicine Name"
+                                    class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none min-w-25 md:w-full mr-1">
+                                @error('medicineName')
+                                    <span class="text-red-700 text-sm">{{ 'Please enter medicine name' }}</span>
+                                @enderror
+                            </div>
+                            <div class="flex flex-col w-1/4">
+                                <input type="number" name="medicinePrice" placeholder="Total Price" id="medicinePrice"
+                                    class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none min-w-20 md:w-full"
+                                    min="1">
+                                @error('medicinePrice')
+                                    <span class="text-red-700 text-sm">{{ 'Please enter medicine price' }}</span>
+                                @enderror
+                            </div>
                         </div>
                     </div>
 
@@ -91,7 +133,8 @@
                     <p id="totalAmount" name="totalAmount">$0</p>
                 </div>
                 <div>
-                    <button class="w-full bg-black text-white rounded-md px-2 py-2">Generate Bill</button>
+                    <button class="w-full bg-black text-white rounded-md px-2 py-2"><i class="fa-solid fa-file-invoice"></i>
+                        Generate Bill</button>
                 </div>
             </form>
         </div>
@@ -103,16 +146,19 @@
                     <p class="text-sm text-black/80">{{ count($fetchBillHistory) }} records found</p>
                 </div>
                 <div>
-                    <a href="{{ route('Receptionist.GetInvoices') }}" class="bg-black text-white px-3 py-2 rounded-md">View
+                    <a href="{{ route('Receptionist.GetInvoices') }}" class="bg-black text-white px-3 py-2 rounded-md"><i class="fa-solid fa-eye"></i> View
                         All Bills</a>
                 </div>
             </div>
-            <form action="{{route("Receptionist.GenerateBills")}}" method="get" class="my-5">
+            <form action="{{ route('Receptionist.GenerateBills') }}" method="get" class="my-5">
                 <div class="w-full flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
-                    <input required name="invoiceDate" type="text" placeholder="Select Date" onfocus="(this.type='date')" class="w-75 md:w-1/4 bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
-                    <input required name="patientName" type="text" placeholder="Patient Name" class="w-75 md:w-1/4 bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
-                    <input required name="doctorName" type="text" placeholder="Doctor Name" class="w-75 md:w-1/4 bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
-                    <button class="w-75 md:w-1/4 px-3 py-1 rounded bg-black text-white">Search</button>
+                    <input required name="invoiceDate" type="text" placeholder="Select Date" onfocus="(this.type='date')"
+                        class="w-75 md:w-1/4 bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                    <input required name="patientName" type="text" placeholder="Patient Name"
+                        class="w-75 md:w-1/4 bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                    <input required name="doctorName" type="text" placeholder="Doctor Name"
+                        class="w-75 md:w-1/4 bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none">
+                    <button class="w-75 md:w-1/4 px-3 py-1 rounded bg-black text-white"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
                 </div>
             </form>
             <div class="overflow-x-auto">

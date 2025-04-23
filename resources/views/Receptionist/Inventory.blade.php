@@ -10,14 +10,14 @@
                     <p class="text-sm text-gray-500">{{ count($fetchInventories) }} records found</p>
                 </div>
                 <div>
-                    <a href="{{ route('Receptionist.AddInventory') }}" class="bg-black text-white px-3 py-2 rounded-md">Add
+                    <a href="{{ route('Receptionist.AddInventory') }}" class="bg-black text-white px-3 py-2 rounded-md"><i class="fa-solid fa-square-plus"></i> Add
                         Inventory</a>
                 </div>
             </div>
             <form action="{{route("Receptionist.Inventories")}}" method="get" class="min-w-max md:w-full flex flex-row space-x-3 mb-5" autocomplete="off">
                 <input type="text" placeholder="Enter medicine name or supplier name" name="search"
                     class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none min-w-48 md:w-4/5 text-sm">
-                <button class="px-3 py-1 bg-black text-white min-w-max md:w-1/5">Search</button>
+                <button class="px-3 py-1 bg-black text-white min-w-max md:w-1/5"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
             </form>
             <div class="overflow-x-auto">
                 <table class="min-w-max md:w-full">

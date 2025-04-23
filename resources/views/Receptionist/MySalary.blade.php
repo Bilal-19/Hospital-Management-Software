@@ -20,8 +20,8 @@
                             <td class="p-3">EMP-{{$record->employeeId}}</td>
                             <td class="p-3">{{$record->salaryMonth}}</td>
                             <td class="p-3">{{date("M d, Y", strtotime($record->created_at))}}</td>
-                            <td class="p-3">{{$record->grossEarning}} PKR</td>
-                            <td class="p-3">{{$record->houseRentAllowance + $record->travelAllowance + $record->medicalAllowance}} PKR</td>
+                            <td class="p-3">{{$record->grossEarning}} USD</td>
+                            <td class="p-3">{{$record->houseRentAllowance + $record->travelAllowance + $record->medicalAllowance}} USD</td>
                             <td class="p-3">
                                 <a href="{{route("Admin.DownloadSlip", ["id" => $record->id])}}" class="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-800">
                                     <i class="fa-solid fa-file-arrow-down"></i>

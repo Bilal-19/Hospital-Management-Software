@@ -7,10 +7,10 @@
             <h2 class="text-xl font-semibold">All Doctors</h2>
             <p class="text-gray-600 text-sm mb-5">{{ count($fetchRecords) }} records found</p>
             <div class="w-70 md:w-full mb-10">
-                <form action="{{ route('Receptionist.AllDoctors') }}" method="get" class="flex flex-row">
+                <form action="{{ route('Receptionist.AllDoctors') }}" method="get" class="flex flex-row" autocomplete="off">
                     <input type="text" name="search" placeholder="Search by doctor name or department"
                         class="w-72 md:w-4/5 focus:outline-none border border-gray-300 px-3 text-sm py-2">
-                    <button class="w-20 md:w-1/5 bg-black text-white px-1 md:px-3 py-1 text-sm">Search</button>
+                    <button class="w-20 md:w-1/5 bg-black text-white px-1 md:px-3 py-1 text-sm"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
                 </form>
             </div>
 
