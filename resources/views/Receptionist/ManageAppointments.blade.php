@@ -12,7 +12,7 @@
                     <div class="flex flex-col">
                         <label for="department">Select Department:</label>
                         <select name="department" id="department"
-                            class="bg-white py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
+                            class="bg-white px-3 py-1 rounded-md border border-slate-300 focus:outline-none capitalize">
                             <option value=""></option>
                             @foreach ($fetchDepartments as $value)
                                 <option value="{{ $value }}">{{ $value }}</option>
