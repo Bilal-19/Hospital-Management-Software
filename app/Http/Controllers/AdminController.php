@@ -156,7 +156,13 @@ class AdminController extends Controller
             where("id", "=", $findSalRecord->employeeId)->
             first();
         $slipName = $findStaffRecord->name;
-        return Pdf::loadView("PDF.SalarySlip", with(compact("findSalRecord", "findStaffRecord")))->download("${slipName}-SalarySlip.pdf");
+        return Pdf::loadView(
+            "PDF.SalarySlip",
+            with(compact(
+                "findSalRecord",
+                "findStaffRecord"
+            ))
+        )->download("${slipName}-SalarySlip.pdf");
     }
 
     // Departments
